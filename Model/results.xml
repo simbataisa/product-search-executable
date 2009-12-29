@@ -16,9 +16,9 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001WA20ZK_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001WA20ZK_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001WA20ZK_variant_large_5.jpg</variantImage>
+      <primaryImage>primary_images/B001WA20ZK_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001WA20ZK_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B001WA20ZK_variant_large_5.jpg</variantImage>
     </item>
     <item>
       <db_id>203829</db_id>
@@ -34,9 +34,9 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001W9X0FU_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001W9X0FU_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001W9X0FU_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B001W9X0FU_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001W9X0FU_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B001W9X0FU_variant_large_2.jpg</variantImage>
     </item>
     <item>
       <db_id>205290</db_id>
@@ -52,8 +52,8 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B000NUXVSK_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B000NUXVSK_variant_large_5.jpg</variantImage>
+      <primaryImage>primary_images/B000NUXVSK_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B000NUXVSK_variant_large_5.jpg</variantImage>
     </item>
     <item>
       <db_id>204625</db_id>
@@ -69,10 +69,10 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001LQYZH6_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001LQYZH6_variant_large_2.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001LQYZH6_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001LQYZH6_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B001LQYZH6_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001LQYZH6_variant_large_2.jpg</variantImage>
+      <variantImage>variant_images/B001LQYZH6_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B001LQYZH6_variant_large_1.jpg</variantImage>
     </item>
     <item>
       <db_id>203435</db_id>
@@ -88,11 +88,11 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0015623V2_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B0015623V2_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0015623V2_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0015623V2_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0015623V2_variant_large_5.jpg</variantImage>
+      <primaryImage>primary_images/B0015623V2_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B0015623V2_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B0015623V2_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B0015623V2_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B0015623V2_variant_large_5.jpg</variantImage>
     </item>
     <item>
       <db_id>203858</db_id>
@@ -108,12 +108,12 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001LR7PSQ_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001LR7PSQ_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001LR7PSQ_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001LR7PSQ_variant_large_2.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001LR7PSQ_variant_large_5.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001LR7PSQ_variant_large_3.jpg</variantImage>
+      <primaryImage>primary_images/B001LR7PSQ_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001LR7PSQ_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B001LR7PSQ_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B001LR7PSQ_variant_large_2.jpg</variantImage>
+      <variantImage>variant_images/B001LR7PSQ_variant_large_5.jpg</variantImage>
+      <variantImage>variant_images/B001LR7PSQ_variant_large_3.jpg</variantImage>
     </item>
     <item>
       <db_id>203969</db_id>
@@ -129,11 +129,11 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0018EFZS4_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B0018EFZS4_variant_large_2.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0018EFZS4_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0018EFZS4_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0018EFZS4_variant_large_4.jpg</variantImage>
+      <primaryImage>primary_images/B0018EFZS4_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B0018EFZS4_variant_large_2.jpg</variantImage>
+      <variantImage>variant_images/B0018EFZS4_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B0018EFZS4_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B0018EFZS4_variant_large_4.jpg</variantImage>
     </item>
     <item>
       <db_id>203928</db_id>
@@ -149,11 +149,11 @@
       <category>75</category>
       <rating>5</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B000DIME80_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B000DIME80_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B000DIME80_variant_large_2.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B000DIME80_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B000DIME80_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B000DIME80_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B000DIME80_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B000DIME80_variant_large_2.jpg</variantImage>
+      <variantImage>variant_images/B000DIME80_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B000DIME80_variant_large_1.jpg</variantImage>
     </item>
     <item>
       <db_id>203658</db_id>
@@ -169,12 +169,12 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001WA047Q_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001WA047Q_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001WA047Q_variant_large_5.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001WA047Q_variant_large_2.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001WA047Q_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001WA047Q_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B001WA047Q_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001WA047Q_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B001WA047Q_variant_large_5.jpg</variantImage>
+      <variantImage>variant_images/B001WA047Q_variant_large_2.jpg</variantImage>
+      <variantImage>variant_images/B001WA047Q_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B001WA047Q_variant_large_1.jpg</variantImage>
     </item>
     <item>
       <db_id>205434</db_id>
@@ -190,9 +190,9 @@
       <category>75</category>
       <rating>5</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0018EDV80_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B0018EDV80_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0018EDV80_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B0018EDV80_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B0018EDV80_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B0018EDV80_variant_large_1.jpg</variantImage>
     </item>
     <item>
       <db_id>204222</db_id>
@@ -208,7 +208,7 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001J2NRY4_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B001J2NRY4_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>205126</db_id>
@@ -224,9 +224,9 @@
       <category>75</category>
       <rating>5</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001567OL6_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001567OL6_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001567OL6_variant_large_5.jpg</variantImage>
+      <primaryImage>primary_images/B001567OL6_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001567OL6_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B001567OL6_variant_large_5.jpg</variantImage>
     </item>
     <item>
       <db_id>204996</db_id>
@@ -242,7 +242,7 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001567OO8_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B001567OO8_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>203476</db_id>
@@ -258,9 +258,9 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0012UIBSK_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B0012UIBSK_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0012UIBSK_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B0012UIBSK_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B0012UIBSK_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B0012UIBSK_variant_large_1.jpg</variantImage>
     </item>
     <item>
       <db_id>269777</db_id>
@@ -276,7 +276,7 @@
       <category>73</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002KNLE1O_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B002KNLE1O_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>203247</db_id>
@@ -292,7 +292,7 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002ONLIUM_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B002ONLIUM_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>268778</db_id>
@@ -308,7 +308,7 @@
       <category>73</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001RV49X0_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B001RV49X0_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>268027</db_id>
@@ -324,7 +324,7 @@
       <category>188</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001M58TBO_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B001M58TBO_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>204216</db_id>
@@ -340,7 +340,7 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002ONEL0Q_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B002ONEL0Q_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>269254</db_id>
@@ -356,7 +356,7 @@
       <category>73</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002C8BD54_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B002C8BD54_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>204815</db_id>
@@ -372,12 +372,12 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0012UCSJ8_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B0012UCSJ8_variant_large_2.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0012UCSJ8_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0012UCSJ8_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0012UCSJ8_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0012UCSJ8_variant_large_5.jpg</variantImage>
+      <primaryImage>primary_images/B0012UCSJ8_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B0012UCSJ8_variant_large_2.jpg</variantImage>
+      <variantImage>variant_images/B0012UCSJ8_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B0012UCSJ8_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B0012UCSJ8_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B0012UCSJ8_variant_large_5.jpg</variantImage>
     </item>
     <item>
       <db_id>204845</db_id>
@@ -393,11 +393,11 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0014ZU2C6_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B0014ZU2C6_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0014ZU2C6_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0014ZU2C6_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B0014ZU2C6_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B0014ZU2C6_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B0014ZU2C6_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B0014ZU2C6_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B0014ZU2C6_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B0014ZU2C6_variant_large_2.jpg</variantImage>
     </item>
     <item>
       <db_id>206264</db_id>
@@ -413,8 +413,8 @@
       <category>68</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002PDQUAO_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B002PDQUAO_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B002PDQUAO_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B002PDQUAO_variant_large_1.jpg</variantImage>
     </item>
     <item>
       <db_id>267542</db_id>
@@ -430,7 +430,7 @@
       <category>188</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0025Z22U4_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B0025Z22U4_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>205165</db_id>
@@ -446,11 +446,11 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002DO9QZQ_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B002DO9QZQ_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B002DO9QZQ_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B002DO9QZQ_variant_large_4.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B002DO9QZQ_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B002DO9QZQ_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B002DO9QZQ_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B002DO9QZQ_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B002DO9QZQ_variant_large_4.jpg</variantImage>
+      <variantImage>variant_images/B002DO9QZQ_variant_large_2.jpg</variantImage>
     </item>
     <item>
       <db_id>205473</db_id>
@@ -466,11 +466,11 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001W9TABS_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001W9TABS_variant_large_1.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001W9TABS_variant_large_5.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001W9TABS_variant_large_3.jpg</variantImage>
-      <variantImage>./p_images/variant_images/B001W9TABS_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B001W9TABS_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001W9TABS_variant_large_1.jpg</variantImage>
+      <variantImage>variant_images/B001W9TABS_variant_large_5.jpg</variantImage>
+      <variantImage>variant_images/B001W9TABS_variant_large_3.jpg</variantImage>
+      <variantImage>variant_images/B001W9TABS_variant_large_2.jpg</variantImage>
     </item>
     <item>
       <db_id>269480</db_id>
@@ -486,7 +486,7 @@
       <category>73</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002KBQRCM_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B002KBQRCM_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>269443</db_id>
@@ -502,7 +502,7 @@
       <category>73</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B002GDX34E_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B002GDX34E_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>269490</db_id>
@@ -518,7 +518,7 @@
       <category>73</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B0027YYOP4_primary_large.jpg</primaryImage>
+      <primaryImage>primary_images/B0027YYOP4_primary_large.jpg</primaryImage>
     </item>
     <item>
       <db_id>203905</db_id>
@@ -534,8 +534,8 @@
       <category>75</category>
       <rating>0</rating>
       <merchant>amazon</merchant>
-      <primaryImage>./p_images/primary_images/B001SH5SVK_primary_large.jpg</primaryImage>
-      <variantImage>./p_images/variant_images/B001SH5SVK_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B001SH5SVK_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B001SH5SVK_variant_large_1.jpg</variantImage>
     </item>
   </products>
   <searchTime>0.31687</searchTime>
