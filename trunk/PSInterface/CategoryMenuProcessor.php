@@ -37,7 +37,7 @@ class CategoryMenuProcessor {
             if ($r["id"] == "35") { //Watches
                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (3071,3073,3081)";
             }else if($r["id"] == "3"){ //Baby
-                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_level = 2 AND name LIKE '%".$r["search_index"]."%'";
+                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_level = 2 AND name LIKE '%".$r["search_index"]."%' GROUP BY name";
             }else{
                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE amazon_id = ".$r["id"]." AND category_level = 1";
             }
