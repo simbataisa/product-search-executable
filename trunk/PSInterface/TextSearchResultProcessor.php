@@ -2,7 +2,7 @@
 /* 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */
+*/
 
 /**
  * Description of TextSearchResultProcessor
@@ -24,187 +24,69 @@ class TextSearchResultProcessor {
     }
 
     public function processError($input) {
-        $totalNode = $this->_xmlWriter->createElement1($this->_constants->xml_element_total,$input);
+        $totalNode = $this->_xmlWriter->createElement2($this->_constants->xml_element_total,$input);
         $this->_xmlWriter->appendChildToRootNode($totalNode);
-        $this->_xmlWriter->save();
+        print $this->_xmlWriter->save();
 
     }
-    //=================NEW PROCESS METHOD==============================
-    public function process_result($resIds,$tota) {
+    
+    public function process_result($resIds,$total,$searchTime,$firstPageReq,$finished) {
+        $totalNode = $this->_xmlWriter->createElement2($this->_constants->xml_element_total,$total);
+        $this->_xmlWriter->appendChildToRootNode($totalNode);
+        $timeNode = $this->_xmlWriter->createElement2("searchTime", $searchTime);
+        $this->_xmlWriter->appendChildToRootNode($timeNode);
+
+        $firstPageNode = $this->_xmlWriter->createElement2("firstPage", $firstPageReq);
+        $this->_xmlWriter->appendChildToRootNode($firstPageNode);
+        $finishedNode = $this->_xmlWriter->createElement2("finished", $finished);
+        $this->_xmlWriter->appendChildToRootNode($finishedNode);
+
 
         $idStr = implode(",",$resIds);
-        //$idStr ="338190";
-
         //echo $idStr;
-        //	$sql1 = "SELECT * FROM products p ,images WHERE p.id=product_id AND p.id in (".$idStr.")";
-
-        /*$sql1 = "SELECT p.product_id,p.asin,p.name,p.description,p.detail_page_url,p.highest_retail_price,
-			p.lowest_retail_price,p.highest_sale_price,p.lowest_sale_price,p.num_views
-				,p.category_id,p.avg_rating,image_type,image_path
-			FROM images i ,(select * from  products where product_id in ($idStr)) as p WHERE product_asin =p.asin
-			 order by Field(p.product_id,$idStr)"	;
-        */
-        $sql1= "SELECT p.product_id,p.asin,p.name,p.description,p.detail_page_url,p.highest_retail_price,
-			p.lowest_retail_price,p.highest_sale_price,p.lowest_sale_price,p.num_views
-				,p.category_id,p.avg_rating,image_type,image_path
-			FROM images i ,products   as p WHERE product_id in ($idStr) and product_asin =p.asin
-			 order by Field(p.product_id,$idStr)"	;
-
-        $sql3 = "SELECT distinct(product_id) FROM images i ,products p WHERE product_asin =asin and p.product_id in ($idStr)" ;
-        ///$sql2 = "SELECT image_type,image_path, product_id FROM images WHERE product_id in ($idStr)";
-        //	echo $sql1;
-        $resPro = mysql_query($sql1);
-        $resImage = mysql_query($sql1);
-        $resPage = mysql_query($sql3) or die ('Query Failed');
-        $total_f =mysql_num_rows($resPage);
-
-        //echo "done get image \n";
-        $images = array();
-        $count = 0;
-
-        $t_found = $this->_xmlWriter->xml->createElement("total_found", $total_f);
-        $t_found  = $this->_xmlWriter->root->appendChild($t_found);
-        $total = $this->_xmlWriter->xml->createElement("total",$tota);
-        $total = $this->_xmlWriter->root->appendChild($total);
-
-        while($r = mysql_fetch_array($resImage)) {
-            $images[$count][0] = $r['product_id'];
-
-            //if( $r['image_type'] == "primary_large")
-            //{
-            $images[$count][1] = $r['image_type'];
-            $images[$count][2] = $r['image_path'];
-            //}
-            //else if( $r['image_type'] == "variant_large")
-            //{
-            //$images[$count][1] = $r['image_type'];
-            //$images[$count][2] = $r['image_path'];
-            //}
-            //else
-            //{
-            //$images[$count][1] = "primary_large";
-            //$images[$count][2] = "test2.jpg";
-            //}
+        //print $this->_xmlWriter->save();
+        $productQuery= "SELECT p.product_id,p.asin,p.name,p.description,p.detail_page_url,
+                        p.highest_retail_price,p.lowest_retail_price,p.highest_sale_price,
+                        p.lowest_sale_price,p.num_views,p.category_id,p.avg_rating,
+                        p.merchant_id,p.search_index
+                        FROM products p WHERE product_id in ($idStr)
+                        ORDER BY Field(p.product_id,$idStr)";
+        $productResultSet = mysql_query($productQuery);
+        while($row = mysql_fetch_array($productResultSet)) {
 
 
-            $count++;
-        }
+                $this->_xmlWriter->resetElements();
+                $this->_xmlWriter->addElement('product_id', $row['product_id']);
+                $this->_xmlWriter->addElement('asin', $row['asin']);
+                $this->_xmlWriter->addElement('name',$row['name']);
+                $this->_xmlWriter->addElement('minRetail',$row['lowest_retail_price']);
+                $this->_xmlWriter->addElement('maxRetail',$row['highest_retail_price']);
+                $this->_xmlWriter->addElement('minSale',$row['lowest_sale_price']);
+                $this->_xmlWriter->addElement('maxSale',$row['highest_sale_price']);
+                $this->_xmlWriter->addElement('description',strip_tags($row['description']));
+                $this->_xmlWriter->addElement('avg_rating',$row['avg_rating']);
+                $this->_xmlWriter->addElement('url',$row['detail_page_url']);
+                $this->_xmlWriter->addElement('num_views',$row['num_views']);
+                $this->_xmlWriter->addElement('category_id',$row['category_id']);
+                $this->_xmlWriter->addElement('merchant_id',$row["merchant_id"]);
+                $this->_xmlWriter->addElement('merchant_id',$row["merchant_id"]);
+                $this->_xmlWriter->addElement('search_index',$row["search_index"]);
 
-
-        //var_dump($images);
-        $baseURL = "./imageNew1/";
-
-        foreach ($resIds as $product) {
-
-            while($row = mysql_fetch_array($resPro)) {
-                if($row['product_id'] == $product) {
-                    $this->_xmlWriter->reset();
-                    $this->_xmlWriter->elements['db_id'] = $row['product_id'];
-                    $this->_xmlWriter->elements['id'] = $row['asin'];
-                    $this->_xmlWriter->elements['name'] = $row['name'];
-                    $this->_xmlWriter->elements['description'] = strip_tags($row['description']);
-                    $this->_xmlWriter->elements['url'] = $row['detail_page_url'];
-                    $this->_xmlWriter->elements['maxRetail'] = $row['highest_retail_price'];
-                    $this->_xmlWriter->elements['minRetail'] = $row['lowest_retail_price'];
-                    $this->_xmlWriter->elements['maxSale'] = $row['highest_sale_price'];
-                    $this->_xmlWriter->elements['minSale'] = $row['lowest_sale_price'];
-                    $this->_xmlWriter->elements['numViews'] = $row['num_views'];
-                    $this->_xmlWriter->elements['category'] = $row['category_id'];
-                    $this->_xmlWriter->elements['rating'] = $row['avg_rating'];
-                    $this->_xmlWriter->elements['merchant'] = "amazon";
-                    //get images info
-
-
-
-                    $c = 0;
-                    $p=0;
-
-                    foreach ($images as $image) {
-                        if($image[0] == $row['product_id']) {
-                            if($image[1] == "primary_large") {
-                                $this->_xmlWriter->elements['primaryImage'] = $baseURL.$image[2];
-                                $p++;
-                            }
-                            else if($p == 0) {
-                                $this->_xmlWriter->elements['primaryImage'] = $baseURL.$image[2];
-
-                            }
-                            else if($image[1] == "variant_large") {
-                                $this->_xmlWriter->elements['variantImage'][$c] = $baseURL.$image[2];
-                                $c++;
-                            }
-
-
-
-                        }
+                //get images info
+                $imageQuery = "SELECT image_path, image_type FROM images WHERE product_asin = '".$row['asin']."'";
+                $imageResultSet = mysql_query($imageQuery);
+                while($imageRow = mysql_fetch_array($imageResultSet)) {
+                    if($imageRow['image_type'] == "primary_large"){
+                        $this->_xmlWriter->addElement('primaryImage',$imageRow['image_path']);
+                    }else if($imageRow['image_type'] == "variant_large"){
+                        $this->_xmlWriter->addElement('variantImage',$imageRow['image_path']);
                     }
-
-
-
-
-                    $this->_xmlWriter->addItem();
-                    mysql_data_seek($resPro, 0);
-                    break;
-
                 }
-            }
-            mysql_data_seek($resPro, 0);
-
+                $this->_xmlWriter->addItem();
+                
         }
-        $this->_xmlWriter->save2();
-        //$this->_xmlWriter->saveFile("results.xml");
-
-
-    }
-
-    //=================RESTRICT THE NUMBER OF TIME ACCESS DB===========
-    public function process($res) {
-
-
-        if ( $res!== false ) {
-            if ( isset($res["matches"]) && is_array($res["matches"]) ) {
-
-                //$total = $this->_xmlWriter->xml->createElement("total", $res['total']);
-                //$total = $this->_xmlWriter->root->appendChild($total);
-                //$total = $this->_xmlWriter->xml->createElement("total_found", $res['total_found']);
-                //$total = $this->_xmlWriter->root->appendChild($total);
-                $time = $this->_xmlWriter->xml->createElement("searchTime", $res['time']);
-                $time = $this->_xmlWriter->root->appendChild($time);
-
-                $ids = array();
-                foreach($res["matches"] as $docinfo) {
-                    array_push($ids, $docinfo['id']);
-                }
-
-                //	$this->processError("No Match Found" . $idss);
-                $this->process_result($ids,$res['total']);
-                //echo "ee".$ids;
-            }
-
-        }
-
-
-    }
-    public function test_process($res) {
-
-
-        if ( $res!== false ) {
-
-            if ( isset($res["matches"]) && is_array($res["matches"]) ) {
-
-                //$total = $this->_xmlWriter->xml->createElement("total", $res['total']);
-                //$total = $this->_xmlWriter->root->appendChild($total);
-                //$total = $this->_xmlWriter->xml->createElement("total_found", $res['total_found']);
-                //$total = $this->_xmlWriter->root->appendChild($total);
-                $time = $this->_xmlWriter->xml->createElement("searchTime", $res['time']);
-                //$time = $this->_xmlWriter->root->appendChild($time);
-
-                echo $time;
-            }
-
-        }
-
-
+        print $this->_xmlWriter->save();
+       
     }
 
     //=======================VISUAL SEARCH=============================
