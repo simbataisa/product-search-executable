@@ -44,6 +44,9 @@ class XMLUtil {
     public function createElement1(/*String*/$name){
         return $this->_xml->createElement($name);
     }
+    public function appendChildToRootNode(/*XML element*/$e){
+        return $this->_root->appendChild($e);
+    }
     public function appendChildToTypeNode(/*XML Element*/$e){
         return $this->_type->appendChild($e);
     }
