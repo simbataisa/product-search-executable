@@ -45,6 +45,12 @@ if(isset ($_REQUEST['firstPageReq'])) {
 }else
     $firstPageReq = "";
 
+if(isset ($_REQUEST['lastPage'])) {
+    $isLastPage = $_REQUEST['lastPage'];
+}else
+    $isLastPage = "";
+
+
 //------------------------------------------------------------------------------
 
 $sphinxSearchManger->setResultRange(0,500,500);
@@ -67,16 +73,16 @@ if($option == "byKeyword") {
             foreach($res["matches"] as $docinfo) {
                 array_push($ids, $docinfo['id']);
             }  
-            $total = $res['total'];                
-        }else{
-            $total = 0;
+            $idsToPrint = array();
+            for ($counter = 0; $counter < $pageLength; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+            //var_dump($idsToPrint);
+            $total = $res['total'];
+            $searchTime = $res['time'];
+            $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
         }
-        //
         //var_dump($res);
     }
 }
-
-
-
-
 ?>
