@@ -54,10 +54,11 @@ if(isset ($_REQUEST['lastPage'])) {
 //------------------------------------------------------------------------------
 
 $sphinxSearchManger->setResultRange(0,500,500);
-$sphinxSearchManger->setIndex("products");
+$sphinxSearchManger->setIndex("product");
 
 if($option == "byKeyword") {    
-    $res = $sphinxSearchManger->search("(@name $key_word) | (@description $key_word)");
+    //$res = $sphinxSearchManger->search("(@name $key_word) | (@description $key_word)");
+    $res = $sphinxSearchManger->search("(@name $key_word)");
     //Getting total result first
 
     if($res === false) {
