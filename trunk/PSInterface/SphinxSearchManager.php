@@ -24,7 +24,7 @@ class SphinxSearchManager {
         $this->cl->SetConnectTimeout ( 1 );
         $this->cl->SetArrayResult ( true );
         $this->cl->SetWeights ( array ( 100, 1 ) );  //?
-        $this->cl->SetMatchMode ( SPH_MATCH_ALL);
+        $this->cl->SetMatchMode (SPH_MATCH_EXTENDED);
         $this->cl->SetRankingMode(SPH_RANK_PROXIMITY_BM25);
     }
 
@@ -33,10 +33,10 @@ class SphinxSearchManager {
         return $res;
     }
 
-    public function setResultRange($offSet, $lim) {
+    public function setResultRange($offSet, $lim, $max) {
         $this->limit = $lim;
         $this->offset = $offSet;
-        $this->cl->SetLimits($offSet, $lim,1000);
+        $this->cl->SetLimits($offSet, $lim, $max);
 
     }
     public function setFilter($field, $values) {
