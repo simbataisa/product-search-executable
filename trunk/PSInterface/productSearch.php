@@ -50,40 +50,94 @@ if(isset ($_REQUEST['lastPage'])) {
 }else
     $isLastPage = "";
 
-
+$total = "";
 //------------------------------------------------------------------------------
 
-$sphinxSearchManger->setResultRange(0,500,500);
+
 $sphinxSearchManger->setIndex("product");
 
-if($option == "byKeyword") {    
+if($option == "byKeyword") {
     //$res = $sphinxSearchManger->search("(@name $key_word) | (@description $key_word)");
-    $res = $sphinxSearchManger->search("(@name $key_word)");
-    //Getting total result first
+    $sphinxSearchManger->setResultRange(0,500,500);
+    if($firstPageReq=="Y") {
+        $res = $sphinxSearchManger->search("(@name $key_word)");
+        //Getting total result first
 
-    if($res === false) {
-        $resultProcessor->processError($sphinxSearchManger->cl->GetLastError());
-    }
-    else if(!isset($res["matches"])) {
-        //No match found
-        $resultProcessor->processError("0");
-    }
-    else {
-        if (is_array($res["matches"]) ) {
-            $ids = array();
-            foreach($res["matches"] as $docinfo) {
-                array_push($ids, $docinfo['id']);
-            }  
-            $idsToPrint = array();
-            for ($counter = 0; $counter < $pageLength; $counter++) {
-                $idsToPrint[$counter] = $ids[$counter];
-            }
-            //var_dump($idsToPrint);
-            $total = $res['total'];
-            $searchTime = $res['time'];
-            $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+        if($res === false) {
+            $resultProcessor->processError($sphinxSearchManger->cl->GetLastError());
         }
-        //var_dump($res);
+        else if(!isset($res["matches"])) {
+            //No match found
+            $resultProcessor->processError("0");
+        }
+        else {
+            if (is_array($res["matches"]) ) {
+                $ids = array();
+
+
+                foreach($res["matches"] as $docinfo) {
+                    array_push($ids, $docinfo['id']);
+                }
+                $_SESSION['ids'] = $ids;
+                $idsToPrint = array();
+                for ($counter = 0; $counter < $pageLength; $counter++) {
+                    $idsToPrint[$counter] = $ids[$counter];
+                }
+                //var_dump($idsToPrint);
+                $total = $res['total'];
+                $_SESSION['total'] = $total;
+                $searchTime = $res['time'];
+                $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+            }
+            //var_dump($res);
+        }
+    }else if($firstPageReq=="N") {
+        $ids = array();
+        if(isset($_SESSION['ids'])){           
+            $ids = $_SESSION['ids'];           
+        }
+
+        if(isset($_SESSION['total'])){           
+            $total = $_SESSION['total'];           
+        }
+
+
+
+        $idsToPrint = array();
+        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
+            $idsToPrint[$counter] = $ids[$counter];
+        }
+        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+        //var_dump($idsToPrint);
+        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
+
+}else if($option == "autoSuggestion"){
+    $sphinxSearchManger->setResultRange(intval($startIndex),intval($stopIndex),500);
+    $res = $sphinxSearchManger->search("(@name $key_word)");
+        //Getting total result first
+        $resultProcessor->createAutoSuggestXMLTitle();
+        if($res === false) {
+            $resultProcessor->processError($sphinxSearchManger->cl->GetLastError());
+        }
+        else if(!isset($res["matches"])) {
+            //No match found
+            $resultProcessor->processError("0");
+        }
+        else {
+            if (is_array($res["matches"]) ) {
+                $ids = array();
+
+
+                foreach($res["matches"] as $docinfo) {
+                    array_push($ids, $docinfo['id']);
+                }
+                $total = $res['total'];
+                $_SESSION['total'] = $total;
+                $searchTime = $res['time'];
+                $resultProcessor->process_result($ids,$total,$searchTime,$firstPageReq,$isLastPage);
+            }
+            //var_dump($res);
+        }
 }
 ?>
