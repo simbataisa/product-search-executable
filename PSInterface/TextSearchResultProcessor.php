@@ -89,6 +89,12 @@ class TextSearchResultProcessor {
        
     }
 
+    /*----------------------------Auto Suggestion-----------------------------*/
+    public function createAutoSuggestXMLTitle(){
+        $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_autosuggesstion,
+                $this->_constants->xml_element_type_products);
+    }
+
     //=======================VISUAL SEARCH=============================
     public function processVSresult($res,$total,$Qtime) {
         //$resIds = preg_split("/\s/",$res);
