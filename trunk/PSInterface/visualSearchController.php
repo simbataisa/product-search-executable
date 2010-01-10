@@ -104,6 +104,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $total = 0;
         $searchTime = $data;
     }
+    $searchTime = number_format($searchTime, 4,'.');
     //var_dump($arrayIndexId);
     
 
