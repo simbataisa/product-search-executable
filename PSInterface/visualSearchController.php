@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
 */
-require_once("VisualSearchResultProcessor.php");
+require_once("TextSearchResultProcessor.php.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
 
@@ -63,7 +63,7 @@ if(isset ($_REQUEST['lastPage'])) {
     $isLastPage = "";
 
 $constants = new Constants();
-$vsResultProcessor = new VisualSearchResultProcessor();
+$vsResultProcessor = new TextSearchResultProcessor();
 $data='';
 $total=0;
 $searchTime="";
