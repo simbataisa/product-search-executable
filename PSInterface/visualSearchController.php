@@ -105,8 +105,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $searchTime = $data;
     }
     //var_dump($arrayIndexId);
-    //Set the session so that data can be retrieved faster for paging...
-    $_SESSION['arrayIndexId'] =$arrayIndexId;
+    
 
     //
     $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
@@ -116,15 +115,12 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     while($r = mysql_fetch_array($cateLevel1ResSet)) {
         $level_1_id = $r['level_1_id'];
     }
+
+
     //Getting index id for first page result
-    $index_id_string = "";
-    for($counter = 0; $counter < intval($pageLength); $counter++){
-        if($counter == intval($pageLength)-1){
-            $index_id_string .= $arrayIndexId[$counter];
-        }else{
-            $index_id_string .= $arrayIndexId[$counter] . ",";
-        }
-    }
+    array_pop($arrayIndexId);
+    $index_id_string = implode(",",$arrayIndexId);;
+    
     //Getting product details
     $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
 	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
@@ -132,10 +128,14 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
 
     $productResSet= mysql_query($productQuery);
+    $total = mysql_num_rows($productResSet);
+
     $product_ids = array();
     while($r = mysql_fetch_array($productResSet)) {
         array_push($product_ids,  $r['pid']);
     }
+    //Set the session so that data can be retrieved faster for paging...
+    $_SESSION['product_ids'] =$product_ids;
     echo $index_id_string;
     var_dump($product_ids);
     echo $total .$searchTime. $firstPageReq. $isLastPage;
