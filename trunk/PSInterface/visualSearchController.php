@@ -136,6 +136,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     while($r = mysql_fetch_array($productResSet)) {
         array_push($product_ids,  $r['pid']);
     }
+    echo $index_id_string;
     var_dump($product_ids);
     echo $total .$searchTime. $firstPageReq. $isLastPage;
     //$vsResultProcessor->process_result($product_ids, $total, $searchTime, $firstPageReq, $isLastPage);
