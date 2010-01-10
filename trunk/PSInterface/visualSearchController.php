@@ -20,20 +20,20 @@ session_start();
 ) as select product_id as pid from images where feature_set !=""  order by product_id */
 
 
-if(isset($_POST['option']))
-    $option = $_POST['option'];
+if(isset($_REQUEST['option']))
+    $option = $_REQUEST['option'];
 //$id = "769";
 else
     $option = "";
 
-if(isset($_POST['category']))
-    $category = $_POST['category'];
+if(isset($_REQUEST['category']))
+    $category = $_REQUEST['category'];
 else
     $category = "";
 
 
-if(isset($_POST['product_id']))
-    $product_id = $_POST['product_id'];
+if(isset($_REQUEST['product_id']))
+    $product_id = $_REQUEST['product_id'];
 //$id = "769";
 else
     $product_id = "";
@@ -65,7 +65,8 @@ if(isset ($_REQUEST['lastPage'])) {
 $constants = new Constants();
 $vsResultProcessor = new VisualSearchResultProcessor();
 
-
+echo "hello";
+echo $option . $category . $product_id;
 
 if($option == "vsDragDrop" || $option == "vsButtonClick"){
     //Getting LSH index id
