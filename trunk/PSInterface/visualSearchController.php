@@ -107,7 +107,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     //var_dump($arrayIndexId);
     
 
-    //
+    //Getting level_1_id category for the requested category id
     $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
 
     $cateLevel1ResSet = mysql_query($cateLevel1Query);
@@ -121,7 +121,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     array_pop($arrayIndexId);
     $index_id_string = implode(",",$arrayIndexId);;
     
-    //Getting product details
+    //Getting actual product id realated to the catefory
     $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
 	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
         AND p.category_id=c.category_id AND
@@ -136,10 +136,16 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     }
     //Set the session so that data can be retrieved faster for paging...
     $_SESSION['product_ids'] =$product_ids;
-    echo $index_id_string;
-    var_dump($product_ids);
-    echo $total .$searchTime. $firstPageReq. $isLastPage;
-    //$vsResultProcessor->process_result($product_ids, $total, $searchTime, $firstPageReq, $isLastPage);
+
+    //Getting product id for first page result
+    $productIdToPrint = array();
+    for($counter = 0; $counter<intval($pageLength); $counter++){
+        $productIdToPrint[$counter] = $product_ids[$counter];
+    }
+    
+    //var_dump($product_ids);
+    echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
+    $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
 }
 
 
