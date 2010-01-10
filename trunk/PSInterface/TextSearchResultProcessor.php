@@ -49,7 +49,7 @@ class TextSearchResultProcessor {
                         p.highest_retail_price,p.lowest_retail_price,p.highest_sale_price,
                         p.lowest_sale_price,p.num_views,p.category_id,p.avg_rating,
                         p.merchant_id,p.search_index
-                        FROM products p WHERE product_id in ($idStr)
+                        FROM products p WHERE product_id IN ($idStr)
                         ORDER BY Field(p.product_id,$idStr)";
         $productResultSet = mysql_query($productQuery);
         while($row = mysql_fetch_array($productResultSet)) {
