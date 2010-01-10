@@ -68,9 +68,6 @@ $data='';
 $total=0;
 $searchTime="";
 
-echo "hello";
-echo $option . $category . $product_id;
-
 if($option == "vsDragDrop" || $option == "vsButtonClick") {
     //Getting LSH index id
     $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
@@ -107,7 +104,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $total = 0;
         $searchTime = $data;
     }
-
+    var_dump($arrayIndexId);
     //Set the session so that data can be retrieved faster for paging...
     $_SESSION['arrayIndexId'] =$arrayIndexId;
 
