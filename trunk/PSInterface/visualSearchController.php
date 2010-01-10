@@ -104,7 +104,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $total = 0;
         $searchTime = $data;
     }
-    var_dump($arrayIndexId);
+    //var_dump($arrayIndexId);
     //Set the session so that data can be retrieved faster for paging...
     $_SESSION['arrayIndexId'] =$arrayIndexId;
 
@@ -136,7 +136,9 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     while($r = mysql_fetch_array($productResSet)) {
         array_push($product_ids,  $r['pid']);
     }
-    $vsResultProcessor->process_result($product_ids, $total, $searchTime, $firstPageReq, $isLastPage);
+    var_dump($product_ids);
+    echo $total .$searchTime. $firstPageReq. $isLastPage;
+    //$vsResultProcessor->process_result($product_ids, $total, $searchTime, $firstPageReq, $isLastPage);
 }
 
 
