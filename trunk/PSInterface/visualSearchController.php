@@ -67,86 +67,103 @@ $vsResultProcessor = new VisualSearchResultProcessor();
 $data='';
 $total=0;
 $searchTime="";
+$product_ids = array();
 
 if($option == "vsDragDrop" || $option == "vsButtonClick") {
-    //Getting LSH index id
-    $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
-    $res = mysql_query($sqlQuery);
-    if($r = mysql_fetch_array($res))
-        $index_id= $r['index_id'];
 
-    $index_id=$index_id;
-    //
-    $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
-    $host = $constants->image_server_host;
-    $port = $constants->image_server_port;
-    // connect to server
-    $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
+    if($firstPageReq=="Y") {
+        //Getting LSH index id
+        $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
+        $res = mysql_query($sqlQuery);
+        if($r = mysql_fetch_array($res))
+            $index_id= $r['index_id'];
 
-    if(!$result) {
-        $vsResultProcessor->processVSresult("-1");
-        die;
-    }
-    socket_write($socket, $index_id, strlen($index_id)) or die("Could not send data to server\n");
+        $index_id=$index_id;
+        //
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
+        $host = $constants->image_server_host;
+        $port = $constants->image_server_port;
+        // connect to server
+        $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
 
-    while (($recv = socket_read($socket, 30)) !=false)
-        $data .=$recv;
-    socket_close($socket);
-    
-    //
-    $pos = strpos($data, ",");
-    $arrayIndexId = array();
-    if($pos){
-        $arrayIndexId = split(",", $data);
-        $total = count($arrayIndexId)-1;
-        $searchTime = $arrayIndexId[count($arrayIndexId)-1];
-    }else{
-        $total = 0;
-        $searchTime = $data;
-    }
-    $searchTime = number_format(floatval($searchTime), 4);
-    //var_dump($arrayIndexId);
-    
+        if(!$result) {
+            $vsResultProcessor->processVSresult("-1");
+            die;
+        }
+        socket_write($socket, $index_id, strlen($index_id)) or die("Could not send data to server\n");
 
-    //Getting level_1_id category for the requested category id
-    $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
+        while (($recv = socket_read($socket, 30)) !=false)
+            $data .=$recv;
+        socket_close($socket);
 
-    $cateLevel1ResSet = mysql_query($cateLevel1Query);
-    $level_1_id = "";
-    while($r = mysql_fetch_array($cateLevel1ResSet)) {
-        $level_1_id = $r['level_1_id'];
-    }
+        //
+        $pos = strpos($data, ",");
+        $arrayIndexId = array();
+        if($pos) {
+            $arrayIndexId = split(",", $data);
+            $total = count($arrayIndexId)-1;
+            $searchTime = $arrayIndexId[count($arrayIndexId)-1];
+        }else {
+            $total = 0;
+            $searchTime = $data;
+        }
+        $searchTime = number_format(floatval($searchTime), 4);
+        //var_dump($arrayIndexId);
 
 
-    //Getting index id for first page result
-    array_pop($arrayIndexId);
-    $index_id_string = implode(",",$arrayIndexId);;
-    
-    //Getting actual product id realated to the catefory
-    $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
+        //Getting level_1_id category for the requested category id
+        $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
+
+        $cateLevel1ResSet = mysql_query($cateLevel1Query);
+        $level_1_id = "";
+        while($r = mysql_fetch_array($cateLevel1ResSet)) {
+            $level_1_id = $r['level_1_id'];
+        }
+
+
+        //Getting index id for first page result
+        array_pop($arrayIndexId);
+        $index_id_string = implode(",",$arrayIndexId);
+        ;
+
+        //Getting actual product id realated to the catefory
+        $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
 	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
         AND p.category_id=c.category_id AND
         p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
 
-    $productResSet= mysql_query($productQuery);
-    $total = mysql_num_rows($productResSet);
+        $productResSet= mysql_query($productQuery);
+        $total = mysql_num_rows($productResSet);
 
-    $product_ids = array();
-    while($r = mysql_fetch_array($productResSet)) {
-        array_push($product_ids,  $r['pid']);
-    }
-    //Set the session so that data can be retrieved faster for paging...
-    $_SESSION['product_ids'] =$product_ids;
+        $product_ids = array();
+        while($r = mysql_fetch_array($productResSet)) {
+            array_push($product_ids,  $r['pid']);
+        }
+        //Set the session so that data can be retrieved faster for paging...
+        $_SESSION['product_ids'] =$product_ids;
 
-    //Getting product id for first page result
-    $productIdToPrint = array();
-    for($counter = 0; $counter<intval($pageLength); $counter++){
-        $productIdToPrint[$counter] = $product_ids[$counter];
+        //Getting product id for first page result
+        $productIdToPrint = array();
+        for($counter = 0; $counter<intval($pageLength); $counter++) {
+            $productIdToPrint[$counter] = $product_ids[$counter];
+        }
+
+        //var_dump($product_ids);
+        //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
+        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+    }else{
+        $product_ids = $_SESSION['product_ids'];
+        //Getting product id for first page result
+        $productIdToPrint = array();
+        for($counter = $startIndex; $counter<intval($stopIndex); $counter++) {
+            $productIdToPrint[$counter] = $product_ids[$counter];
+        }
+
+        //var_dump($product_ids);
+        //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
+        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }
-    
-    //var_dump($product_ids);
-    //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
-    $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+
 }
 
 
