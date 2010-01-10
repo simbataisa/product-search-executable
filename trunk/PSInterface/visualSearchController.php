@@ -94,7 +94,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick"){
     while (($recv = socket_read($socket, 30)) !=false)
         $data .=$recv;
     socket_close($socket);
-
+    echo $data;
     $_SESSION['items'] =$data;
 }
 
