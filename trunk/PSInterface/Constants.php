@@ -27,6 +27,9 @@ class Constants {
     public $xml_element_iscomplete = 'isComplete';
     public $xml_element_total = 'total';
 
+    public $image_server_host = "localhost";
+    public $image_server_port = 9000;
+
     function Constants(){
         
     }
