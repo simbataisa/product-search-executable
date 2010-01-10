@@ -92,12 +92,11 @@ if($option == "vsDragDrop" || $option == "vsButtonClick"){
 
     socket_write($socket, $index_id, strlen($index_id)) or die("Could not send data to server\n");
 
-    $recv = socket_read($socket, 30);
-    var_dump($recv);
-    //while (($recv = socket_read($socket, 30)) !=false)
-    //    $data .=$recv;
+
+    while (($recv = socket_read($socket, 30)) !=false)
+        $data .=$recv;
     socket_close($socket);
-    //echo $data;
+    var_dump(split(",", $data));
     $_SESSION['items'] =$data;
 }
 
