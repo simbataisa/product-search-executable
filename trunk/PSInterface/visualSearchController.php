@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
 */
-require_once("TextSearchResultProcessor.php.php");
+require_once("TextSearchResultProcessor.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
 
