@@ -5,12 +5,12 @@ $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
 
 
 $file = fopen("./images/exp.txt","w+"	);
- chmod("./images/exp.txt" ,0777);
+chmod("./images/exp.txt" ,0777);
 $doc = new DOMDocument();
- $doc->formatOutput = true;
+$doc->formatOutput = true;
   
-  $r = $doc->createElement( "upload" );
-  $doc->appendChild( $r );
+$r = $doc->createElement( "upload" );
+$doc->appendChild( $r );
    
 ini_set('display_errors',0);
 
@@ -23,86 +23,26 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE)
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
 	
     if ($type == 1 || $type == 2 || $type == 3)
-    {	 
-    	
-    	rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-       chmod("./images/".$_FILES['Filedata']['name'] ,0777);
-       fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
-       fclose($file);
+    {	     	
+        rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
+        chmod("./images/".$_FILES['Filedata']['name'] ,0777);
+        fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
+        fclose($file);
     	$last = exec("./extractFeatures ./images/exp.txt",$returnvar);
     	
-		 $b = $doc->createElement( "item" );
-  
-  		$url = $doc->createElement( "url" );
- 		 $url->appendChild($doc->createTextNode( "Controller/images/".$_FILES['Filedata']['name'] ));
-  		$b->appendChild( $url );
-		
-		//system("./extractFeatures ./images/exp.txt");
-		
-		$feature = $doc->createElement( "feature" );
- 		 $feature->appendChild($doc->createTextNode(get_feature() ));
-  		$b->appendChild( $feature );
-		
-		
-		
-  		$r->appendChild( $b );
-  		
-  		$message = "<upload><item><url>Controller/images/".$_FILES['Filedata']['name']."</url> <feature>-1</feature><status>OK</status></item></upload>";
-		
-    	
-		/*if($type == 1)
-		{
-        rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-       chmod("./images/".$_FILES['Filedata']['name'] ,0777);
-		 $b = $doc->createElement( "item" );
-  
-  		$url = $doc->createElement( "url" );
- 		 $url->appendChild($doc->createTextNode( "Controller/images/".$_FILES['Filedata']['name'] ));
-  		$b->appendChild( $url );
-		
-		system("./extractFeatures ./images/exp.txt");
-		
-		$feature = $doc->createElement( "feature" );
- 		 $feature->appendChild($doc->createTextNode(get_feature() ));
-  		$b->appendChild( $feature );
-		
-		
-		
-  		$r->appendChild( $b );
-		fwrite ($file, "./images/".$_FILES['Filedata']['name']);
-		}
-		else if($type == 2)
-		{
-        rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-        chmod("./images/".$_FILES['Filedata']['name'] ,0777);
-		 $b = $doc->createElement( "item" );
-  
- 		 $url = $doc->createElement( "url" );
-  		$url->appendChild($doc->createTextNode( "Controller/images/".$_FILES['Filedata']['name'] ));
-  		$b->appendChild( $url );
-		system("./extractFeatures ./images/exp.txt");
-		$feature = $doc->createElement( "feature" );
- 		 $feature->appendChild($doc->createTextNode( get_feature()  ));
-  		$b->appendChild( $feature );
-  		$r->appendChild( $b );
-		fwrite ($file, "./images/".$_FILES['Filedata']['name']);
-		}
-		else if($type == 3)
-		{
-        rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-        chmod("./images/".$_FILES['Filedata']['name'] ,0777);
-		 $b = $doc->createElement( "item" );
-  
- 		 $url = $doc->createElement( "url" );
-  		$url->appendChild($doc->createTextNode( "Controller/images/".$_FILES['Filedata']['name'] ));
-  		$b->appendChild( $url );
-		system("./extractFeatures ./images/exp.txt");
-		$feature = $doc->createElement( "feature" );
- 		 $feature->appendChild($doc->createTextNode( get_feature()  ));
-  		$b->appendChild( $feature );
-  		$r->appendChild( $b );
-		fwrite ($file, "./images/".$_FILES['Filedata']['name']);
-		}*/
+	$b = $doc->createElement( "item" );
+
+        $url = $doc->createElement( "url" );
+        $url->appendChild($doc->createTextNode( "Controller/images/".$_FILES['Filedata']['name'] ));
+        $b->appendChild( $url );
+
+        //system("./extractFeatures ./images/exp.txt");
+
+        $feature = $doc->createElement( "feature" );
+        $feature->appendChild($doc->createTextNode(get_feature() ));
+        $b->appendChild( $feature );
+        $r->appendChild( $b );
+        $message = "<upload><item><url>Controller/images/".$_FILES['Filedata']['name']."</url> <feature>-1</feature><status>OK</status></item></upload>";
     }
     else
     {
@@ -124,10 +64,10 @@ if (count($files) > $MAXIMUM_FILE_COUNT)
         unlink($files_to_delete[$i][0]);
     }
 }
-	//$doc->save("feature.xml");
-	//echo $doc->saveXML();
-	echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-	echo $message;
+//$doc->save("feature.xml");
+//echo $doc->saveXML();
+echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+echo $message;
 
 
 closedir($directory);
@@ -145,7 +85,7 @@ function sorter($a, $b)
 }
 
 
- function get_feature()
+function get_feature()
 {
 	
 	$count =0;
