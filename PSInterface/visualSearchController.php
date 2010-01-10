@@ -144,7 +144,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     }
     
     //var_dump($product_ids);
-    echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
+    //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
     $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
 }
 
