@@ -64,6 +64,7 @@ if(isset ($_REQUEST['lastPage'])) {
 
 $constants = new Constants();
 $vsResultProcessor = new VisualSearchResultProcessor();
+$data='';
 
 echo "hello";
 echo $option . $category . $product_id;
