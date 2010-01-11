@@ -134,7 +134,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
 
         $productResSet= mysql_query($productQuery);
         $total = mysql_num_rows($productResSet);
-
+        $_SESSION['total'] = $total;
         $product_ids = array();
         while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
@@ -153,6 +153,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }else{
         $product_ids = $_SESSION['product_ids'];
+        $total = $_SESSION['total'];
         //Getting product id for first page result
         $productIdToPrint = array();
         for($counter = $startIndex; $counter<intval($stopIndex); $counter++) {
