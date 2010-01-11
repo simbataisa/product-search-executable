@@ -80,11 +80,19 @@ if($option == "byKeyword") {
                 }
                 $_SESSION['ids'] = $ids;
                 $idsToPrint = array();
-                for ($counter = 0; $counter < $pageLength; $counter++) {
-                    $idsToPrint[$counter] = $ids[$counter];
-                }
-                //var_dump($idsToPrint);
                 $total = $res['total'];
+                if(intval($total)>$pageLength) {
+                    for ($counter = 0; $counter < $pageLength; $counter++) {
+                        $idsToPrint[$counter] = $ids[$counter];
+                    }
+                }else{
+                    for ($counter = 0; $counter < $total; $counter++) {
+                        $idsToPrint[$counter] = $ids[$counter];
+                    }
+                }
+
+                //var_dump($idsToPrint);
+
                 $_SESSION['total'] = $total;
                 $searchTime = $res['time'];
                 $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
@@ -93,12 +101,12 @@ if($option == "byKeyword") {
         }
     }else if($firstPageReq=="N") {
         $ids = array();
-        if(isset($_SESSION['ids'])){           
-            $ids = $_SESSION['ids'];           
+        if(isset($_SESSION['ids'])) {
+            $ids = $_SESSION['ids'];
         }
 
-        if(isset($_SESSION['total'])){           
-            $total = $_SESSION['total'];           
+        if(isset($_SESSION['total'])) {
+            $total = $_SESSION['total'];
         }
 
 
@@ -112,32 +120,32 @@ if($option == "byKeyword") {
         $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
 
-}else if($option == "autoSuggestion"){
+}else if($option == "autoSuggestion") {
     $sphinxSearchManger->setResultRange(intval($startIndex),intval($stopIndex),500);
     $res = $sphinxSearchManger->search("(@name $key_word)");
-        //Getting total result first
-        $resultProcessor->createAutoSuggestXMLTitle();
-        if($res === false) {
-            $resultProcessor->processError($sphinxSearchManger->cl->GetLastError());
-        }
-        else if(!isset($res["matches"])) {
-            //No match found
-            $resultProcessor->processError("0");
-        }
-        else {
-            if (is_array($res["matches"]) ) {
-                $ids = array();
+    //Getting total result first
+    $resultProcessor->createAutoSuggestXMLTitle();
+    if($res === false) {
+        $resultProcessor->processError($sphinxSearchManger->cl->GetLastError());
+    }
+    else if(!isset($res["matches"])) {
+        //No match found
+        $resultProcessor->processError("0");
+    }
+    else {
+        if (is_array($res["matches"]) ) {
+            $ids = array();
 
 
-                foreach($res["matches"] as $docinfo) {
-                    array_push($ids, $docinfo['id']);
-                }
-                $total = $res['total'];
-                $_SESSION['total'] = $total;
-                $searchTime = $res['time'];
-                $resultProcessor->process_result($ids,$total,$searchTime,$firstPageReq,$isLastPage);
+            foreach($res["matches"] as $docinfo) {
+                array_push($ids, $docinfo['id']);
             }
-            //var_dump($res);
+            $total = $res['total'];
+            $_SESSION['total'] = $total;
+            $searchTime = $res['time'];
+            $resultProcessor->process_result($ids,$total,$searchTime,$firstPageReq,$isLastPage);
         }
+        //var_dump($res);
+    }
 }
 ?>
