@@ -55,6 +55,19 @@ if(isset ($_REQUEST['colorRequest'])) {
 }else
     $colorRequest = 0;
 
+if(isset($_POST['red']))
+    $red = $_POST['red'];
+else
+    $red = 0;
+if(isset($_POST['green']))
+    $green = $_POST['green'];
+else
+    $green = 0;
+if(isset($_POST['blue']))
+    $blue = $_POST['blue'];
+else
+    $blue = 0;
+
 $total = "";
 //------------------------------------------------------------------------------
 
