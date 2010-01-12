@@ -147,5 +147,25 @@ if($option == "byKeyword") {
         }
         //var_dump($res);
     }
+}else if($colorRequest!=0 && $firstPageReq=="Y") {
+    $ids = array();
+    if(isset($_SESSION['ids'])) {
+        $ids = $_SESSION['ids'];
+    }
+    $idStr = implode(",",$ids);
+    //if ($color == -97)
+    $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
+            FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
+
+    $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
+
+    $idsWithTheColor = array();
+    $total = mysql_num_rows($idWithTheColorResSet);
+    while($r1 = mysql_fetch_array($res1)) {
+        array_push($idsWithTheColor, $r1['pid']);
+    }
+    $_SESSION['idsWithTheColor'] = $idsWithTheColor;
+    $_SESSION['total'] = $total;
+    $resultProcessor->process_result($ids,$total,$searchTime,$firstPageReq,$isLastPage);
 }
 ?>
