@@ -183,7 +183,7 @@ if($option == "byKeyword") {
         $ids = array();
         $total = mysql_num_rows($idWithTheColorResSet);
         while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
-            array_push($ids, $r1['pid']);
+            array_push($ids, $r1['product_id']);
         }
         $_SESSION['$ids'] = $ids;
         $_SESSION['total'] = $total;
