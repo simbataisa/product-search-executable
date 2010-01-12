@@ -50,6 +50,11 @@ if(isset ($_REQUEST['lastPage'])) {
 }else
     $isLastPage = "";
 
+if(isset ($_REQUEST['colorRequest'])) {
+    $colorRequest = $_REQUEST['colorRequest'];
+}else
+    $colorRequest = 0;
+
 $total = "";
 //------------------------------------------------------------------------------
 
@@ -85,7 +90,7 @@ if($option == "byKeyword") {
                     for ($counter = 0; $counter < $pageLength; $counter++) {
                         $idsToPrint[$counter] = $ids[$counter];
                     }
-                }else{
+                }else {
                     for ($counter = 0; $counter < $total; $counter++) {
                         $idsToPrint[$counter] = $ids[$counter];
                     }
@@ -95,6 +100,7 @@ if($option == "byKeyword") {
 
                 $_SESSION['total'] = $total;
                 $searchTime = $res['time'];
+                $_SESSION['time'] = $searchTime;
                 $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
             }
             //var_dump($res);
@@ -147,25 +153,57 @@ if($option == "byKeyword") {
         }
         //var_dump($res);
     }
-}else if($colorRequest!=0 && $firstPageReq=="Y") {
-    $ids = array();
-    if(isset($_SESSION['ids'])) {
-        $ids = $_SESSION['ids'];
-    }
-    $idStr = implode(",",$ids);
-    //if ($color == -97)
-    $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
+}else if($option=="byColor") {
+    $resultProcessor->createColorSearchXMLTitle();
+    if($firstPageReq=="Y") {
+        $ids = array();
+        if(isset($_SESSION['ids'])) {
+            $ids = $_SESSION['ids'];
+        }
+        $idStr = implode(",",$ids);
+        //if ($color == -97)
+        $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
             FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
-
-    $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
-
-    $idsWithTheColor = array();
-    $total = mysql_num_rows($idWithTheColorResSet);
-    while($r1 = mysql_fetch_array($res1)) {
-        array_push($idsWithTheColor, $r1['pid']);
+        
+        $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
+        
+        $ids = array();
+        $total = mysql_num_rows($idWithTheColorResSet);
+        while($r1 = mysql_fetch_array($res1)) {
+            array_push($ids, $r1['pid']);
+        }
+        $_SESSION['$ids'] = $ids;
+        $_SESSION['total'] = $total;
+        $searchTime = $_SESSION['time'];
+        //
+        $idsToPrint = array();
+        if(intval($total)>$pageLength) {
+            for ($counter = 0; $counter < $pageLength; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+        }else {
+            for ($counter = 0; $counter < $total; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+        }
+        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+    }else if($firstPageReq == "N"){
+        $ids = array();
+        if(isset($_SESSION['ids'])) {
+            $ids = $_SESSION['ids'];
+        }
+        
+        if(isset($_SESSION['total'])) {
+            $total = $_SESSION['total'];
+        }
+        
+        $idsToPrint = array();
+        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
+            $idsToPrint[$counter] = $ids[$counter];
+        }
+        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+        //var_dump($idsToPrint);
+        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
-    $_SESSION['idsWithTheColor'] = $idsWithTheColor;
-    $_SESSION['total'] = $total;
-    $resultProcessor->process_result($ids,$total,$searchTime,$firstPageReq,$isLastPage);
 }
 ?>
