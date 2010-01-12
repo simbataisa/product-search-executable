@@ -14,6 +14,7 @@ class Constants {
     public $xml_element_title = 'title';
     public $xml_element_title_searchresult = 'search results';
     public $xml_element_title_vs_searchresult = 'vssearch results';
+    public $xml_element_title_cs_searchresult = 'cssearch results';
     public $xml_element_title_category = 'product categories';
     public $xml_element_title_account = 'user account';
     public $xml_element_title_autosuggesstion = 'search suggestion';
