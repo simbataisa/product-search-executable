@@ -116,8 +116,7 @@ if($option == "imageUploadSearch"){
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
-        var_dump($arrayIndexId);
-        echo $search_index;
+        
         //Refine products id
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
             WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = '".$search_index.
@@ -131,7 +130,7 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }
-        var_dump($product_ids);
+        echo $total;
         //Set the session so that data can be retrieved faster for paging...
         /*$_SESSION['product_ids'] =$product_ids;
 
