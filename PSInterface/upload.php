@@ -3,7 +3,7 @@ require_once("XMLCreator.php");
 $MAXIMUM_FILESIZE = 10240 * 10240; // 200KB
 $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
 
-chmod("./images/exp.txt" ,777);
+//chmod("./images/exp.txt" ,777);
 $file = fopen("./images/exp.txt","w+");
 $doc = new DOMDocument();
 $doc->formatOutput = true;
