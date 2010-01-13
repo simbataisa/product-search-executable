@@ -9,6 +9,9 @@
  *
  * @author Dao Tuan Anh
  */
+require_once("XMLUtil.php");
+require_once("dbconnection.php");
+
 class SearchResultProcessor {
     private $_xmlWriter;
     private $_constants;
