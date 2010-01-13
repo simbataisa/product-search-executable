@@ -179,7 +179,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
     }
 
 }else if($option=="byColor") {
-    $resultProcessor->createColorSearchXMLTitle();
+    $vsResultProcessor->createColorSearchXMLTitle();
     if($firstPageReq=="Y") {
         $product_ids = array();
         if(isset($_SESSION['product_ids'])) {
