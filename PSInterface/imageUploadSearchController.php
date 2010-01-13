@@ -76,7 +76,7 @@ $total=0;
 $searchTime="";
 $product_ids = array();
 $feature = get_feature();
-echo $feature;
+
 if($option == "imageUploadSearch"){
     $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
         $host = $constants->image_server_host;
@@ -93,7 +93,7 @@ if($option == "imageUploadSearch"){
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-
+        echo $data;
         //
         $pos = strpos($data, ",");
         $arrayIndexId = array();
