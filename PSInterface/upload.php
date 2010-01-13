@@ -18,10 +18,23 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
         chmod("./images/".$_FILES['Filedata']['name'] ,777);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
+        $file = fopen("./images/exp.txt","r") or die ("Can't open file");
+        $fileContent = "";
+        while (!feof($file)) {
+            $fileContent .= fread($file,8);
+        }
+        fclose($file);
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
         
         $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
-        $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
+        $message = "<upload>
+                    <item>
+                        <url>".$image_url."</url>
+                        <file_content>".$fileContent."</file_content>
+                        <feature>-1</feature>
+                        <status>OK</status>
+                    </item>
+                    </upload>";
     }
     else {
         unlink("./temporary/".$_FILES['Filedata']['name']);
