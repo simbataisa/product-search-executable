@@ -211,7 +211,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
                 $idsToPrint[$counter] = $ids[$counter];
             }
         }
-        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+        $vsResultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
     }else if($firstPageReq == "N"){
         $product_ids = array();
         if(isset($_SESSION['product_ids'])) {
@@ -228,7 +228,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         }
         //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
         //var_dump($idsToPrint);
-        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
+        $vsResultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
 }
 
