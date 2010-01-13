@@ -1,11 +1,12 @@
 <?php
 //Include File
 require_once ('SphinxSearchManager.php');
-require_once('TextSearchResultProcessor.php');
+require_once('SearchResultProcessor.php');
 
 session_start();
 $sphinxSearchManger = new SphinxSearchManager();
-$resultProcessor = new TextSearchResultProcessor();
+$resultProcessor = new SearchResultProcessor();
+$resultProcessor->createTextSearchXMLTitle();
 
 /* 
  * Getting request parameters
