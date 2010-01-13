@@ -29,12 +29,14 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     echo "Opening file...\n";
     $file = fopen("./images/exp.txt","w+") or die("can't open file");
     if ($type == 1 || $type == 2 || $type == 3) {
+        echo "File opened...\n";
+
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
         chmod("./images/".$_FILES['Filedata']['name'] ,0777);
         //fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fwrite ($file, "images/hello \n");
         fclose($file);
-        echo "Opening file...\n";
+        
         $fh = fopen("./images/exp.txt", 'r') or die("can't open file");
         $theData = fread($fh, 5);
         fclose($fh);
