@@ -116,7 +116,8 @@ if($option == "imageUploadSearch"){
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
-
+        var_dump($arrayIndexId);
+        echo $search_index;
         //Refine products id
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
             WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = $search_index
