@@ -149,7 +149,7 @@ if($option == "imageUploadSearch"){
             array_push($product_ids,  $r['pid']);
         }
 
-        //echo $total;
+        echo $total;
         //Set the session so that data can be retrieved faster for paging...
         $_SESSION['product_ids'] =$product_ids;
 
