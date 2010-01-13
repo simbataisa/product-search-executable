@@ -10,7 +10,7 @@ fclose($file);
 
 $file = fopen("./images/exp.txt","r") or die ("Can't open file");
 while (!feof($file)) {
-        echo fread($handle,8);
+        echo fread($file,8);
 
     }
 ?>
