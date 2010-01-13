@@ -145,6 +145,18 @@ if($option == "imageUploadSearch"){
         //var_dump($product_ids);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+    }else{
+        $product_ids = $_SESSION['product_ids'];
+        $total = $_SESSION['total'];
+        //Getting product id for first page result
+        $productIdToPrint = array();
+        for($counter = $startIndex; $counter<intval($stopIndex); $counter++) {
+            $productIdToPrint[$counter] = $product_ids[$counter];
+        }
+
+        //var_dump($product_ids);
+        //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
+        $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }
     
 }
