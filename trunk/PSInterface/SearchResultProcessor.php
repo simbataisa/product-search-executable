@@ -94,17 +94,24 @@ class SearchResultProcessor {
                 $this->_constants->xml_element_type_products);
     }
 
+    /*----------------------------Auto Suggestion-----------------------------*/
+    public function createAutoSuggestXMLTitle(){
+        $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_autosuggesstion,
+                $this->_constants->xml_element_type_products);
+    }
+
     /*----------------------------Visual Search -----------------------------*/
     public function createVisualSearchXMLTitle(){
         $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_vs_searchresult,
                 $this->_constants->xml_element_type_products);
     }
 
-    /*----------------------------Auto Suggestion-----------------------------*/
-    public function createAutoSuggestXMLTitle(){
-        $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_autosuggesstion,
+     /*----------------------------Visual Search -----------------------------*/
+    public function createUploadSearchXMLTitle(){
+        $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_us_searchresult,
                 $this->_constants->xml_element_type_products);
     }
+    
     /*----------------------------Color Search -----------------------------*/
     public function createColorSearchXMLTitle(){
         $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_cs_searchresult,

@@ -74,7 +74,7 @@ else
     $blue = 0;
 
 $constants = new Constants();
-$vsResultProcessor = new SearchResultProcessor();
+$imageUploadResultProcessor = new SearchResultProcessor();
 
 $data='';
 $total=0;
@@ -83,7 +83,9 @@ $product_ids = array();
 $feature = get_feature();
 
 if($option == "imageUploadSearch"){
-    $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
+    $imageUploadResultProcessor->createUploadSearchXMLTitle();
+    if($firstPageReq=="Y"){
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
         $host = $constants->image_server_host;
         $port = $constants->image_server_port;
         // connect to server
@@ -116,7 +118,7 @@ if($option == "imageUploadSearch"){
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
-        
+
         //Refine products id
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
             WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = '".$search_index.
@@ -142,7 +144,9 @@ if($option == "imageUploadSearch"){
 
         //var_dump($product_ids);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
-        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+        $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+    }
+    
 }
 
 function get_feature() {
