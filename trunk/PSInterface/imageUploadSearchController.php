@@ -75,7 +75,25 @@ $data='';
 $total=0;
 $searchTime="";
 $product_ids = array();
-echo get_feature();
+$feature = get_feature();
+if($option == ""){
+    $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
+        $host = $constants->image_server_host;
+        $port = $constants->image_server_port;
+        // connect to server
+        $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
+
+        if(!$result) {
+            $vsResultProcessor->processVSresult("-1");
+            die;
+        }
+        socket_write($socket, $feature, strlen($feature)) or die("Could not send data to server\n");
+
+        while (($recv = socket_read($socket, 30)) !=false)
+            $data .=$recv;
+        socket_close($socket);
+        echo $data;
+}
 function get_feature() {
     $count =0;
     $feature ="";
