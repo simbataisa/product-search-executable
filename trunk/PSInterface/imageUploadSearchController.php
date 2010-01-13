@@ -119,6 +119,15 @@ if($option == "imageUploadSearch"){
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
 
+        $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
+            WHERE category_id = (SELECT category_id FROM products
+            WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";
+        $cateLevel1ResSet = mysql_query($cateLevel1Query);
+        $level_1_id = "";
+        while($r = mysql_fetch_array($cateLevel1ResSet)) {
+            $level_1_id = $r['level_1_id'];
+        }
+        echo $level_1_id;
         //Refine products id
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
             WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = '".$search_index.
@@ -132,6 +141,7 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }
+
         //echo $total;
         //Set the session so that data can be retrieved faster for paging...
         $_SESSION['product_ids'] =$product_ids;
