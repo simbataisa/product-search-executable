@@ -11,19 +11,26 @@ ini_set('display_errors',0);
 if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
 
     $file = fopen("./images/exp.txt","w+") or die("Can't open file");
-    move_uploaded_file($_FILES['Filedata']['tmp_name'], $_SERVER['DOCUMENT_ROOT']."ProductSearch/product-search-2/PSInterface/images/".$_FILES['Filedata']['name']);
+    $movefile = move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
+    
     if ($type == 1 || $type == 2 || $type == 3) {
-        //rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
+        rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         //fwrite ($file, "images/bikini.jpg \n");
         fclose($file);
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 
         $image_url = $IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
-        $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
+        $message = "<upload>
+                    <item>
+                        <url>".$image_url."</url>
+                        <uploaded>$movefile</uploaded>
+                        <feature>-1</feature>
+                        <status>OK</status>
+                    </item></upload>";
     }else {
-        unlink("./images/".$_FILES['Filedata']['name']);
+        unlink("./temporary/".$_FILES['Filedata']['name']);
     }
     //chmod("./images/".$_FILES['Filedata']['name'] ,777);
     fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
