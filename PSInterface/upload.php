@@ -33,6 +33,7 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
         chmod("./images/".$_FILES['Filedata']['name'] ,777);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
+        echo "Opening file...\n";
         $fh = fopen("./images/exp.txt", 'r') or die("can't open file");
         $theData = fread($fh, 5);
         fclose($fh);
