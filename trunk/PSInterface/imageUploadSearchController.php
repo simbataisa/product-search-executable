@@ -119,7 +119,7 @@ if($option == "imageUploadSearch"){
 
         //Refine products id
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
-            WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = $level_1_id
+            WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = $search_index
             AND p.product_id = t.product_id
             ORDER BY Field(index_id," .$index_id_string. ")";
 
