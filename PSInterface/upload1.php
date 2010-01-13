@@ -4,7 +4,7 @@ $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
 $IMAGE_PREFIX_DIR = "PSInterface/images/";
 
 //chmod("./images/exp.txt" ,0777);
-$file = fopen("./images/exp.txt","w+");
+//$file = fopen("./images/exp.txt","w+");
 $doc = new DOMDocument();
 $doc->formatOutput = true;
 
