@@ -98,7 +98,7 @@ if($option == "imageUploadSearch"){
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-        echo $data;
+
         //
         $pos = strpos($data, ",");
         $arrayIndexId = array();
@@ -130,9 +130,9 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }
-        echo $total;
+        //echo $total;
         //Set the session so that data can be retrieved faster for paging...
-        /*$_SESSION['product_ids'] =$product_ids;
+        $_SESSION['product_ids'] =$product_ids;
 
         //Getting product id for first page result
         $productIdToPrint = array();
@@ -142,7 +142,7 @@ if($option == "imageUploadSearch"){
 
         //var_dump($product_ids);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
-        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);*/
+        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
 }
 
 function get_feature() {
