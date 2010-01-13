@@ -120,8 +120,8 @@ if($option == "imageUploadSearch"){
         echo $search_index;
         //Refine products id
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
-            WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = $search_index
-            AND p.product_id = t.product_id
+            WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = '".$search_index.
+            "' AND p.product_id = t.product_id
             ORDER BY Field(index_id," .$index_id_string. ")";
 
         $productResSet= mysql_query($productQuery);
