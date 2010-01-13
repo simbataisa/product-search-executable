@@ -5,7 +5,7 @@ $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
 $IMAGE_PREFIX_DIR = "PSInterface/images/";
 
 //chmod("./images/exp.txt" ,0777);
-$file = fopen("./images/exp.txt","w+");
+
 $doc = new DOMDocument();
 $doc->formatOutput = true;
 
@@ -27,13 +27,19 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
 
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
 
+    $file = fopen("./images/exp.txt","w+") or die("can't open file");
     if ($type == 1 || $type == 2 || $type == 3) {
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
         chmod("./images/".$_FILES['Filedata']['name'] ,777);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
+        $fh = fopen("./images/exp.txt", 'r');
+        $theData = fread($fh, 5);
+        fclose($fh);
+        echo $theData;
+
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
-        
+
         $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
         $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
     }
