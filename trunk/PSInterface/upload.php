@@ -12,8 +12,9 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
 
     $file = fopen("./images/exp.txt","w+") or die("Can't open file");
     move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
-    rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
+    
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
+    rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
     if ($type == 1 || $type == 2 || $type == 3) {        
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         //fwrite ($file, "images/bikini.jpg \n");
