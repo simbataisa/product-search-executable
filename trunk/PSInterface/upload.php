@@ -30,9 +30,10 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     if ($type == 1 || $type == 2 || $type == 3) {
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
         chmod("./images/".$_FILES['Filedata']['name'] ,777);
-        fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
+        //fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
+        fwrite ($file, "Testing .........\n");
         fclose($file);
-        $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
+        //$last = exec("./extractFeatures ./images/exp.txt",$returnvar);
         
         $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
         $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
