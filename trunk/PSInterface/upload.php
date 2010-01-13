@@ -6,20 +6,8 @@ $IMAGE_PREFIX_DIR = "PSInterface/images/";
 
 //chmod("./images/exp.txt" ,0777);
 $file = fopen("./images/exp.txt","w+");
-$doc = new DOMDocument();
-$doc->formatOutput = true;
-
-$r = $doc->createElement( "upload" );
-$doc->appendChild( $r );
 
 ini_set('display_errors',0);
-$message = "<upload>
-            <item>
-                <url/>
-                <feature>-1</feature>
-                <status>ERROR</status>
-            </item>
-            </upload>";
 
 if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
