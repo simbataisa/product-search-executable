@@ -15,7 +15,7 @@ $doc->appendChild( $r );
 ini_set('display_errors',0);
 $message = "<upload>
             <item>
-                <url>".$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name']."</url>
+                <url/>
                 <feature>-1</feature>
                 <status>ERROR</status>
             </item>
