@@ -106,7 +106,6 @@ if($option == "imageUploadSearch"){
         $arrayIndexId = array();
         if($pos) {
             $arrayIndexId = split(",", $data);
-            $total = count($arrayIndexId)-1;
             $searchTime = $arrayIndexId[count($arrayIndexId)-1];
         }else {
             $total = 0;
@@ -116,7 +115,7 @@ if($option == "imageUploadSearch"){
         //var_dump($arrayIndexId);
 
         
-        //
+        //Getting the level 1 category id
         $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
             WHERE category_id = (SELECT category_id FROM products
             WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";
