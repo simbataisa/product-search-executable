@@ -12,6 +12,7 @@
 
 require_once("XMLUtil.php");
 require_once("dbconnection.php");
+
 class TextSearchResultProcessor {
 
     private $_xmlWriter;
