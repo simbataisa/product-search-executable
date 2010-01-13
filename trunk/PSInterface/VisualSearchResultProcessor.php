@@ -88,5 +88,10 @@ class VisualSearchResultProcessor {
         print $this->_xmlWriter->save();
 
     }
+     /*----------------------------Color Search -----------------------------*/
+    public function createColorSearchXMLTitle(){
+        $this->_xmlWriter = new XMLUtil($this->_constants->xml_element_title_cs_searchresult,
+                $this->_constants->xml_element_type_products);
+    }
 }
 ?>
