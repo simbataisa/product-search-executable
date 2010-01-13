@@ -62,6 +62,19 @@ if(isset ($_REQUEST['lastPage'])) {
 }else
     $isLastPage = "";
 
+if(isset($_POST['red']))
+    $red = $_POST['red'];
+else
+    $red = 0;
+if(isset($_POST['green']))
+    $green = $_POST['green'];
+else
+    $green = 0;
+if(isset($_POST['blue']))
+    $blue = $_POST['blue'];
+else
+    $blue = 0;
+
 $constants = new Constants();
 $vsResultProcessor = new VisualSearchResultProcessor();
 $data='';
@@ -165,6 +178,58 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }
 
+}else if($option=="byColor") {
+    $resultProcessor->createColorSearchXMLTitle();
+    if($firstPageReq=="Y") {
+        $product_ids = array();
+        if(isset($_SESSION['product_ids'])) {
+            $product_ids = $_SESSION['product_ids'];
+        }
+        $idStr = implode(",",$product_ids);
+        //if ($color == -97)
+        $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
+            FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
+
+        $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
+
+        $product_ids = array();
+        $total = mysql_num_rows($idWithTheColorResSet);
+        while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
+            array_push($product_ids, $r1['product_id']);
+        }
+        $_SESSION['product_ids'] = $product_ids;
+        $_SESSION['total'] = $total;
+        $searchTime = $_SESSION['time'];
+        //
+        $idsToPrint = array();
+        if(intval($total)>$pageLength) {
+            for ($counter = 0; $counter < $pageLength; $counter++) {
+                $idsToPrint[$counter] = $product_ids[$counter];
+            }
+        }else {
+            for ($counter = 0; $counter < $total; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+        }
+        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+    }else if($firstPageReq == "N"){
+        $product_ids = array();
+        if(isset($_SESSION['product_ids'])) {
+            $product_ids = $_SESSION['product_ids'];
+        }
+
+        if(isset($_SESSION['total'])) {
+            $total = $_SESSION['total'];
+        }
+
+        $idsToPrint = array();
+        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
+            $idsToPrint[$counter] = $product_ids[$counter];
+        }
+        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+        //var_dump($idsToPrint);
+        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
+    }
 }
 
 
