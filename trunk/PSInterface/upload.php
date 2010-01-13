@@ -26,19 +26,19 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
 
 
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
-
+    echo "Opening file...\n";
     $file = fopen("./images/exp.txt","w+") or die("can't open file");
     if ($type == 1 || $type == 2 || $type == 3) {
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
         chmod("./images/".$_FILES['Filedata']['name'] ,777);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
-        $fh = fopen("./images/exp.txt", 'r');
+        $fh = fopen("./images/exp.txt", 'r') or die("can't open file");
         $theData = fread($fh, 5);
         fclose($fh);
         echo $theData;
 
-        $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
+        //$last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 
         $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
         $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
