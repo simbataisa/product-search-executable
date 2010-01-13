@@ -2,6 +2,7 @@
 require_once("XMLCreator.php");
 $MAXIMUM_FILESIZE = 10240 * 10240; // 200KB
 $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
+$IMAGE_PREFIX_DIR = "PSInterface/images/";
 
 //chmod("./images/exp.txt" ,0777);
 $file = fopen("./images/exp.txt","w+");
@@ -12,7 +13,13 @@ $r = $doc->createElement( "upload" );
 $doc->appendChild( $r );
 
 ini_set('display_errors',0);
-$message = "<upload><item><url>Controller/images/".$_FILES['Filedata']['name']."</url> <feature>-1</feature><status>OK</status></item></upload>";
+$message = "<upload>
+            <item>
+                <url>".$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name']."</url>
+                <feature>-1</feature>
+                <status>ERROR</status>
+            </item>
+            </upload>";
 
 if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
@@ -26,25 +33,15 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
-
-        $b = $doc->createElement( "item" );
-
-        $url = $doc->createElement( "url" );
-        $url->appendChild($doc->createTextNode( "Controller/images/".$_FILES['Filedata']['name'] ));
-        $b->appendChild( $url );
-
-        //system("./extractFeatures ./images/exp.txt");
-
-        $feature = $doc->createElement( "feature" );
-        $feature->appendChild($doc->createTextNode(get_feature() ));
-        $b->appendChild( $feature );
-        $r->appendChild( $b );
-        $message = "<upload><item><url>Controller/images/".$_FILES['Filedata']['name']."</url> <feature>-1</feature><status>OK</status></item></upload>";
+        
+        $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
+        $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
     }
     else {
         unlink("./temporary/".$_FILES['Filedata']['name']);
     }
 }
+//
 $directory = opendir('./images/');
 $files = array();
 while ($file = readdir($directory)) {
@@ -57,8 +54,7 @@ if (count($files) > $MAXIMUM_FILE_COUNT) {
         unlink($files_to_delete[$i][0]);
     }
 }
-//$doc->save("feature.xml");
-//echo $doc->saveXML();
+
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 echo $message;
 
