@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
 */
-require_once("VisualSearchResultProcessor.php");
+require_once("SearchResultProcessor.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
 
@@ -76,14 +76,15 @@ else
     $blue = 0;
 
 $constants = new Constants();
-$vsResultProcessor = new VisualSearchResultProcessor();
+$vsResultProcessor = new SearchResultProcessor();
+
 $data='';
 $total=0;
 $searchTime="";
 $product_ids = array();
 
 if($option == "vsDragDrop" || $option == "vsButtonClick") {
-
+    $vsResultProcessor->createVisualSearchXMLTitle();
     if($firstPageReq=="Y") {
         //Getting LSH index id
         $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
