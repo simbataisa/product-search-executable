@@ -27,7 +27,7 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
 
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
     echo "Opening file...\n";
-    $file = fopen("./images/exp.txt","w+") or die("can't open file");
+    $file = fopen("./images/exp.txt","w") or die("can't open file");
     if ($type == 1 || $type == 2 || $type == 3) {
         echo "File opened...\n";
 
