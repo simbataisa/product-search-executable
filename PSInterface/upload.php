@@ -6,21 +6,11 @@ $IMAGE_PREFIX_DIR = "PSInterface/images/";
 
 //chmod("./images/exp.txt" ,0777);
 
-$doc = new DOMDocument();
-$doc->formatOutput = true;
-
-$r = $doc->createElement( "upload" );
-$doc->appendChild( $r );
-
 ini_set('display_errors',0);
-$file = fopen("./images/exp.txt","w+") or die ("Can't open file");
-    fwrite ($file, "./images/bikini.jpg \n");
-    fclose($file);
-    $image_url->$IMAGE_PREFIX_DIR."bikini.jpg";
-     $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
+
 if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     
-    /*$file = fopen("./images/exp.txt","w+") or die("Can't open file");
+    $file = fopen("./images/exp.txt","w+") or die("Can't open file");
     move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
 
@@ -30,14 +20,14 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
         //fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fwrite ($file, "./images/bikini.jpg \n");
         fclose($file);
-        //$last = exec("./extractFeatures ./images/exp.txt",$returnvar);
+        $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
         
-        $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
+        $image_url = $IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
         $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
     }
     else {
         unlink("./temporary/".$_FILES['Filedata']['name']);
-    }*/
+    }
 }
 //
 $directory = opendir('./images/');
