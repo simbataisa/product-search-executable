@@ -82,7 +82,7 @@ function get_feature() {
 
     //1st method
 
-    //$filename = "./data.bin";
+    $filename = "./data.bin";
     //chmod($filename , 0777);
     $handle = fopen($filename, "rb");
     $contents = '';
