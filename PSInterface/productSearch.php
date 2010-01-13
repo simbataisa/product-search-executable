@@ -6,7 +6,7 @@ require_once('SearchResultProcessor.php');
 session_start();
 $sphinxSearchManger = new SphinxSearchManager();
 $resultProcessor = new SearchResultProcessor();
-$resultProcessor->createTextSearchXMLTitle();
+
 
 /* 
  * Getting request parameters
@@ -76,6 +76,7 @@ $total = "";
 $sphinxSearchManger->setIndex("product");
 
 if($option == "byKeyword") {
+    $resultProcessor->createTextSearchXMLTitle();
     //$res = $sphinxSearchManger->search("(@name $key_word) | (@description $key_word)");
     $sphinxSearchManger->setResultRange(0,500,500);
     if($firstPageReq=="Y") {
