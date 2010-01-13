@@ -113,31 +113,15 @@ if($option == "imageUploadSearch"){
         $searchTime = number_format(floatval($searchTime), 4);
         //var_dump($arrayIndexId);
 
-        //
-
-
-        //Getting level_1_id category for the requested category id
-        $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories WHERE category_id =
-                            (SELECT category_id FROM products WHERE product_id =
-                            (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";
-
-        $cateLevel1ResSet = mysql_query($cateLevel1Query);
-        $level_1_id = "";
-        while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            $level_1_id = $r['level_1_id'];
-        }
-
-        echo $level_1_id;
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
-        ;
 
-        //Getting actual product id realated to the catefory
-        $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
-	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
-        AND p.category_id=c.category_id AND
-        p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        //Refine products id
+        $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t
+            WHERE t.index_id IN (" .$index_id_string.") AND p.search_index = $level_1_id
+            AND p.product_id = t.product_id
+            ORDER BY Field(index_id," .$index_id_string. ")";
 
         $productResSet= mysql_query($productQuery);
         $total = mysql_num_rows($productResSet);
@@ -146,8 +130,9 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }
+        var_dump($product_ids);
         //Set the session so that data can be retrieved faster for paging...
-        $_SESSION['product_ids'] =$product_ids;
+        /*$_SESSION['product_ids'] =$product_ids;
 
         //Getting product id for first page result
         $productIdToPrint = array();
@@ -157,8 +142,9 @@ if($option == "imageUploadSearch"){
 
         //var_dump($product_ids);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
-        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);*/
 }
+
 function get_feature() {
     $count =0;
     $feature ="";
