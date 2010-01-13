@@ -13,4 +13,5 @@ while (!feof($file)) {
         echo fread($file,8);
 
     }
+  echo  $_SERVER['DOCUMENT_ROOT']."/images/";
 ?>
