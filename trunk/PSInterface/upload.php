@@ -13,20 +13,13 @@ $r = $doc->createElement( "upload" );
 $doc->appendChild( $r );
 
 ini_set('display_errors',0);
-$message = "<upload>
-            <item>
-                <url>".$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name']."</url>
-                <feature>-1</feature>
-                <status>ERROR</status>
-            </item>
-            </upload>";
-
-if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
-    $file = fopen("./images/exp.txt","w+") or die ("Can't open file");
+$file = fopen("./images/exp.txt","w+") or die ("Can't open file");
     fwrite ($file, "./images/bikini.jpg \n");
     fclose($file);
     $image_url->$IMAGE_PREFIX_DIR."bikini.jpg";
      $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
+if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
+    
     /*$file = fopen("./images/exp.txt","w+") or die("Can't open file");
     move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
