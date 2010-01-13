@@ -5,7 +5,7 @@ $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
 
 
 $file = fopen("./images/exp.txt","w+"	);
-chmod("./images/exp.txt" ,0777);
+//chmod("./images/exp.txt" ,0777);
 $doc = new DOMDocument();
 $doc->formatOutput = true;
 
