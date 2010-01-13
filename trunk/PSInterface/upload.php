@@ -30,7 +30,7 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     $file = fopen("./images/exp.txt","w+") or die("can't open file");
     if ($type == 1 || $type == 2 || $type == 3) {
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-        chmod("./images/".$_FILES['Filedata']['name'] ,777);
+        chmod("./images/".$_FILES['Filedata']['name'] ,0777);
         //fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fwrite ($file, "images/hello \n");
         fclose($file);
