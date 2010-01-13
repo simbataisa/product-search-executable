@@ -6,30 +6,36 @@ $IMAGE_PREFIX_DIR = "PSInterface/images/";
 
 //chmod("./images/exp.txt" ,0777);
 $file = fopen("./images/exp.txt","w+");
+$doc = new DOMDocument();
+$doc->formatOutput = true;
+
+$r = $doc->createElement( "upload" );
+$doc->appendChild( $r );
 
 ini_set('display_errors',0);
+$message = "<upload>
+            <item>
+                <url>".$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name']."</url>
+                <feature>-1</feature>
+                <status>ERROR</status>
+            </item>
+            </upload>";
 
 if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     move_uploaded_file($_FILES['Filedata']['tmp_name'], "./temporary/".$_FILES['Filedata']['name']);
 
+
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
+
     if ($type == 1 || $type == 2 || $type == 3) {
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-        //chmod("./images/".$_FILES['Filedata']['name'] ,0777);
+        chmod("./images/".$_FILES['Filedata']['name'] ,777);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
-        
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
         
         $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
-        $message = "<upload>
-                    <item>
-                        <url>".$image_url."</url>
-                        <file_content>".$fileContent."</file_content>
-                        <feature>-1</feature>
-                        <status>OK</status>
-                    </item>
-                    </upload>";
+        $message = "<upload><item><url>".$image_url."</url> <feature>-1</feature><status>OK</status></item></upload>";
     }
     else {
         unlink("./temporary/".$_FILES['Filedata']['name']);
