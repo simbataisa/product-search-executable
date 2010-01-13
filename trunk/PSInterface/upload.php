@@ -16,8 +16,8 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
 
 
         //chmod("./images/".$_FILES['Filedata']['name'] ,777);
-        //fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
-        fwrite ($file, "./images/bikini.jpg \n");
+        fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
+        //fwrite ($file, "images/bikini.jpg \n");
         fclose($file);
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 
