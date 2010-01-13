@@ -15,15 +15,10 @@ if ($_FILES['Filedata']['size'] <= $MAXIMUM_FILESIZE) {
     $type = exif_imagetype("./temporary/".$_FILES['Filedata']['name']);
     if ($type == 1 || $type == 2 || $type == 3) {
         rename("./temporary/".$_FILES['Filedata']['name'], "./images/".$_FILES['Filedata']['name']);
-        chmod("./images/".$_FILES['Filedata']['name'] ,0777);
+        //chmod("./images/".$_FILES['Filedata']['name'] ,0777);
         fwrite ($file, "images/".$_FILES['Filedata']['name']."\n");
         fclose($file);
-        $file = fopen("./images/exp.txt","r") or die ("Can't open file");
-        $fileContent = "";
-        while (!feof($file)) {
-            $fileContent .= fread($file,8);
-        }
-        fclose($file);
+        
         $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
         
         $image_url->$IMAGE_PREFIX_DIR.$_FILES['Filedata']['name'];
