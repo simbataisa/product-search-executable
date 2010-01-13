@@ -23,6 +23,11 @@ if(isset($_REQUEST['category']))
 else
     $category = "";
 
+if(isset($_REQUEST['search_index']))
+    $search_index = $_REQUEST['search_index'];
+else
+    $search_index = "";
+
 
 if(isset($_REQUEST['product_id']))
     $product_id = $_REQUEST['product_id'];
@@ -107,6 +112,8 @@ if($option == "imageUploadSearch"){
         }
         $searchTime = number_format(floatval($searchTime), 4);
         //var_dump($arrayIndexId);
+
+        //
 
 
         //Getting level_1_id category for the requested category id
