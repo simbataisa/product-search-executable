@@ -23,7 +23,7 @@ fclose($f);
 $file = fopen("./images/exp.txt","w+"	);
 fwrite ($file, "images/upload.jpg\n");
 fclose($file);
-chmod("./images/exp.txt" ,0777);
+//chmod("./images/exp.txt" ,0777);
 $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
