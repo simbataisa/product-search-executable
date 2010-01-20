@@ -146,7 +146,7 @@ if($option == "imageUploadSearch"){
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            array_push($temp, $r['product_id']);
+            array_push($temp, $r['category_id']);
         }
         echo "category";
         var_dump($temp);
