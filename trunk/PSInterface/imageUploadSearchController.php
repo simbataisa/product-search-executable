@@ -117,7 +117,7 @@ if($option == "imageUploadSearch"){
         for($counter = 0; $counter < 10; $counter++){
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
-        var_dump($first10ids);
+
         $index_id_string = implode(",",$first10ids);
         //Finding the most suitable category
         /*$cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
@@ -138,6 +138,7 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['product_id']);
         }
+        echo "product_id";
         var_dump($temp);
         $product_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT category_id FROM products
@@ -147,6 +148,7 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['product_id']);
         }
+        echo "category";
         var_dump($temp);
         //Getting index id for first page result
         array_pop($arrayIndexId);
