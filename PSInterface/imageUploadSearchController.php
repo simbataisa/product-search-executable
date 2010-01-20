@@ -114,7 +114,7 @@ if($option == "imageUploadSearch"){
         $searchTime = number_format(floatval($searchTime), 4);
         //var_dump($arrayIndexId);
         $first10ids = array();
-        for($counter = 0; $counter < 10; $counter++){
+        for($counter = 0; $counter < 20; $counter++){
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
 
@@ -156,7 +156,7 @@ if($option == "imageUploadSearch"){
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            array_push($temp, $r['level_1_id']);
+            array_push($temp, $r['level_1_id']." ".$r['total']);
         }
         echo "level_1_id ";
         var_dump($temp);
