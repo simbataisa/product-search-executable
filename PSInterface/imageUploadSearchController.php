@@ -152,7 +152,7 @@ if($option == "imageUploadSearch"){
         var_dump($temp);
         $cate_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
-            WHERE category_id IN (".$cate_ids_string.")";
+            WHERE category_id IN (".$cate_ids_string.") GROUP BY level_1_id";
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
