@@ -232,6 +232,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick") {
         $vsResultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
 }else if($option == "refineSearchResult"){
+    $vsResultProcessor->createVisualSearchXMLTitle();
     if($firstPageReq=="Y") {
 
         //Getting level_1_id category for the requested category id
