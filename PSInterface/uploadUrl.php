@@ -29,9 +29,9 @@ $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 echo "<result><title>upload result</title><item><url>PSInterface/images/upload.jpg</url> <feature>-1</feature><status>".$message."</status></item></result>";
 
-$filename = "testout.txt";
-$handle = fopen($filename, 'w+');
-fwrite($handle,"text=".$_REQUEST['url']);
+//$filename = "testout.txt";
+//$handle = fopen($filename, 'w+');
+//fwrite($handle,"text=".$_REQUEST['url']);
 
 
 
