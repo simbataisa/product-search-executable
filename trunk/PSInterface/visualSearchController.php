@@ -83,7 +83,7 @@ $total=0;
 $searchTime="";
 $product_ids = array();
 
-if($option == "vsDragDrop" || $option == "vsButtonClick") {
+if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefinement") {
     $vsResultProcessor->createVisualSearchXMLTitle();
     if($firstPageReq=="Y") {
         //Getting LSH index id
