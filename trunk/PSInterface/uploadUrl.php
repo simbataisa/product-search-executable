@@ -27,7 +27,7 @@ fclose($file);
 $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-echo "<upload><item><url>Controller/images/upload.jpg</url> <feature>-1</feature><status>".$message."</status></item></upload>";
+echo "<result><title>upload result</title><item><url>PSInterface/images/upload.jpg</url> <feature>-1</feature><status>".$message."</status></item></result>";
 
 $filename = "testout.txt";
 $handle = fopen($filename, 'w+');
