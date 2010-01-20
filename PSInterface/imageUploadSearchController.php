@@ -113,18 +113,27 @@ if($option == "imageUploadSearch"){
         }
         $searchTime = number_format(floatval($searchTime), 4);
         //var_dump($arrayIndexId);
-
-        
-        //Getting the level 1 category id
-        $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
+        $first10ids = array();
+        for($counter = 0; $counter < 10; $counter++){
+            $first10ids[$counter] = $arrayIndexId[$counter];
+        }
+        //Finding the most suitable category
+        $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
             WHERE category_id = (SELECT category_id FROM products
-            WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";
+            WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))
+            GROUP BY level_1_id ORDER BY total DESC";
+        //Getting the level 1 category id
+       /* $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
+            WHERE category_id = (SELECT category_id FROM products
+            WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";*/
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $level_1_id = "";
-        while($r = mysql_fetch_array($cateLevel1ResSet)) {
+        /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
-        }
+        }*/
         //echo $level_1_id;
+        $r = mysql_fetch_array($cateLevel1ResSet);
+        $level_1_id = $r['level_1_id'];
 
         //Getting index id for first page result
         array_pop($arrayIndexId);
