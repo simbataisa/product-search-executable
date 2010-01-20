@@ -16,6 +16,11 @@ if(isset ($_REQUEST['option'])) {
 }else
     $option = "";
 
+if(isset($_REQUEST['category']))
+    $category = $_REQUEST['category'];
+else
+    $category = "";
+
 if(isset ($_REQUEST['pageLength'])) {
     $pageLength = $_REQUEST['pageLength'];
 }else
@@ -219,6 +224,50 @@ if($option == "byKeyword") {
         //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
         //var_dump($idsToPrint);
         $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
+    }
+}else if($option == "refineSearchResult"){
+    $resultProcessor->createTextSearchXMLTitle();
+    if($firstPageReq=="Y") {
+        $ids = array();
+        if(isset($_SESSION['ids'])) {
+            $ids = $_SESSION['ids'];
+        }
+        $idStr = implode(",",$ids);
+        //if ($color == -97)
+        $cateQuery = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
+        $cateResSet = mysql_query($cateQuery);
+        $level_1_id = "";
+        while($r1 = mysql_fetch_array($cateResSet)) {
+            $level_1_id = $r1['level_1_id'];
+        }
+        //echo $level_1_id;
+        //echo $idStr;
+        $productQuery ="SELECT distinct p.product_id as pid from products as p, test_sub_categories c
+	where p.product_id IN (" .$idStr.") AND level_1_id = '".$level_1_id."'
+        AND p.category_id=c.category_id  ORDER BY Field(product_id," .$idStr. ")";
+
+        $productResSet = mysql_query($productQuery);
+
+        $ids = array();
+        $total = mysql_num_rows($productResSet);
+        while($r1 = mysql_fetch_array($productResSet)) {
+            array_push($ids, $r1['pid']);
+        }
+        $_SESSION['$ids'] = $ids;
+        $_SESSION['total'] = $total;
+        $searchTime = $_SESSION['time'];
+        //
+        $idsToPrint = array();
+        if(intval($total)>$pageLength) {
+            for ($counter = 0; $counter < $pageLength; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+        }else {
+            for ($counter = 0; $counter < $total; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+        }
+        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
     }
 }
 ?>
