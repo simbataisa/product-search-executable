@@ -135,7 +135,7 @@ if($option == "imageUploadSearch"){
             $level_1_id = $r['level_1_id'];
         }*/
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            $level_1_id = $r['product_id'];
+            $level_1_id .= $r['product_id'];
         }
         echo $level_1_id;
 
