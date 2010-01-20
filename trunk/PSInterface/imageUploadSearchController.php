@@ -128,19 +128,26 @@ if($option == "imageUploadSearch"){
        /* $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
             WHERE category_id = (SELECT category_id FROM products
             WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";*/
-        $cateLevel1Query = "SELECT category_id FROM products
-            WHERE product_id IN (SELECT product_id FROM itable
-            WHERE index_id IN (".$index_id_string."))";
+        $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $level_1_id = "";
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
         }*/
+        $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            $level_1_id .= $r['category_id']. " ";
+            array_push($temp, $r['product_id']);
         }
-        echo $level_1_id;
-
+        var_dump($temp);
+        $product_ids_string = implode(",",$temp);
+        $cateLevel1Query = "SELECT category_id FROM products
+            WHERE product_id IN (".$product_ids_string.")";
+        $cateLevel1ResSet = mysql_query($cateLevel1Query);
+        $temp = array();
+        while($r = mysql_fetch_array($cateLevel1ResSet)) {
+            array_push($temp, $r['product_id']);
+        }
+        var_dump($temp);
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
