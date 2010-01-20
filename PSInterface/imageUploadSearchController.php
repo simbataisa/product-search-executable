@@ -117,10 +117,11 @@ if($option == "imageUploadSearch"){
         for($counter = 0; $counter < 10; $counter++){
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
+        $index_id_string = implode(",",$first10ids);
         //Finding the most suitable category
         $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
-            WHERE category_id = (SELECT category_id FROM products
-            WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))
+            WHERE category_id IN (SELECT category_id FROM products
+            WHERE product_id IN (SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")))
             GROUP BY level_1_id ORDER BY total DESC";
         //Getting the level 1 category id
        /* $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
