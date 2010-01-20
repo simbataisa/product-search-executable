@@ -29,6 +29,18 @@ $last = exec("./extractFeatures ./images/exp.txt",$returnvar);
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 echo "<result><title>upload result</title><item><url>PSInterface/images/upload.jpg</url> <feature>-1</feature><status>".$message."</status></item></result>";
 
+$directory = opendir('./images/');
+$files = array();
+while ($file = readdir($directory)) {
+    array_push($files, array('./images/'.$file, filectime('./images/'.$file)));
+}
+usort($files, sorter);
+if (count($files) > $MAXIMUM_FILE_COUNT) {
+    $files_to_delete = array_splice($files, 0, count($files) - $MAXIMUM_FILE_COUNT);
+    for ($i = 0; $i < count($files_to_delete); $i++) {
+        unlink($files_to_delete[$i][0]);
+    }
+}
 //$filename = "testout.txt";
 //$handle = fopen($filename, 'w+');
 //fwrite($handle,"text=".$_REQUEST['url']);
