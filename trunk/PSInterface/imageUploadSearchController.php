@@ -150,6 +150,17 @@ if($option == "imageUploadSearch"){
         }
         echo "category";
         var_dump($temp);
+        $cate_ids_string = implode(",",$temp);
+        $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
+            WHERE category_id IN (".$cate_ids_string.")";
+        $cateLevel1ResSet = mysql_query($cateLevel1Query);
+        $temp = array();
+        while($r = mysql_fetch_array($cateLevel1ResSet)) {
+            array_push($temp, $r['level_1_id']);
+        }
+        echo "level_1_id ";
+        var_dump($temp);
+
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
