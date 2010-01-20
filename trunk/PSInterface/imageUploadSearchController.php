@@ -117,6 +117,7 @@ if($option == "imageUploadSearch"){
         for($counter = 0; $counter < 10; $counter++){
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
+        var_dump($first10ids);
         $index_id_string = implode(",",$first10ids);
         //Finding the most suitable category
         /*$cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
