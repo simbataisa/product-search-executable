@@ -128,14 +128,16 @@ if($option == "imageUploadSearch"){
        /* $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
             WHERE category_id = (SELECT category_id FROM products
             WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";*/
-        $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
+        $cateLevel1Query = "SELECT category_id FROM products
+            WHERE product_id IN (SELECT product_id FROM itable
+            WHERE index_id IN (".$index_id_string."))";
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $level_1_id = "";
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
         }*/
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            $level_1_id .= $r['product_id'];
+            $level_1_id .= $r['category_id']. " ";
         }
         echo $level_1_id;
 
