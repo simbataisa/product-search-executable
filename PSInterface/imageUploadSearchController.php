@@ -129,8 +129,7 @@ if($option == "imageUploadSearch"){
             WHERE category_id = (SELECT category_id FROM products
             WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";*/
         $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
-        $cateLevel1ResSet = mysql_query($cateLevel1Query);
-        $level_1_id = "";
+        $cateLevel1ResSet = mysql_query($cateLevel1Query);        
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
         }*/
@@ -138,8 +137,8 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['product_id']);
         }
-        echo "product_id";
-        var_dump($temp);
+        //echo "product_id";
+        //var_dump($temp);
         $product_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT category_id FROM products
             WHERE product_id IN (".$product_ids_string.")";
@@ -148,19 +147,20 @@ if($option == "imageUploadSearch"){
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['category_id']);
         }
-        echo "category";
-        var_dump($temp);
+        //echo "category";
+        //var_dump($temp);
         $cate_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
             WHERE category_id IN (".$cate_ids_string.") GROUP BY level_1_id ORDER BY total DESC";
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
-            array_push($temp, $r['level_1_id']." ".$r['total']);
+            array_push($temp, $r['level_1_id']);
         }
-        echo "level_1_id ";
-        var_dump($temp);
-
+        //echo "level_1_id ";
+        //var_dump($temp);
+        $level_1_id = $temp[0];
+        
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
