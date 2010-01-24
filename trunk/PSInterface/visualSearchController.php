@@ -103,6 +103,8 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         if(!$result) {
             $vsResultProcessor->processVSresult("-1");
             die;
+        }else{
+            echo $result;
         }
         socket_write($socket, $index_id, strlen($index_id)) or die("Could not send data to server\n");
 
