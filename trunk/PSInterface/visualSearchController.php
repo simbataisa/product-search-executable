@@ -98,7 +98,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         $host = $constants->image_server_host;
         $port = $constants->image_server_port;
         // connect to server
-        $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
+        $result = socket_connect($socket, $host, $port) or die("Could not connect to server\n");
 
         if(!$result) {
             $vsResultProcessor->processVSresult("-1");
