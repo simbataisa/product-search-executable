@@ -206,6 +206,99 @@ if($option == "imageUploadSearch"){
         $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }
     
+}else if($option=="byColor") {
+    $vsResultProcessor->createColorSearchXMLTitle();
+    if($firstPageReq=="Y") {
+        $product_ids = array();
+        if(isset($_SESSION['product_ids'])) {
+            $product_ids = $_SESSION['product_ids'];
+        }
+        $idStr = implode(",",$product_ids);
+        //if ($color == -97)
+        $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
+            FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
+
+        $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
+
+        $product_ids = array();
+        $total = mysql_num_rows($idWithTheColorResSet);
+        while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
+            array_push($product_ids, $r1['product_id']);
+        }
+        $_SESSION['product_ids'] = $product_ids;
+        $_SESSION['total'] = $total;
+        $searchTime = $_SESSION['time'];
+        //
+        $idsToPrint = array();
+        if(intval($total)>$pageLength) {
+            for ($counter = 0; $counter < $pageLength; $counter++) {
+                $idsToPrint[$counter] = $product_ids[$counter];
+            }
+        }else {
+            for ($counter = 0; $counter < $total; $counter++) {
+                $idsToPrint[$counter] = $ids[$counter];
+            }
+        }
+        $vsResultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+    }else if($firstPageReq == "N"){
+        $product_ids = array();
+        if(isset($_SESSION['product_ids'])) {
+            $product_ids = $_SESSION['product_ids'];
+        }
+
+        if(isset($_SESSION['total'])) {
+            $total = $_SESSION['total'];
+        }
+
+        $idsToPrint = array();
+        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
+            $idsToPrint[$counter] = $product_ids[$counter];
+        }
+        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+        //var_dump($idsToPrint);
+        $vsResultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
+    }
+}else if($option == "refineSearchResult"){
+    $vsResultProcessor->createVisualSearchXMLTitle();
+    if($firstPageReq=="Y") {
+
+        //Getting level_1_id category for the requested category id
+        $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
+
+        $cateLevel1ResSet = mysql_query($cateLevel1Query);
+        $level_1_id = "";
+        while($r = mysql_fetch_array($cateLevel1ResSet)) {
+            $level_1_id = $r['level_1_id'];
+        }
+
+        $product_ids = $_SESSION['product_ids'];
+        $idStr = implode(",",$product_ids);
+
+        //Getting refined product id realated to the catefory
+        $productQuery ="SELECT distinct p.product_id as pid from products as p, test_sub_categories c
+	where p.product_id IN (" .$idStr.") AND level_1_id = '".$level_1_id."'
+        AND p.category_id=c.category_id  ORDER BY Field(product_id," .$idStr. ")";
+
+        $productResSet= mysql_query($productQuery);
+        $total = mysql_num_rows($productResSet);
+        $_SESSION['total'] = $total;
+        $product_ids = array();
+        while($r = mysql_fetch_array($productResSet)) {
+            array_push($product_ids,  $r['pid']);
+        }
+        //Set the session so that data can be retrieved faster for paging...
+        $_SESSION['product_ids'] =$product_ids;
+
+        //Getting product id for first page result
+        $productIdToPrint = array();
+        for($counter = 0; $counter<intval($pageLength); $counter++) {
+            $productIdToPrint[$counter] = $product_ids[$counter];
+        }
+
+        //var_dump($product_ids);
+        //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
+        $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
+    }
 }
 
 function get_feature() {
