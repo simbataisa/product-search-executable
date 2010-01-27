@@ -207,7 +207,7 @@ if($option == "imageUploadSearch"){
     }
     
 }else if($option=="byColor") {
-    $vsResultProcessor->createColorSearchXMLTitle();
+    $imageUploadResultProcessor->createColorSearchXMLTitle();
     if($firstPageReq=="Y") {
         $product_ids = array();
         if(isset($_SESSION['product_ids'])) {
