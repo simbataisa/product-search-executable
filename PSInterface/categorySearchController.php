@@ -93,7 +93,7 @@ if($option == "byCategory") {
         
         
         $product_ids = array();
-        while$product_ids($r = mysql_fetch_array($productResSet)) {
+        while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }             
         $_SESSION['product_ids'] = $product_ids;
