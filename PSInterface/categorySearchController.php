@@ -87,7 +87,7 @@ if($option == "byCategory") {
     $sphinxSearchManger->setResultRange(0,500,500);
 
     if($firstPageReq=="Y") {
-        $sphinxSearchManger->setFilter("category_id", array(2) );
+        $sphinxSearchManger->setFilter("category_id", array($category) );
         $res = $sphinxSearchManger->search("");
         $product_ids = array();
         if (is_array($res["matches"]) ) {
@@ -109,7 +109,7 @@ if($option == "byCategory") {
 
 
         
-        var_dump($product_ids);
+        //var_dump($product_ids);
         /*while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }  */
