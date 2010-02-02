@@ -86,7 +86,7 @@ if($option == "byCategory") {
     $resultProcessor->createTextSearchXMLTitle();
     $sphinxSearchManger->setResultRange(0,500,500);
     $sphinxSearchManger->setFilter("category_id", array(2) );
-    $res = $sphinxSearchManger->search();
+    $res = $sphinxSearchManger->search("");
     
     if($firstPageReq=="Y") {
         $productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
