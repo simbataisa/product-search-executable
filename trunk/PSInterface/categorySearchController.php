@@ -115,7 +115,7 @@ if($option == "byCategory") {
         $_SESSION['time'] = $searchTime;
         $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
        
-    }
+    
 }else if($firstPageReq=="N") {
     $ids = array();
     if(isset($_SESSION['ids'])) {
