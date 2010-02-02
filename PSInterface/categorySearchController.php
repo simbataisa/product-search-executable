@@ -85,19 +85,31 @@ $sphinxSearchManger->setIndex("product");
 if($option == "byCategory") {
     $resultProcessor->createTextSearchXMLTitle();
     $sphinxSearchManger->setResultRange(0,500,500);
-    $sphinxSearchManger->setFilter("category_id", array(2) );
-    $res = $sphinxSearchManger->search("");
-    var_dump($res["matches"]);
+
     if($firstPageReq=="Y") {
-        $productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
+        $sphinxSearchManger->setFilter("category_id", array($category) );
+        $res = $sphinxSearchManger->search("");
+        if (is_array($res["matches"]) ) {
+
+        }else {
+            $total = 0;
+        }
+        $_SESSION['total'] = $total;
+        $searchTime = $res['time'];
+        $_SESSION['time'] = $searchTime;
+        //var_dump($res["matches"]);
+        //$productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
         $productResSet = mysql_query($productQuery);
         $total = mysql_num_rows($productResSet);
-        
-        
+
+
         $product_ids = array();
-        while($r = mysql_fetch_array($productResSet)) {
+        foreach($res["matches"] as $docinfo) {
+            array_push($product_ids, $docinfo['id']);
+        }
+        /*while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
-        }             
+        }  */
         $_SESSION['product_ids'] = $product_ids;
         $idsToPrint = array();
         if(intval($total)>$pageLength) {
@@ -109,35 +121,33 @@ if($option == "byCategory") {
                 $idsToPrint[$counter] = $product_ids[$counter];
             }
         }
-        
+
         //var_dump($idsToPrint);
-        
-        $_SESSION['total'] = $total;
-        $searchTime = 0;
-        $_SESSION['time'] = $searchTime;
+
+
         $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
-       
-    
-}else if($firstPageReq=="N") {
-    $product_ids = array();
-    if(isset($_SESSION['product_ids'])) {
-        $product_ids = $_SESSION['product_ids'];
+
+
+    }else if($firstPageReq=="N") {
+        $product_ids = array();
+        if(isset($_SESSION['product_ids'])) {
+            $product_ids = $_SESSION['product_ids'];
+        }
+
+        if(isset($_SESSION['total'])) {
+            $total = $_SESSION['total'];
+        }
+
+
+
+        $idsToPrint = array();
+        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
+            $idsToPrint[$counter] = $ids[$counter];
+        }
+        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+        //var_dump($idsToPrint);
+        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
-    
-    if(isset($_SESSION['total'])) {
-        $total = $_SESSION['total'];
-    }
-    
-    
-    
-    $idsToPrint = array();
-    for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
-        $idsToPrint[$counter] = $ids[$counter];
-    }
-    //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
-    //var_dump($idsToPrint);
-    $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
-}
 
 }else if($option == "autoSuggestion") {
     $sphinxSearchManger->setResultRange(intval($startIndex),intval($stopIndex),500);
@@ -154,8 +164,8 @@ if($option == "byCategory") {
     else {
         if (is_array($res["matches"]) ) {
             $ids = array();
-            
-            
+
+
             foreach($res["matches"] as $docinfo) {
                 array_push($ids, $docinfo['id']);
             }
@@ -177,9 +187,9 @@ if($option == "byCategory") {
         //if ($color == -97)
         $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
             FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
-        
+
         $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
-        
+
         $ids = array();
         $total = mysql_num_rows($idWithTheColorResSet);
         while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
@@ -205,11 +215,11 @@ if($option == "byCategory") {
         if(isset($_SESSION['ids'])) {
             $ids = $_SESSION['ids'];
         }
-        
+
         if(isset($_SESSION['total'])) {
             $total = $_SESSION['total'];
         }
-        
+
         $idsToPrint = array();
         for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
             $idsToPrint[$counter] = $ids[$counter];
@@ -238,9 +248,9 @@ if($option == "byCategory") {
         $productQuery ="SELECT distinct p.product_id as pid from products as p, test_sub_categories c
 	where p.product_id IN (" .$idStr.") AND level_1_id = '".$level_1_id."'
         AND p.category_id=c.category_id  ORDER BY Field(product_id," .$idStr. ")";
-        
+
         $productResSet = mysql_query($productQuery);
-        
+
         $ids = array();
         $total = mysql_num_rows($productResSet);
         while($r1 = mysql_fetch_array($productResSet)) {
