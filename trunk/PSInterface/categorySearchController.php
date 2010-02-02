@@ -90,15 +90,27 @@ if($option == "byCategory") {
         $sphinxSearchManger->setFilter("category_id", array($category) );
         $res = $sphinxSearchManger->search("");
         $product_ids = array();
-        if (is_array($res["matches"]) ) {
+        $idsToPrint = array();
+        if (is_array($res["matches"]) && count($res["matches"])>0) {
             $total = $res['total'];
-            
+
             foreach($res["matches"] as $docinfo) {
                 array_push($product_ids, $docinfo['id']);
+            }
+            $_SESSION['product_ids'] = $product_ids;            
+            if(intval($total)>$pageLength) {
+                for ($counter = 0; $counter < $pageLength; $counter++) {
+                    $idsToPrint[$counter] = $product_ids[$counter];
+                }
+            }else {
+                for ($counter = 0; $counter < $total; $counter++) {
+                    $idsToPrint[$counter] = $product_ids[$counter];
+                }
             }
         }else {
             $total = 0;
         }
+
         $_SESSION['total'] = $total;
         $searchTime = $res['time'];
         $_SESSION['time'] = $searchTime;
@@ -108,22 +120,12 @@ if($option == "byCategory") {
         //$total = mysql_num_rows($productResSet);
 
 
-        
+
         //var_dump($product_ids);
         /*while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }  */
-        $_SESSION['product_ids'] = $product_ids;
-        $idsToPrint = array();
-        if(intval($total)>$pageLength) {
-            for ($counter = 0; $counter < $pageLength; $counter++) {
-                $idsToPrint[$counter] = $product_ids[$counter];
-            }
-        }else {
-            for ($counter = 0; $counter < $total; $counter++) {
-                $idsToPrint[$counter] = $product_ids[$counter];
-            }
-        }
+
 
         //var_dump($idsToPrint);
 
@@ -140,9 +142,6 @@ if($option == "byCategory") {
         if(isset($_SESSION['total'])) {
             $total = $_SESSION['total'];
         }
-
-
-
         $idsToPrint = array();
         for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
             $idsToPrint[$counter] = $ids[$counter];
@@ -152,33 +151,6 @@ if($option == "byCategory") {
         $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
 
-}else if($option == "autoSuggestion") {
-    $sphinxSearchManger->setResultRange(intval($startIndex),intval($stopIndex),500);
-    $res = $sphinxSearchManger->search("(@name $key_word)");
-    //Getting total result first
-    $resultProcessor->createAutoSuggestXMLTitle();
-    if($res === false) {
-        $resultProcessor->processError($sphinxSearchManger->cl->GetLastError());
-    }
-    else if(!isset($res["matches"])) {
-        //No match found
-        $resultProcessor->processError("0");
-    }
-    else {
-        if (is_array($res["matches"]) ) {
-            $ids = array();
-
-
-            foreach($res["matches"] as $docinfo) {
-                array_push($ids, $docinfo['id']);
-            }
-            $total = $res['total'];
-            $_SESSION['total'] = $total;
-            $searchTime = $res['time'];
-            $resultProcessor->process_result($ids,$total,$searchTime,$firstPageReq,$isLastPage);
-        }
-        //var_dump($res);
-    }
 }else if($option=="byColor") {
     $resultProcessor->createColorSearchXMLTitle();
     if($firstPageReq=="Y") {
