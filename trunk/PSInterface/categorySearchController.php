@@ -108,7 +108,7 @@ if($option == "byCategory") {
             }
         }
         
-        var_dump($idsToPrint);
+        //var_dump($idsToPrint);
         
         $_SESSION['total'] = $total;
         $searchTime = 0;
@@ -117,9 +117,9 @@ if($option == "byCategory") {
        
     
 }else if($firstPageReq=="N") {
-    $ids = array();
-    if(isset($_SESSION['ids'])) {
-        $ids = $_SESSION['ids'];
+    $product_ids = array();
+    if(isset($_SESSION['product_ids'])) {
+        $product_ids = $_SESSION['product_ids'];
     }
     
     if(isset($_SESSION['total'])) {
