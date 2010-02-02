@@ -99,8 +99,8 @@ if($option == "byCategory") {
         $_SESSION['time'] = $searchTime;
         //var_dump($res["matches"]);
         //$productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
-        $productResSet = mysql_query($productQuery);
-        $total = mysql_num_rows($productResSet);
+        //$productResSet = mysql_query($productQuery);
+        //$total = mysql_num_rows($productResSet);
 
 
         $product_ids = array();
