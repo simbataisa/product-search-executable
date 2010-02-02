@@ -100,11 +100,11 @@ if($option == "byCategory") {
         $idsToPrint = array();
         if(intval($total)>$pageLength) {
             for ($counter = 0; $counter < $pageLength; $counter++) {
-                $idsToPrint[$counter] = $ids[$counter];
+                $idsToPrint[$counter] = $product_ids[$counter];
             }
         }else {
             for ($counter = 0; $counter < $total; $counter++) {
-                $idsToPrint[$counter] = $ids[$counter];
+                $idsToPrint[$counter] = $product_ids[$counter];
             }
         }
         
