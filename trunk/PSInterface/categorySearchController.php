@@ -144,7 +144,7 @@ if($option == "byCategory") {
         }
         $idsToPrint = array();
         for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
-            $idsToPrint[$counter] = $ids[$counter];
+            $idsToPrint[$counter] = $product_ids[$counter];
         }
         //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
         //var_dump($idsToPrint);
