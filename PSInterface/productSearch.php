@@ -103,9 +103,25 @@ if($option == "byKeyword") {
                 foreach($res["matches"] as $docinfo) {
                     array_push($ids, $docinfo['id']);
                 }
+
+                //
+                $idStr = implode(",",$ids);
+                if($search_index == "All Categories") {
+                    $productIdQuery = "SELECT product_id FROM products WHERE product_id IN (".$idStr.")
+                        ORDER BY Field(product_id," .$idStr. ")";
+                }else
+                    $productIdQuery = "SELECT product_id FROM products WHERE search_index = '" . $search_index . "'
+                    AND product_id IN (".$idStr.") ORDER BY Field(product_id," .$idStr. ")";
+                $productResSet = mysql_query($productIdQuery);
+                $total = mysql_num_rows($productResSet);
+                $ids = array();
+                while($r = mysql_fetch_array($productResSet)) {
+                    array_push($ids, $r['product_id']);
+                }
+
                 $_SESSION['ids'] = $ids;
                 $idsToPrint = array();
-                $total = $res['total'];
+                //$total = $res['total'];
                 if(intval($total)>$pageLength) {
                     for ($counter = 0; $counter < $pageLength; $counter++) {
                         $idsToPrint[$counter] = $ids[$counter];
@@ -184,9 +200,9 @@ if($option == "byKeyword") {
         //if ($color == -97)
         $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
             FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
-        
+
         $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
-        
+
         $ids = array();
         $total = mysql_num_rows($idWithTheColorResSet);
         while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
@@ -207,16 +223,16 @@ if($option == "byKeyword") {
             }
         }
         $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
-    }else if($firstPageReq == "N"){
+    }else if($firstPageReq == "N") {
         $ids = array();
         if(isset($_SESSION['ids'])) {
             $ids = $_SESSION['ids'];
         }
-        
+
         if(isset($_SESSION['total'])) {
             $total = $_SESSION['total'];
         }
-        
+
         $idsToPrint = array();
         for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
             $idsToPrint[$counter] = $ids[$counter];
@@ -225,7 +241,7 @@ if($option == "byKeyword") {
         //var_dump($idsToPrint);
         $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
-}else if($option == "refineSearchResult"){
+}else if($option == "refineSearchResult") {
     $resultProcessor->createTextSearchXMLTitle();
     if($firstPageReq=="Y") {
         $ids = array();
