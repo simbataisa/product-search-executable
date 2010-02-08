@@ -108,6 +108,9 @@ if($option == "byCategory") {
                     }
                 }
             }
+            $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+        }else{
+             $resultProcessor->processError($total);
         }
         
 
@@ -130,7 +133,7 @@ if($option == "byCategory") {
         //var_dump($idsToPrint);
 
 
-        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+       
 
 
     }else if($firstPageReq=="N") {
