@@ -115,29 +115,36 @@ if($option == "byKeyword") {
                 $productResSet = mysql_query($productIdQuery);
                 $total = mysql_num_rows($productResSet);
                 $ids = array();
-                while($r = mysql_fetch_array($productResSet)) {
-                    array_push($ids, $r['product_id']);
-                }
-                var_dump($ids);
-                $_SESSION['ids'] = $ids;
-                $idsToPrint = array();
-                //$total = $res['total'];
-                if(intval($total)>$pageLength) {
-                    for ($counter = 0; $counter < $pageLength; $counter++) {
-                        $idsToPrint[$counter] = $ids[$counter];
+                if(intval($total)>0) {
+                    while($r = mysql_fetch_array($productResSet)) {
+                        array_push($ids, $r['product_id']);
                     }
+                    var_dump($ids);
+                    $_SESSION['ids'] = $ids;
+                    $idsToPrint = array();
+                    //$total = $res['total'];
+                    if(intval($total)>$pageLength) {
+                        for ($counter = 0; $counter < $pageLength; $counter++) {
+                            $idsToPrint[$counter] = $ids[$counter];
+                        }
+                    }else {
+                        for ($counter = 0; $counter < $total; $counter++) {
+                            $idsToPrint[$counter] = $ids[$counter];
+                        }
+                    }
+                    $_SESSION['total'] = $total;
+                    $searchTime = $res['time'];
+                    $_SESSION['time'] = $searchTime;
+                    $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
                 }else {
-                    for ($counter = 0; $counter < $total; $counter++) {
-                        $idsToPrint[$counter] = $ids[$counter];
-                    }
+                    $total = 0;
+                    $resultProcessor->processError($total);
                 }
+
 
                 //var_dump($idsToPrint);
 
-                $_SESSION['total'] = $total;
-                $searchTime = $res['time'];
-                $_SESSION['time'] = $searchTime;
-                $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+
             }
             //var_dump($res);
         }
