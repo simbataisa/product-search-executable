@@ -91,6 +91,7 @@ if($option == "byCategory") {
         $res = $sphinxSearchManger->search("");
         $product_ids = array();
         $idsToPrint = array();
+        var_dump($res['total']);
         if ($res["matches"]!=null && is_array($res["matches"]) && count($res["matches"])>0) {
             $total = $res['total'];
 
