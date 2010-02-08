@@ -92,6 +92,9 @@ if($option == "byCategory") {
         $product_ids = array();
         $idsToPrint = array();
         $total = $res['total'];
+        $_SESSION['total'] = $total;
+        $searchTime = $res['time'];
+        $_SESSION['time'] = $searchTime;
         if(intval($total)>0){
             if ($res["matches"]!=null && is_array($res["matches"]) && count($res["matches"])>0) {
                 foreach($res["matches"] as $docinfo) {
@@ -114,9 +117,7 @@ if($option == "byCategory") {
         }
         
 
-        $_SESSION['total'] = $total;
-        $searchTime = $res['time'];
-        $_SESSION['time'] = $searchTime;
+       
         //var_dump($res["matches"]);
         //$productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
         //$productResSet = mysql_query($productQuery);
