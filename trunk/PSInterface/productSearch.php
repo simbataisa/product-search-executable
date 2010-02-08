@@ -118,7 +118,7 @@ if($option == "byKeyword") {
                 while($r = mysql_fetch_array($productResSet)) {
                     array_push($ids, $r['product_id']);
                 }
-
+                var_dump($ids);
                 $_SESSION['ids'] = $ids;
                 $idsToPrint = array();
                 //$total = $res['total'];
