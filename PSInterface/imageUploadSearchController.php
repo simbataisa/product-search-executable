@@ -7,7 +7,7 @@
 require_once("SearchResultProcessor.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
-
+header ("content-type: text/xml");
 $stimer = explode(' ',microtime());
 $stimer = $stimer[1] + $stimer[0];
 session_start();

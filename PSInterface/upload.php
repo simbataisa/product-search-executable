@@ -1,5 +1,6 @@
 <?php
 require_once("XMLCreator.php");
+header ("content-type: text/xml");
 $MAXIMUM_FILESIZE = 10240 * 10240; // 200KB
 $MAXIMUM_FILE_COUNT = 10; // keep maximum 10 files on server
 $IMAGE_PREFIX_DIR = "PSInterface/images/";
