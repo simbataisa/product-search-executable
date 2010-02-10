@@ -1,6 +1,6 @@
 <?php
 require_once("dbconnection.php");
-
+header ("content-type: text/xml");
 if(isset ($_REQUEST['option'])) {
     $option = $_REQUEST['option'];
 }else

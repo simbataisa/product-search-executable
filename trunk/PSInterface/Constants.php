@@ -19,6 +19,8 @@ class Constants {
     public $xml_element_title_category = 'product categories';
     public $xml_element_title_account = 'user account';
     public $xml_element_title_autosuggesstion = 'search suggestion';
+    public $xml_element_title_keywordgeneration = 'keyword generation';
+
 
     public $xml_element_type_categories = 'categories';
     public $xml_element_type_categories_category = 'category';
@@ -26,8 +28,13 @@ class Constants {
 
     public $xml_element_type_products = 'products';
     public $xml_element_type_product = 'item';
+
+    public $xml_element_type_keywords = 'keywords';
+    public $xml_element_type_keywords_keyword = 'keyword';
+
     public $xml_element_iscomplete = 'isComplete';
     public $xml_element_total = 'total';
+
 
     public $image_server_host = "localhost";
     public $image_server_port = 9000;

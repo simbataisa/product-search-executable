@@ -2,6 +2,7 @@
 //Include File
 require_once ('SphinxSearchManager.php');
 require_once('SearchResultProcessor.php');
+header ("content-type: text/xml");
 
 session_start();
 $sphinxSearchManger = new SphinxSearchManager();

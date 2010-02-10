@@ -100,6 +100,24 @@ class XMLUtil {
         //var_dump($this->xml);
         //var_dump($this->xml->saveXML());
     }
+    public function addItem1($eName) {
+        //$this->xml = new DomDocument('1.0', 'UTF-8');
+        //echo "in test item";
+        $itemEle = $this->_xml->createElement($eName);
+        $itemEle = $this->_type->appendChild($itemEle);
+        //$field = $this->xml->createElement($name, $value);
+        //$field = $itemEle->appendChild($field);
+
+        $keys = array_keys($this->_elements);
+        foreach($keys as $key) {
+           $field = $this->createElement1($key);
+           $field->appendChild($this->_xml->createTextNode($this->_elements[$key]));
+           $field = $itemEle->appendChild($field);
+        }
+
+        //var_dump($this->xml);
+        //var_dump($this->xml->saveXML());
+    }
     public function save() {
         return $this->_xml->saveXML();
     }
