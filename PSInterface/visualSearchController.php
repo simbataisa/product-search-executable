@@ -165,12 +165,12 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
                 $productIdToPrint[$counter] = $product_ids[$counter];
             }
         }else {
-            for ($counter = 0; $counter < $total; $counter++) {
+            for ($counter = 0; $counter < intval($total); $counter++) {
                 $idsToPrint[$counter] = $product_ids[$counter];
             }
         }
 
-        //var_dump($product_ids);
+        var_dump($idsToPrint);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }else {
