@@ -169,9 +169,9 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
                 $idsToPrint[$counter] = $product_ids[$counter];
             }
         }
-        $idStr = implode(",",$idsToPrint);
-        var_dump($idsToPrint);
-        var_dump($idStr);
+        //$idStr = implode(",",$idsToPrint);
+        //var_dump($idsToPrint);
+        //var_dump($idStr);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }else {
