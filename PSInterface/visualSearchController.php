@@ -166,7 +166,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
             }
         }else {
             for ($counter = 0; $counter < intval($total); $counter++) {
-                $idsToPrint[$counter] = $product_ids[$counter];
+                $productIdToPrint[$counter] = $product_ids[$counter];
             }
         }
         //$idStr = implode(",",$idsToPrint);

@@ -42,7 +42,7 @@ class SearchResultProcessor {
 
 
         $idStr = implode(",",$resIds);
-        var_dump($idStr);
+        //var_dump($idStr);
         //print $this->_xmlWriter->save();
         $productQuery= "SELECT p.product_id,p.asin,p.name,p.description,p.detail_page_url,
                         p.highest_retail_price,p.lowest_retail_price,p.highest_sale_price,
