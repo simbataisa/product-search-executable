@@ -6,7 +6,7 @@
 require_once("SearchResultProcessor.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
-//header ("content-type: text/xml");
+header ("content-type: text/xml");
 
 $stimer = explode(' ',microtime());
 $stimer = $stimer[1] + $stimer[0];
@@ -140,7 +140,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
-        
+
         //Getting actual product id realated to the catefory
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
 	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
@@ -154,20 +154,26 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }
-        var_dump($product_ids);
+        //var_dump($product_ids);
         //Set the session so that data can be retrieved faster for paging...
         $_SESSION['product_ids'] =$product_ids;
 
         //Getting product id for first page result
         $productIdToPrint = array();
-        for($counter = 0; $counter<intval($pageLength); $counter++) {
-            $productIdToPrint[$counter] = $product_ids[$counter];
+        if(intval($total)>$pageLength) {
+            for($counter = 0; $counter<intval($pageLength); $counter++) {
+                $productIdToPrint[$counter] = $product_ids[$counter];
+            }
+        }else {
+            for ($counter = 0; $counter < $total; $counter++) {
+                $idsToPrint[$counter] = $product_ids[$counter];
+            }
         }
 
         //var_dump($product_ids);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $vsResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
-    }else{
+    }else {
         $product_ids = $_SESSION['product_ids'];
         $total = $_SESSION['total'];
         //Getting product id for first page result
@@ -215,7 +221,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
             }
         }
         $vsResultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
-    }else if($firstPageReq == "N"){
+    }else if($firstPageReq == "N") {
         $product_ids = array();
         if(isset($_SESSION['product_ids'])) {
             $product_ids = $_SESSION['product_ids'];
@@ -233,7 +239,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         //var_dump($idsToPrint);
         $vsResultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
     }
-}else if($option == "refineSearchResult"){
+}else if($option == "refineSearchResult") {
     $vsResultProcessor->createVisualSearchXMLTitle();
     if($firstPageReq=="Y") {
 
@@ -248,7 +254,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
 
         $product_ids = $_SESSION['product_ids'];
         $idStr = implode(",",$product_ids);
-  
+
         //Getting refined product id realated to the catefory
         $productQuery ="SELECT distinct p.product_id as pid from products as p, test_sub_categories c
 	where p.product_id IN (" .$idStr.") AND level_1_id = '".$level_1_id."'
