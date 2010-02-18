@@ -140,8 +140,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         //Getting index id for first page result
         array_pop($arrayIndexId);
         $index_id_string = implode(",",$arrayIndexId);
-        ;
-
+        var_dump($arrayIndexId);
         //Getting actual product id realated to the catefory
         $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
 	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
