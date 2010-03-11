@@ -248,7 +248,7 @@ if($option == "imageUploadSearch") {
         $_SESSION['time'] = $searchTime;
         var_dump($productIdToPrint);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
-        $imageUploadResultProcessor->process_result($product_ids, $total, $searchTime, $firstPageReq, $isLastPage);
+        $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }else {
         $product_ids = $_SESSION['product_ids'];
         $total = $_SESSION['total'];
