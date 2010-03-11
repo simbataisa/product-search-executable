@@ -127,12 +127,12 @@ if($option == "imageUploadSearch") {
             $searchTime = $data;
         }
         $searchTime = number_format(floatval($searchTime), 4);
-        //var_dump($arrayIndexId);
+        var_dump($arrayIndexId);
         $first10ids = array();
         for($counter = 0; $counter < 20; $counter++) {
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
-        //var_dump($first10ids);
+        var_dump($first10ids);
         $index_id_string = implode(",",$first10ids);
         //var_dump($index_id_string);
         //Finding the most suitable category
