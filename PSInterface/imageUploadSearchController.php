@@ -23,8 +23,10 @@ if(isset($_REQUEST['category']))
 else
     $category = "";
 
-if(isset($_REQUEST['search_index']))
+if(isset($_REQUEST['search_index'])){
     $search_index = $_REQUEST['search_index'];
+    $search_index =  trim($search_index);
+}
 else
     $search_index = "";
 
