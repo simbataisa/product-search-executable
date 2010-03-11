@@ -7,7 +7,7 @@
 require_once("SearchResultProcessor.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
-header ("content-type: text/xml");
+//header ("content-type: text/xml");
 $stimer = explode(' ',microtime());
 $stimer = $stimer[1] + $stimer[0];
 session_start();
@@ -115,7 +115,7 @@ if($option == "imageUploadSearch") {
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-
+        var_dump($data);
         //
         $pos = strpos($data, ",");
         $arrayIndexId = array();
