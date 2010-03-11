@@ -87,10 +87,10 @@ if($option == "imageUploadSearch") {
     if($firstPageReq=="Y") {
         $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
         $host = $constants->image_server_host;
-        if($search_index=="Apparel") {
+        if($search_index == "Apparel") {
             $port = 9001;
         }else {
-            $port = $constants->image_server_port;
+            $port = 9001;
         }
         // connect to server
         $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
