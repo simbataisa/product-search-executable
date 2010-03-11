@@ -246,7 +246,7 @@ if($option == "imageUploadSearch") {
             $productIdToPrint[$counter] = $product_ids[$counter];
         }
         $_SESSION['time'] = $searchTime;
-        //var_dump($product_ids);
+        var_dump($productIdToPrint);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }else {
@@ -258,7 +258,7 @@ if($option == "imageUploadSearch") {
             $productIdToPrint[$counter] = $product_ids[$counter];
         }
         $searchTime = $_SESSION['time'];
-        var_dump($productIdToPrint);
+        //var_dump($product_ids);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }
