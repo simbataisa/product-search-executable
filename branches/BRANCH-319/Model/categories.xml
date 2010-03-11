@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+  <title>product categories</title>
+  <categories>
+    <category>Automotive </category>
+    <category>Books </category>
+    <category>Business, Industrial </category>
+    <category>Cards, Gifts </category>
+    <category>Clothing, Shoes </category>
+    <category>Collectibles </category>
+    <category>Computers</category>
+    <category>Digital Downloads</category>
+    <category>Electronics</category>
+    <category>Health </category>
+    <category>Home </category>
+    <category>Jewelry </category>
+    <category>Movies, Music </category>
+    <category>Real Estate</category>
+    <category>Specialty Services</category>
+    <category>Sports, Travel </category>
+    <category>Tools </category>
+    <category>Toys, Kids </category>
+    <category>Everything Else</category>
+  </categories>
+</results>
