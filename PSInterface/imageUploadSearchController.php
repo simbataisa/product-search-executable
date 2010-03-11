@@ -93,6 +93,8 @@ if($option == "imageUploadSearch"){
             $port = 9001;
         }else if($search_index=="Baby"){
             $port = 9002;
+        }else if($search_index=="Beauty"){
+            $port = 9003;
         }else{
             $port = $constants->image_server_port;
         }
@@ -137,11 +139,13 @@ if($option == "imageUploadSearch"){
        /* $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
             WHERE category_id = (SELECT category_id FROM products
             WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";*/
-        $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
+        $cateLevel1Query = "";
         if($search_index=="Apparel"){
             $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
         }if($search_index=="Baby"){
             $cateLevel1Query = "SELECT product_id FROM map_baby WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="Beauty"){
+            $cateLevel1Query = "SELECT product_id FROM map_beauty WHERE index_id IN (".$index_id_string.")";
         }else{
              $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
