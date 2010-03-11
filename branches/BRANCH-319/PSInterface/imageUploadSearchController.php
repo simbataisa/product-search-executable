@@ -148,8 +148,14 @@ if($option == "imageUploadSearch"){
         $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         if($search_index=="Apparel"){
             $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
-        }if($search_index=="Baby"){
+        }else if($search_index=="Baby"){
             $cateLevel1Query = "SELECT product_id FROM map_baby WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="Beauty"){
+            $cateLevel1Query = "SELECT product_id FROM map_beauty WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="Jewelry"){
+            $cateLevel1Query = "SELECT product_id FROM map_jewelry WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="Watches"){
+            $cateLevel1Query = "SELECT product_id FROM map_watches WHERE index_id IN (".$index_id_string.")";
         }else{
              $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
