@@ -93,14 +93,6 @@ if($option == "imageUploadSearch"){
             $port = 9001;
         }else if($search_index=="Baby"){
             $port = 9002;
-        }else if($search_index=="Beauty"){
-            $port = 9003;
-        }else if($search_index=="Jewelry"){
-            $port = 9004;
-        }else if($search_index=="Watches"){
-            $port = 9005;
-        }else if($search_index=="Automotive"){
-            $port = 9006;
         }else{
             $port = $constants->image_server_port;
         }
@@ -148,14 +140,8 @@ if($option == "imageUploadSearch"){
         $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         if($search_index=="Apparel"){
             $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
-        }else if($search_index=="Baby"){
+        }if($search_index=="Baby"){
             $cateLevel1Query = "SELECT product_id FROM map_baby WHERE index_id IN (".$index_id_string.")";
-        }else if($search_index=="Beauty"){
-            $cateLevel1Query = "SELECT product_id FROM map_beauty WHERE index_id IN (".$index_id_string.")";
-        }else if($search_index=="Jewelry"){
-            $cateLevel1Query = "SELECT product_id FROM map_jewelry WHERE index_id IN (".$index_id_string.")";
-        }else if($search_index=="Watches"){
-            $cateLevel1Query = "SELECT product_id FROM map_watches WHERE index_id IN (".$index_id_string.")";
         }else{
              $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
