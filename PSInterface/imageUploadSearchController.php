@@ -95,6 +95,10 @@ if($option == "imageUploadSearch") {
             $port = 9002;
         }else if($search_index=="Beauty") {
             $port = 9003;
+        }else if($search_index=="Jewelry") {
+            $port = 9004;
+        }else if($search_index=="Watches") {
+            $port = 9005;
         }else {
             $port = $constants->image_server_port;
         }
@@ -143,11 +147,14 @@ if($option == "imageUploadSearch") {
         $cateLevel1Query = "";
         if($search_index=="Apparel") {
             $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
-        }if
-        ($search_index=="Baby") {
+        }else if($search_index=="Baby") {
             $cateLevel1Query = "SELECT product_id FROM map_baby WHERE index_id IN (".$index_id_string.")";
         }else if($search_index=="Beauty") {
             $cateLevel1Query = "SELECT product_id FROM map_beauty WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="Jewelry") {
+            $cateLevel1Query = "SELECT product_id FROM map_jewelry WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="Watches") {
+            $cateLevel1Query = "SELECT product_id FROM map_watches WHERE index_id IN (".$index_id_string.")";
         }else {
             $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
@@ -200,6 +207,16 @@ if($option == "imageUploadSearch") {
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
         }else if($search_index=="Beauty") {
             $productQuery ="SELECT distinct p.product_id as pid from products as p,map_beauty t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="Jewelry") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_jewelry t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="Watches") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_watches t, test_sub_categories c
             where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
