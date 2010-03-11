@@ -167,7 +167,7 @@ if($option == "imageUploadSearch") {
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['product_id']);
         }
-        echo "\n";
+        echo "<br>";
         //echo "product_id";
         var_dump($temp);
         $product_ids_string = implode(",",$temp);
