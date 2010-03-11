@@ -111,7 +111,7 @@ if($option == "imageUploadSearch"){
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-
+        var_dump($data);
         //
         $pos = strpos($data, ",");
         $arrayIndexId = array();
