@@ -167,8 +167,9 @@ if($option == "imageUploadSearch") {
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['product_id']);
         }
+        echo "\n";
         //echo "product_id";
-        //var_dump($temp);
+        var_dump($temp);
         $product_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT category_id FROM products
             WHERE product_id IN (".$product_ids_string.")";
