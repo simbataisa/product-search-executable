@@ -93,6 +93,14 @@ if($option == "imageUploadSearch"){
             $port = 9001;
         }else if($search_index=="Baby"){
             $port = 9002;
+        }else if($search_index=="Beauty"){
+            $port = 9003;
+        }else if($search_index=="Jewelry"){
+            $port = 9004;
+        }else if($search_index=="Watches"){
+            $port = 9005;
+        }else if($search_index=="Automotive"){
+            $port = 9006;
         }else{
             $port = $constants->image_server_port;
         }
