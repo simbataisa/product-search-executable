@@ -83,7 +83,7 @@ $total=0;
 $searchTime="";
 $product_ids = array();
 $feature = get_feature();
-
+echo "<search_index>" . $search_index . "</search_index>";
 if($option == "imageUploadSearch"){
     $imageUploadResultProcessor->createUploadSearchXMLTitle();
     if($firstPageReq=="Y"){
