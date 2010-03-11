@@ -83,7 +83,7 @@ $total=0;
 $searchTime="";
 $product_ids = array();
 $feature = get_feature();
-echo "<search_index>" . $search_index . "</search_index>";
+//echo "<search_index>" . $search_index . "</search_index>";
 if($option == "imageUploadSearch"){
     $imageUploadResultProcessor->createUploadSearchXMLTitle();
     if($firstPageReq=="Y"){
@@ -91,7 +91,7 @@ if($option == "imageUploadSearch"){
         $host = $constants->image_server_host;
         if($search_index=="Apparel"){
             $port = 9001;
-        }if($search_index=="Baby"){
+        }else if($search_index=="Baby"){
             $port = 9002;
         }else{
             $port = $constants->image_server_port;
