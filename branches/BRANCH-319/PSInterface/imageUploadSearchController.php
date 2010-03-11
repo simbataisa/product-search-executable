@@ -111,7 +111,7 @@ if($option == "imageUploadSearch"){
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-        var_dump($data);
+        
         //
         $pos = strpos($data, ",");
         $arrayIndexId = array();
@@ -130,6 +130,7 @@ if($option == "imageUploadSearch"){
         }
 
         $index_id_string = implode(",",$first10ids);
+        var_dump($index_id_string);
         //Finding the most suitable category
         /*$cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
             WHERE category_id IN (SELECT category_id FROM products
