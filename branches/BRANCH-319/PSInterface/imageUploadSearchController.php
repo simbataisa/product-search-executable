@@ -91,6 +91,8 @@ if($option == "imageUploadSearch"){
         $host = $constants->image_server_host;
         if($search_index=="Apparel"){
             $port = 9001;
+        }if($search_index=="Baby"){
+            $port = 9002;
         }else{
             $port = $constants->image_server_port;
         }
@@ -136,6 +138,13 @@ if($option == "imageUploadSearch"){
             WHERE category_id = (SELECT category_id FROM products
             WHERE product_id = (SELECT product_id FROM itable WHERE index_id = $arrayIndexId[0]))";*/
         $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
+        if($search_index=="Apparel"){
+            $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
+        }if($search_index=="Baby"){
+            $cateLevel1Query = "SELECT product_id FROM map_baby WHERE index_id IN (".$index_id_string.")";
+        }else{
+             $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
+        }
         $cateLevel1ResSet = mysql_query($cateLevel1Query);        
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
