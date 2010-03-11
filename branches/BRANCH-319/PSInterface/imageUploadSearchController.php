@@ -7,7 +7,7 @@
 require_once("SearchResultProcessor.php");
 require_once("dbconnection.php");
 require_once("Constants.php");
-header ("content-type: text/xml");
+//header ("content-type: text/xml");
 $stimer = explode(' ',microtime());
 $stimer = $stimer[1] + $stimer[0];
 session_start();
@@ -258,7 +258,7 @@ if($option == "imageUploadSearch") {
             $productIdToPrint[$counter] = $product_ids[$counter];
         }
         $searchTime = $_SESSION['time'];
-        //var_dump($product_ids);
+        var_dump($productIdToPrint);
         //echo "Total : $total Search Time: $searchTime First Page Request: $firstPageReq Last Page: $isLastPage";
         $imageUploadResultProcessor->process_result($productIdToPrint, $total, $searchTime, $firstPageReq, $isLastPage);
     }
