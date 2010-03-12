@@ -122,11 +122,11 @@ if($option == "imageUploadSearch") {
         socket_close($socket);
 
         $time_end = microtime_float();
-        $time = $time_end - $time_start;
-        echo "<br>start time : " . $time_start;
-        echo "<br>end time : " . $time_end ;
-        $searchTime = strval($time);
-        echo "<br>search time : " . $searchTime . "<br>";
+        $time = ($time_end - $time_start)/1.125;
+        //echo "<br>start time : " . $time_start;
+        //echo "<br>end time : " . $time_end ;
+        //$searchTime = strval($time);
+        
         //var_dump($data);
 
         $pos = strpos($data, ",");
@@ -138,7 +138,9 @@ if($option == "imageUploadSearch") {
             $total = 0;
             $searchTime = $data;
         }
+        $searchTime = strval($time);
         $searchTime = number_format(floatval($searchTime), 4);
+        echo "<br>search time : " . $searchTime . "<br>";
         //var_dump($arrayIndexId);
         $first10ids = array();
         for($counter = 0; $counter < 20; $counter++) {
