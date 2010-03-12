@@ -110,11 +110,15 @@ if($option == "imageUploadSearch") {
             $vsResultProcessor->processVSresult("-1");
             die;
         }
+        $startTime = time();
         socket_write($socket, $feature, strlen($feature)) or die("Could not send data to server\n");
 
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
+        $endTime = time();
+        $searchTime = $endTime - $startTime;
+        echo $searchTime;
         //var_dump($data);
 
         $pos = strpos($data, ",");
