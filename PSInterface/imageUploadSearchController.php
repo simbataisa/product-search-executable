@@ -403,4 +403,9 @@ function get_feature() {
     */
     return $feature;
 }
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
 ?>
