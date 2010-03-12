@@ -110,16 +110,22 @@ if($option == "imageUploadSearch") {
             $vsResultProcessor->processVSresult("-1");
             die;
         }
-        $startTime = time();
+        $time_start = microtime_float();
+
+        // Sleep for a while
+        usleep(100);
+        echo "Did nothing in $time seconds\n";
         socket_write($socket, $feature, strlen($feature)) or die("Could not send data to server\n");
 
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-        $endTime = time();
-        echo "<br>start time : " . $startTime;
-        echo "<br>end time : " . $endTime;
-        $searchTime = strval($endTime - $startTime);
+
+        $time_end = microtime_float();
+        $time = $time_end - $time_start;
+        echo "<br>start time : " . $time_start;
+        echo "<br>end time : " . $time_end;
+        $searchTime = strval($time);
         echo "<br>search time : " . $searchTime;
         //var_dump($data);
 
