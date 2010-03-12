@@ -117,8 +117,10 @@ if($option == "imageUploadSearch") {
             $data .=$recv;
         socket_close($socket);
         $endTime = time();
-        $searchTime = $endTime - $startTime;
-        echo $searchTime;
+        echo "<br>start time : " . $startTime;
+        echo "<br>end time : " . $endTime;
+        $searchTime = strval($endTime - $startTime);
+        echo "<br>search time : " . $searchTime;
         //var_dump($data);
 
         $pos = strpos($data, ",");
