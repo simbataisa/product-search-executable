@@ -113,8 +113,8 @@ if($option == "imageUploadSearch") {
         $time_start = microtime_float();
 
         // Sleep for a while
-        usleep(100);
-        echo "Did nothing in $time seconds\n";
+        //usleep(100);
+        
         socket_write($socket, $feature, strlen($feature)) or die("Could not send data to server\n");
 
         while (($recv = socket_read($socket, 30)) !=false)
@@ -124,9 +124,9 @@ if($option == "imageUploadSearch") {
         $time_end = microtime_float();
         $time = $time_end - $time_start;
         echo "<br>start time : " . $time_start;
-        echo "<br>end time : " . $time_end;
+        echo "<br>end time : " . $time_end ;
         $searchTime = strval($time);
-        echo "<br>search time : " . $searchTime;
+        echo "<br>search time : " . $searchTime . "<br>";
         //var_dump($data);
 
         $pos = strpos($data, ",");
@@ -403,6 +403,7 @@ function get_feature() {
     */
     return $feature;
 }
+
 function microtime_float()
 {
     list($usec, $sec) = explode(" ", microtime());
