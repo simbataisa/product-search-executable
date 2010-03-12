@@ -94,11 +94,31 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
             $index_id= $r['index_id'];
 
         $index_id=$index_id;
+
+        //Deciding server to sent request to
+        $sqlQuery = "SELECT search_index FROM products WHERE product_id ='$product_id'";
+        $res = mysql_query($sqlQuery);
+        if($r = mysql_fetch_array($res))
+            $search_index = $r['search_index'];
+        $search_index = trim($search_index);
         //
         $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket");
         $host = $constants->image_server_host;
-        $port = $constants->image_server_port;
+        if($search_index=="Apparel") {
+            $port = 9001;
+        }else if($search_index=="Baby") {
+            $port = 9002;
+        }else if($search_index=="Beauty") {
+            $port = 9003;
+        }else if($search_index=="Jewelry") {
+            $port = 9004;
+        }else if($search_index=="Watches") {
+            $port = 9005;
+        }else {
+            $port = $constants->image_server_port;
+        }
         // connect to server
+        $time_start = microtime_float();
         $result = 0;
         $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
 
@@ -111,7 +131,8 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-
+        $time_end = microtime_float();
+        $time = ($time_end - $time_start)/1.125;
         //
         $pos = strpos($data, ",");
         $arrayIndexId = array();
@@ -123,6 +144,7 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
             $total = 0;
             $searchTime = $data;
         }
+        $searchTime = strval($time);
         $searchTime = number_format(floatval($searchTime), 4);
         //var_dump($arrayIndexId);
 
@@ -142,10 +164,41 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         $index_id_string = implode(",",$arrayIndexId);
 
         //Getting actual product id realated to the catefory
-        $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
+        /*$productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
 	where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
         AND p.category_id=c.category_id AND
-        p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";*/
+        if($search_index=="Apparel") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p, map_apparel t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="Baby") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_baby t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="Beauty") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_beauty t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="Jewelry") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_jewelry t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="Watches") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_watches t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }
 
         $productResSet= mysql_query($productQuery);
         $total = mysql_num_rows($productResSet);
