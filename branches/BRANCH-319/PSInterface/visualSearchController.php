@@ -87,14 +87,8 @@ $product_ids = array();
 if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefinement") {
     $vsResultProcessor->createVisualSearchXMLTitle();
     if($firstPageReq=="Y") {
-        //Getting LSH index id
-        $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
-        $res = mysql_query($sqlQuery);
-        if($r = mysql_fetch_array($res))
-            $index_id= $r['index_id'];
-
-        $index_id=$index_id;
-
+        
+        
         //Deciding server to sent request to
         $sqlQuery = "SELECT search_index FROM products WHERE product_id ='$product_id'";
         $res = mysql_query($sqlQuery);
@@ -106,17 +100,32 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         $host = $constants->image_server_host;
         if($search_index=="Apparel") {
             $port = 9001;
+            $sqlQuery = "SELECT index_id FROM map_apparel WHERE product_id ='$product_id'";
         }else if($search_index=="Baby") {
             $port = 9002;
+            $sqlQuery = "SELECT index_id FROM map_baby WHERE product_id ='$product_id'";
         }else if($search_index=="Beauty") {
             $port = 9003;
+            $sqlQuery = "SELECT index_id FROM map_beauty WHERE product_id ='$product_id'";
         }else if($search_index=="Jewelry") {
             $port = 9004;
+            $sqlQuery = "SELECT index_id FROM map_jewelry WHERE product_id ='$product_id'";
         }else if($search_index=="Watches") {
             $port = 9005;
+            $sqlQuery = "SELECT index_id FROM map_watches WHERE product_id ='$product_id'";
         }else {
             $port = $constants->image_server_port;
+            $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
         }
+
+        //Getting LSH index id
+
+        $res = mysql_query($sqlQuery);
+        if($r = mysql_fetch_array($res))
+            $index_id= $r['index_id'];
+
+        $index_id=$index_id;
+
         // connect to server
         $time_start = microtime_float();
         $result = 0;
