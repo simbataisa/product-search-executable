@@ -140,7 +140,7 @@ if($option == "imageUploadSearch") {
         }
         $searchTime = strval($time);
         $searchTime = number_format(floatval($searchTime), 4);
-        echo "<br>search time : " . $searchTime . "<br>";
+        //echo "<br>search time : " . $searchTime . "<br>";
         //var_dump($arrayIndexId);
         $first10ids = array();
         for($counter = 0; $counter < 20; $counter++) {
