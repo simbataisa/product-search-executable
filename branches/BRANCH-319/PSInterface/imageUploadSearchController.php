@@ -115,8 +115,8 @@ if($option == "imageUploadSearch") {
         while (($recv = socket_read($socket, 30)) !=false)
             $data .=$recv;
         socket_close($socket);
-        var_dump($data);
-        //
+        //var_dump($data);
+
         $pos = strpos($data, ",");
         $arrayIndexId = array();
         if($pos) {
@@ -132,8 +132,8 @@ if($option == "imageUploadSearch") {
         for($counter = 0; $counter < 20; $counter++) {
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
-        echo "\n";
-        var_dump($first10ids);
+        //echo "\n";
+        //var_dump($first10ids);
         $index_id_string = implode(",",$first10ids);
         //var_dump($index_id_string);
         //Finding the most suitable category
@@ -167,9 +167,9 @@ if($option == "imageUploadSearch") {
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['product_id']);
         }
-        echo "<br>";
+        //echo "<br>";
         //echo "product_id";
-        var_dump($temp);
+        //var_dump($temp);
         $product_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT category_id FROM products
             WHERE product_id IN (".$product_ids_string.")";
