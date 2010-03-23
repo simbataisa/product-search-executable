@@ -174,6 +174,9 @@ if($option == "imageUploadSearch") {
         }else {
             $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
+        echo "\n";
+        var_dump($cateLevel1Query);
+        echo "\n";
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
