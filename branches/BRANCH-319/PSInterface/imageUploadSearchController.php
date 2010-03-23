@@ -147,8 +147,8 @@ if($option == "imageUploadSearch") {
             $first10ids[$counter] = $arrayIndexId[$counter];
         }
 
-        echo "\n";
-        var_dump($first10ids);
+        //echo "\n";
+        //var_dump($first10ids);
         $index_id_string = implode(",",$first10ids);
         //var_dump($index_id_string);
         //Finding the most suitable category
@@ -175,8 +175,8 @@ if($option == "imageUploadSearch") {
         }else {
             $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
-        echo "\n";
-        var_dump($cateLevel1Query);
+        //echo "\n";
+        //var_dump($cateLevel1Query);
 
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
@@ -190,24 +190,31 @@ if($option == "imageUploadSearch") {
         //echo "product_id";
         //var_dump($temp);
         $product_ids_string = implode(",",$temp);
-        $cateLevel1Query = "SELECT category_id FROM products
+        /*$cateLevel1Query = "SELECT category_id FROM products
             WHERE product_id IN (".$product_ids_string.")
-            ORDER BY Field(product_id," .$product_ids_string.")";
-        echo "\n";
-        var_dump($cateLevel1Query);
+            ORDER BY Field(product_id," .$product_ids_string.")";*/
+        $cateLevel1Query = "SELECT category_id, count(*) as total FROM products
+            WHERE product_id IN (".$product_ids_string.")
+            GROUP BY category_id ORDER BY total DESC";
+        //echo "\n";
+        //var_dump($cateLevel1Query);
 
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
-        $temp = array();
+        mysql_fetch_array($cateLevel1ResSet)) {
+            $major_cate = $r['category_id'];
+        /*$temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
             array_push($temp, $r['category_id']);
-        }
+        }*/
         //echo "category";
         //var_dump($temp);
-        $cate_ids_string = implode(",",$temp);
+        /*$cate_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
-            WHERE category_id IN (".$cate_ids_string.") GROUP BY level_1_id ORDER BY total DESC";
-        echo "\n";
-        var_dump($cateLevel1Query);
+            WHERE category_id IN (".$cate_ids_string.") GROUP BY level_1_id ORDER BY total DESC";*/
+        //echo "\n";
+        //var_dump($cateLevel1Query);
+        $cateLevel1Query = "SELECT level_1_id FROM test_sub_categories
+            WHERE category_id = ".$major_cate;
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
