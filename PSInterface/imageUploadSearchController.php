@@ -170,7 +170,8 @@ if($option == "imageUploadSearch") {
         }else if($search_index=="Jewelry") {
             $cateLevel1Query = "SELECT product_id FROM map_jewelry WHERE index_id IN (".$index_id_string.")";
         }else if($search_index=="Watches") {
-            $cateLevel1Query = "SELECT product_id FROM map_watches WHERE index_id IN (".$index_id_string.")";
+            $cateLevel1Query = "SELECT product_id FROM map_watches WHERE index_id IN (".$index_id_string.")
+                                    ORDER BY Field(index_id," .$index_id_string. ")";
         }else {
             $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
         }
@@ -190,7 +191,8 @@ if($option == "imageUploadSearch") {
         //var_dump($temp);
         $product_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT category_id FROM products
-            WHERE product_id IN (".$product_ids_string.")";
+            WHERE product_id IN (".$product_ids_string.")
+            ORDER BY Field(product_id," .$product_ids_string.")";
         echo "\n";
         var_dump($cateLevel1Query);
         echo "\n";
