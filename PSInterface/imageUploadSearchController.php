@@ -177,7 +177,7 @@ if($option == "imageUploadSearch") {
         }
         echo "\n";
         var_dump($cateLevel1Query);
-        echo "\n";
+
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         /*while($r = mysql_fetch_array($cateLevel1ResSet)) {
             $level_1_id = $r['level_1_id'];
@@ -195,7 +195,7 @@ if($option == "imageUploadSearch") {
             ORDER BY Field(product_id," .$product_ids_string.")";
         echo "\n";
         var_dump($cateLevel1Query);
-        echo "\n";
+
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
@@ -206,6 +206,8 @@ if($option == "imageUploadSearch") {
         $cate_ids_string = implode(",",$temp);
         $cateLevel1Query = "SELECT level_1_id, count(*) as total FROM test_sub_categories
             WHERE category_id IN (".$cate_ids_string.") GROUP BY level_1_id ORDER BY total DESC";
+        echo "\n";
+        var_dump($cateLevel1Query);
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
         $temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
