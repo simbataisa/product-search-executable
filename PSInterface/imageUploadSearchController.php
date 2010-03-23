@@ -127,7 +127,7 @@ if($option == "imageUploadSearch") {
         //echo "<br>end time : " . $time_end ;
         //$searchTime = strval($time);
         
-        //var_dump($data);
+        var_dump($data);
 
         $pos = strpos($data, ",");
         $arrayIndexId = array();
