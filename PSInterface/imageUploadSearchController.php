@@ -200,7 +200,7 @@ if($option == "imageUploadSearch") {
         //var_dump($cateLevel1Query);
 
         $cateLevel1ResSet = mysql_query($cateLevel1Query);
-        mysql_fetch_array($cateLevel1ResSet)) {
+        $r = mysql_fetch_array($cateLevel1ResSet);
             $major_cate = $r['category_id'];
         /*$temp = array();
         while($r = mysql_fetch_array($cateLevel1ResSet)) {
