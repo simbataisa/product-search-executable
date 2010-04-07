@@ -294,7 +294,7 @@ if($option == "byKeyword") {
         $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
     }
 } else if($option == "frontPageItems") {
-    $productIdQuery = "SELECT product_id FROM products WHERE asin IN (B002DR9Z0Y)";
+    $productIdQuery = "SELECT product_id FROM products WHERE asin IN ('B002DR9Z0Y')";
     $productResSet = mysql_query($productIdQuery);
     $total = mysql_num_rows($productResSet);
     $ids = array();
