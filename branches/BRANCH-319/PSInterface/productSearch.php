@@ -315,9 +315,6 @@ if($option == "byKeyword") {
                 $idsToPrint[$counter] = $ids[$counter];
             }
         }
-        $_SESSION['total'] = $total;
-        $searchTime = $res['time'];
-        $_SESSION['time'] = $searchTime;
         $resultProcessor->process_result($idsToPrint,$total,"0","Y","Y");
     }else {
         $total = 0;
