@@ -3,6 +3,24 @@
   <title>search results</title>
   <products>
     <item>
+      <product_id>203479</product_id>
+      <asin>B002P73SBE</asin>
+      <name>STANLEY Corset Back Leatherette Halter Dress</name>
+      <minRetail>28.99</minRetail>
+      <maxRetail>28.99</maxRetail>
+      <minSale>-1</minSale>
+      <maxSale>-1</maxSale>
+      <description>A halter leatherette dress for those wild nights. Features a corset tie back with wide ribbon. Also ties behind the neck.</description>
+      <avg_rating>0</avg_rating>
+      <url>http://www.amazon.com/STANLEY-Corset-Leatherette-Halter-Dress/dp/B002P73SBE%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002P73SBE</url>
+      <num_views>0</num_views>
+      <category_id>75</category_id>
+      <merchant_id>1</merchant_id>
+      <search_index>Apparel </search_index>
+      <variantImage>variant_images/B002P73SBE_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B002P73SBE_primary_large.jpg</primaryImage>
+    </item>
+    <item>
       <product_id>204365</product_id>
       <asin>B002FX6XA6</asin>
       <name>Voom by Joy Han Dress - Tina in White</name>
@@ -111,58 +129,40 @@ The pictures of the dress are taken using our own actual dress. The dress you or
       <primaryImage>primary_images/B002E14Q76_primary_large.jpg</primaryImage>
     </item>
     <item>
-      <product_id>203694</product_id>
-      <asin>B001PDIOJA</asin>
-      <name>Formal Evening Gown. Beaded Dress for Prom, Party Dress by Sean Collection (70067) Black/Silver</name>
-      <minRetail>259</minRetail>
-      <maxRetail>259</maxRetail>
-      <minSale>139</minSale>
-      <maxSale>139</maxSale>
-      <description>Stretch charmeuse tank with open bra back.</description>
-      <avg_rating>0</avg_rating>
-      <url>http://www.amazon.com/Formal-Evening-Beaded-Sean-Collection/dp/B001PDIOJA%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB001PDIOJA</url>
-      <num_views>0</num_views>
-      <category_id>75</category_id>
-      <merchant_id>1</merchant_id>
-      <search_index>Apparel </search_index>
-      <variantImage>variant_images/B001PDIOJA_variant_large_1.jpg</variantImage>
-      <primaryImage>primary_images/B001PDIOJA_primary_large.jpg</primaryImage>
-    </item>
-    <item>
-      <product_id>203479</product_id>
-      <asin>B002P73SBE</asin>
-      <name>STANLEY Corset Back Leatherette Halter Dress</name>
-      <minRetail>28.99</minRetail>
-      <maxRetail>28.99</maxRetail>
+      <product_id>202999</product_id>
+      <asin>B002RXKNVE</asin>
+      <name>CALISSA Ruched Foil Mini Dress</name>
+      <minRetail>23.99</minRetail>
+      <maxRetail>23.99</maxRetail>
       <minSale>-1</minSale>
       <maxSale>-1</maxSale>
-      <description>A halter leatherette dress for those wild nights. Features a corset tie back with wide ribbon. Also ties behind the neck.</description>
+      <description>With so many special details, you'll want to spotlight this trendy mini dress. Features a ruched, metallic foil down the bodice and puffy shoulder straps. Ties at the back. Belt not included. Online exclusive!</description>
       <avg_rating>0</avg_rating>
-      <url>http://www.amazon.com/STANLEY-Corset-Leatherette-Halter-Dress/dp/B002P73SBE%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002P73SBE</url>
+      <url>http://www.amazon.com/CALISSA-Ruched-Foil-Mini-Dress/dp/B002RXKNVE%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002RXKNVE</url>
       <num_views>0</num_views>
       <category_id>75</category_id>
       <merchant_id>1</merchant_id>
       <search_index>Apparel </search_index>
-      <variantImage>variant_images/B002P73SBE_variant_large_2.jpg</variantImage>
-      <primaryImage>primary_images/B002P73SBE_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B002RXKNVE_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B002RXKNVE_primary_large.jpg</primaryImage>
     </item>
     <item>
-      <product_id>204858</product_id>
-      <asin>B00127O4B6</asin>
-      <name>Formal Evening Gown. Silk Beaded Dress for Prom, Party, Wedding by Sean Collection (70082)</name>
-      <minRetail>319</minRetail>
-      <maxRetail>319</maxRetail>
-      <minSale>139</minSale>
-      <maxSale>139</maxSale>
-      <description>Elegant! Silk tank dress with hand beading.  Sash in front over slit.  Rhinestone jewel pin.  Great for Evening, Prom, Formals.  Fit Tip: This dress is form fitted use bust, waist and hip measurement to determine fit.</description>
+      <product_id>203051</product_id>
+      <asin>B002FQ2PXM</asin>
+      <name>Voom by Joy Han Dress - Paris Bubble Polka Dot Pattern with Ruffles - Cocktail Party Holiday Dresses</name>
+      <minRetail>284</minRetail>
+      <maxRetail>284</maxRetail>
+      <minSale>-1</minSale>
+      <maxSale>-1</maxSale>
+      <description>Voom by Joy Han Dress - Paris Bubble</description>
       <avg_rating>0</avg_rating>
-      <url>http://www.amazon.com/Formal-Evening-Wedding-Sean-Collection/dp/B00127O4B6%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00127O4B6</url>
+      <url>http://www.amazon.com/Voom-Joy-Han-Dress-Cocktail/dp/B002FQ2PXM%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002FQ2PXM</url>
       <num_views>0</num_views>
       <category_id>75</category_id>
       <merchant_id>1</merchant_id>
       <search_index>Apparel </search_index>
-      <variantImage>variant_images/B00127O4B6_variant_large_1.jpg</variantImage>
-      <primaryImage>primary_images/B00127O4B6_primary_large.jpg</primaryImage>
+      <variantImage>variant_images/B002FQ2PXM_variant_large_1.jpg</variantImage>
+      <primaryImage>primary_images/B002FQ2PXM_primary_large.jpg</primaryImage>
     </item>
     <item>
       <product_id>205618</product_id>
