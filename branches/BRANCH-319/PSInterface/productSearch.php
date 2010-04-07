@@ -294,10 +294,10 @@ if($option == "byKeyword") {
         $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
     }
 } else if($option == "frontPageItems") {
-    $productIdQuery = "SELECT product_id FROM products WHERE asin IN ('B002FX6XA6','B002EDRMTI','B002MG4ER0'
-                        ,'B001PLBTDA','B002UAPK30','B002E14Q76','B001PDIOJA','B002P73SBE','B00127O4B6'
-                        ,'BOO1PDM4J6','B002DQBXMS','B002FX8INQ') ORDER BY Field(asin,'B002FX6XA6','B002EDRMTI','B002MG4ER0'
-                        ,'B001PLBTDA','B002UAPK30','B002E14Q76','B001PDIOJA','B002P73SBE','B00127O4B6'
+    $productIdQuery = "SELECT product_id FROM products WHERE asin IN ('B002P73SBE','B002FX6XA6','B002EDRMTI','B002MG4ER0'
+                        ,'B001PLBTDA','B002UAPK30','B002E14Q76','B002RXKNVE','B002FQ2PXM'
+                        ,'BOO1PDM4J6','B002DQBXMS','B002FX8INQ') ORDER BY Field(asin,'B002P73SBE','B002FX6XA6','B002EDRMTI','B002MG4ER0'
+                        ,'B001PLBTDA','B002UAPK30','B002E14Q76','B002RXKNVE','B002FQ2PXM'
                         ,'BOO1PDM4J6','B002DQBXMS','B002FX8INQ')";
     $productResSet = mysql_query($productIdQuery);
     $total = mysql_num_rows($productResSet);
