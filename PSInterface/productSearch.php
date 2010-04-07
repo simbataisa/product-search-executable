@@ -295,9 +295,9 @@ if($option == "byKeyword") {
     }
 } else if($option == "frontPageItems") {
     $productIdQuery = "SELECT product_id FROM products WHERE asin IN ('B002P73SBE','B002FX6XA6','B002EDRMTI','B002MG4ER0'
-                        ,'B001PLBTDA','B002UAPK30','B002E14Q76','B002RXKNVE','B002FQ2PXM'
+                        ,'B001PLBTDA','B002UAPK30','B002FQ2PXM','B002RXKNVE','B001VNENXK'
                         ,'BOO1PDM4J6','B002DQBXMS','B002FX8INQ') ORDER BY Field(asin,'B002P73SBE','B002FX6XA6','B002EDRMTI','B002MG4ER0'
-                        ,'B001PLBTDA','B002UAPK30','B002E14Q76','B002RXKNVE','B002FQ2PXM'
+                        ,'B001PLBTDA','B002UAPK30','B002FQ2PXM','B002RXKNVE','B001VNENXK'
                         ,'BOO1PDM4J6','B002DQBXMS','B002FX8INQ')";
     $productResSet = mysql_query($productIdQuery);
     $total = mysql_num_rows($productResSet);
