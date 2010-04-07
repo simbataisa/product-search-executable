@@ -21,24 +21,6 @@
       <primaryImage>primary_images/B00127O4B6_primary_large.jpg</primaryImage>
     </item>
     <item>
-      <product_id>204571</product_id>
-      <asin>B001PDIOGS</asin>
-      <name>Formal Evening Gown. Beaded Dress for Prom, Party Dress by Sean Collection (70031) Lime</name>
-      <minRetail>319</minRetail>
-      <maxRetail>319</maxRetail>
-      <minSale>-1</minSale>
-      <maxSale>-1</maxSale>
-      <description>Stretch charmeuse tank with beaded bust and open back.</description>
-      <avg_rating>0</avg_rating>
-      <url>http://www.amazon.com/Formal-Evening-Beaded-Sean-Collection/dp/B001PDIOGS%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB001PDIOGS</url>
-      <num_views>0</num_views>
-      <category_id>75</category_id>
-      <merchant_id>1</merchant_id>
-      <search_index>Apparel </search_index>
-      <variantImage>variant_images/B001PDIOGS_variant_large_1.jpg</variantImage>
-      <primaryImage>primary_images/B001PDIOGS_primary_large.jpg</primaryImage>
-    </item>
-    <item>
       <product_id>203694</product_id>
       <asin>B001PDIOJA</asin>
       <name>Formal Evening Gown. Beaded Dress for Prom, Party Dress by Sean Collection (70067) Black/Silver</name>
@@ -55,24 +37,6 @@
       <search_index>Apparel </search_index>
       <variantImage>variant_images/B001PDIOJA_variant_large_1.jpg</variantImage>
       <primaryImage>primary_images/B001PDIOJA_primary_large.jpg</primaryImage>
-    </item>
-    <item>
-      <product_id>203279</product_id>
-      <asin>B001PIK13W</asin>
-      <name>Formal Evening Gown. Beaded Dress for Prom, Party Dress by Sean Collection (70299) Red</name>
-      <minRetail>319</minRetail>
-      <maxRetail>319</maxRetail>
-      <minSale>-1</minSale>
-      <maxSale>-1</maxSale>
-      <description>Stretch charmeuse halter beaded with front slit and open back.</description>
-      <avg_rating>0</avg_rating>
-      <url>http://www.amazon.com/Formal-Evening-Beaded-Sean-Collection/dp/B001PIK13W%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB001PIK13W</url>
-      <num_views>0</num_views>
-      <category_id>75</category_id>
-      <merchant_id>1</merchant_id>
-      <search_index>Apparel </search_index>
-      <variantImage>variant_images/B001PIK13W_variant_large_3.jpg</variantImage>
-      <primaryImage>primary_images/B001PIK13W_primary_large.jpg</primaryImage>
     </item>
     <item>
       <product_id>184334</product_id>
@@ -200,6 +164,41 @@ The pictures of the dress are taken using our own actual dress. The dress you or
       <search_index>Apparel </search_index>
       <variantImage>variant_images/B002MG4ER0_variant_large_2.jpg</variantImage>
       <primaryImage>primary_images/B002MG4ER0_primary_large.jpg</primaryImage>
+    </item>
+    <item>
+      <product_id>203479</product_id>
+      <asin>B002P73SBE</asin>
+      <name>STANLEY Corset Back Leatherette Halter Dress</name>
+      <minRetail>28.99</minRetail>
+      <maxRetail>28.99</maxRetail>
+      <minSale>-1</minSale>
+      <maxSale>-1</maxSale>
+      <description>A halter leatherette dress for those wild nights. Features a corset tie back with wide ribbon. Also ties behind the neck.</description>
+      <avg_rating>0</avg_rating>
+      <url>http://www.amazon.com/STANLEY-Corset-Leatherette-Halter-Dress/dp/B002P73SBE%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002P73SBE</url>
+      <num_views>0</num_views>
+      <category_id>75</category_id>
+      <merchant_id>1</merchant_id>
+      <search_index>Apparel </search_index>
+      <variantImage>variant_images/B002P73SBE_variant_large_2.jpg</variantImage>
+      <primaryImage>primary_images/B002P73SBE_primary_large.jpg</primaryImage>
+    </item>
+    <item>
+      <product_id>202898</product_id>
+      <asin>B002UAPK30</asin>
+      <name>GUESS Melissa Sateen Dress</name>
+      <minRetail>118</minRetail>
+      <maxRetail>118</maxRetail>
+      <minSale>-1</minSale>
+      <maxSale>-1</maxSale>
+      <description>Everyones favorite dress  now with an edge. Stud details at pockets in front and back. Button-down front to skirt waist. Soft spun sateen cotton design with silky retro pocket lining. 98% Cotton, 2% Spandex 100% Polyester pockets Machine wash cold Women &gt; Dresses</description>
+      <avg_rating>0</avg_rating>
+      <url>http://www.amazon.com/GUESS-Melissa-Sateen-Dress/dp/B002UAPK30%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002UAPK30</url>
+      <num_views>0</num_views>
+      <category_id>75</category_id>
+      <merchant_id>1</merchant_id>
+      <search_index>Apparel </search_index>
+      <primaryImage>primary_images/B002UAPK30_primary_large.jpg</primaryImage>
     </item>
   </products>
   <total>11</total>
