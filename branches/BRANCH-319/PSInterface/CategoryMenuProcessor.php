@@ -35,7 +35,7 @@ class CategoryMenuProcessor {
             $category = $this->_xmlWriter->appendChildToTypeNode($category);
             $level1Query = "";
             if ($r["id"] == "35") { //Watches
-                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (1870,2039,2041,2049,6175,9064) ORDER BY name";
+                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (2039,2041,2049) ORDER BY name";
             }else if($r["id"] == "3"){ //Baby
                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_level = 2 AND name LIKE '%".$r["search_index"]."%' GROUP BY name";
             }else{
