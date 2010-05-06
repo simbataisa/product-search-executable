@@ -101,21 +101,24 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
         if($search_index=="Apparel") {
             $port = 9001;
             $sqlQuery = "SELECT index_id FROM map_apparel WHERE product_id ='$product_id'";
-        }else if($search_index=="Baby") {
-            $port = 9002;
-            $sqlQuery = "SELECT index_id FROM map_baby WHERE product_id ='$product_id'";
         }else if($search_index=="Beauty") {
-            $port = 9003;
+            $port = 9002;
             $sqlQuery = "SELECT index_id FROM map_beauty WHERE product_id ='$product_id'";
-        }else if($search_index=="Jewelry") {
+        }else if($search_index=="HealthPersonalCare") {
+            $port = 9003;
+            $sqlQuery = "SELECT index_id FROM map_healthpersonalcare WHERE product_id ='$product_id'";
+        }else if($search_index=="Jewelry") {  
             $port = 9004;
             $sqlQuery = "SELECT index_id FROM map_jewelry WHERE product_id ='$product_id'";
-        }else if($search_index=="Watches") {
+        }else if($search_index=="MusicalInstruments") {
             $port = 9005;
+            $sqlQuery = "SELECT index_id FROM map_musicalinstruments WHERE product_id ='$product_id'";
+        }else if($search_index=="Watches") {
+            $port = 9006;
             $sqlQuery = "SELECT index_id FROM map_watches WHERE product_id ='$product_id'";
         }else {
             $port = $constants->image_server_port;
-            $sqlQuery = "SELECT index_id FROM itable WHERE product_id ='$product_id'";
+            $sqlQuery = "SELECT index_id FROM map_categories WHERE product_id ='$product_id'";
         }
 
         //Getting LSH index id
