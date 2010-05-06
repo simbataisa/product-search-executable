@@ -23,6 +23,11 @@ if(isset($_REQUEST['category']))
 else
     $category = "";
 
+if(isset($_REQUEST['cateLabel']))
+    $cateLabel = $_REQUEST['cateLabel'];
+else
+    $cateLabel = "";
+
 if(isset ($_REQUEST['pageLength'])) {
     $pageLength = $_REQUEST['pageLength'];
 }else
@@ -84,173 +89,216 @@ $sphinxSearchManger->setIndex("product");
 
 if($option == "byCategory") {
     $resultProcessor->createTextSearchXMLTitle();
-    $sphinxSearchManger->setResultRange(0,500,500);
+    $sphinxSearchManger->setResultRange(0,1000,1000);
 
     if($firstPageReq=="Y") {
-        $sphinxSearchManger->setFilter("category_id", array($category) );
-        $res = $sphinxSearchManger->search("");
+        //$sphinxSearchManger->setFilter("category_id", array($category) );
+        $res = $sphinxSearchManger->search("(@name $cateLabel)");
         $product_ids = array();
         $idsToPrint = array();
         $total = $res['total'];
         $_SESSION['total'] = $total;
         $searchTime = $res['time'];
         $_SESSION['time'] = $searchTime;
-        if(intval($total)>0){
-            if ($res["matches"]!=null && is_array($res["matches"]) && count($res["matches"])>0) {
+        if(intval($total)>0) {
+            if (is_array($res["matches"]) ) {
+                $ids = array();
+
+
                 foreach($res["matches"] as $docinfo) {
-                    array_push($product_ids, $docinfo['id']);
+                    array_push($ids, $docinfo['id']);
                 }
-                $_SESSION['product_ids'] = $product_ids;
-                if(intval($total)>$pageLength) {
-                    for ($counter = 0; $counter < $pageLength; $counter++) {
-                        $idsToPrint[$counter] = $product_ids[$counter];
+
+                //
+                $idStr = implode(",",$ids);
+                $productIdQuery = "SELECT product_id FROM products WHERE search_index =
+                    (Select search_index From amazon Where amazon_id =
+                        (Select amazon_id From test_sub_categories Where category_id = " . $category . "))
+                    AND product_id IN (".$idStr.") ORDER BY Field(product_id," .$idStr. ")";
+                $productResSet = mysql_query($productIdQuery);
+                $total = mysql_num_rows($productResSet);
+                $ids = array();
+                if(intval($total)>0) {
+                    while($r = mysql_fetch_array($productResSet)) {
+                        array_push($ids, $r['product_id']);
                     }
+                    //var_dump($ids);
+                    $_SESSION['ids'] = $ids;
+                    $idsToPrint = array();
+                    //$total = $res['total'];
+                    if(intval($total)>$pageLength) {
+                        for ($counter = 0; $counter < $pageLength; $counter++) {
+                            $idsToPrint[$counter] = $ids[$counter];
+                        }
+                    }else {
+                        for ($counter = 0; $counter < $total; $counter++) {
+                            $idsToPrint[$counter] = $ids[$counter];
+                        }
+                    }
+                    $_SESSION['total'] = $total;
+                    $searchTime = $res['time'];
+                    $_SESSION['time'] = $searchTime;
+                    $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
                 }else {
-                    for ($counter = 0; $counter < $total; $counter++) {
-                        $idsToPrint[$counter] = $product_ids[$counter];
+                    $total = 0;
+                    $resultProcessor->processError($total);
+                }
+                /*if ($res["matches"]!=null && is_array($res["matches"]) && count($res["matches"])>0) {
+                    foreach($res["matches"] as $docinfo) {
+                        array_push($product_ids, $docinfo['id']);
+                    }
+                    $_SESSION['product_ids'] = $product_ids;
+                    if(intval($total)>$pageLength) {
+                        for ($counter = 0; $counter < $pageLength; $counter++) {
+                            $idsToPrint[$counter] = $product_ids[$counter];
+                        }
+                    }else {
+                        for ($counter = 0; $counter < $total; $counter++) {
+                            $idsToPrint[$counter] = $product_ids[$counter];
+                        }
                     }
                 }
+                $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);*/
+            }else {
+                $resultProcessor->processError($total);
             }
-            $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
-        }else{
-             $resultProcessor->processError($total);
-        }
-        
-
-       
-        //var_dump($res["matches"]);
-        //$productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
-        //$productResSet = mysql_query($productQuery);
-        //$total = mysql_num_rows($productResSet);
 
 
 
-        //var_dump($product_ids);
-        /*while($r = mysql_fetch_array($productResSet)) {
+            //var_dump($res["matches"]);
+            //$productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
+            //$productResSet = mysql_query($productQuery);
+            //$total = mysql_num_rows($productResSet);
+
+
+
+            //var_dump($product_ids);
+            /*while($r = mysql_fetch_array($productResSet)) {
             array_push($product_ids,  $r['pid']);
         }  */
 
 
-        //var_dump($idsToPrint);
+            //var_dump($idsToPrint);
 
 
-       
 
 
-    }else if($firstPageReq=="N") {
-        $product_ids = array();
-        if(isset($_SESSION['product_ids'])) {
-            $product_ids = $_SESSION['product_ids'];
+
+        }else if($firstPageReq=="N") {
+            $product_ids = array();
+            if(isset($_SESSION['product_ids'])) {
+                $product_ids = $_SESSION['product_ids'];
+            }
+
+            if(isset($_SESSION['total'])) {
+                $total = $_SESSION['total'];
+            }
+            $idsToPrint = array();
+            for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
+                $idsToPrint[$counter] = $product_ids[$counter];
+            }
+            //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+            //var_dump($idsToPrint);
+            $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
         }
 
-        if(isset($_SESSION['total'])) {
-            $total = $_SESSION['total'];
-        }
-        $idsToPrint = array();
-        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
-            $idsToPrint[$counter] = $product_ids[$counter];
-        }
-        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
-        //var_dump($idsToPrint);
-        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
-    }
-
-}else if($option=="byColor") {
-    $resultProcessor->createColorSearchXMLTitle();
-    if($firstPageReq=="Y") {
-        $ids = array();
-        if(isset($_SESSION['ids'])) {
-            $ids = $_SESSION['ids'];
-        }
-        $idStr = implode(",",$ids);
-        //if ($color == -97)
-        $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
+    }else if($option=="byColor") {
+        $resultProcessor->createColorSearchXMLTitle();
+        if($firstPageReq=="Y") {
+            $ids = array();
+            if(isset($_SESSION['ids'])) {
+                $ids = $_SESSION['ids'];
+            }
+            $idStr = implode(",",$ids);
+            //if ($color == -97)
+            $idWithTheColorQuery="SELECT product_id,sqrt(power($red-R_value,2)+ power($green-G_value,2)+power($blue-B_value,2)) as dist
             FROM RGB WHERE product_id in (".$idStr.") ORDER BY dist";
 
-        $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
+            $idWithTheColorResSet = mysql_query($idWithTheColorQuery);
 
-        $ids = array();
-        $total = mysql_num_rows($idWithTheColorResSet);
-        while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
-            array_push($ids, $r1['product_id']);
-        }
-        $_SESSION['$ids'] = $ids;
-        $_SESSION['total'] = $total;
-        $searchTime = $_SESSION['time'];
-        //
-        $idsToPrint = array();
-        if(intval($total)>$pageLength) {
-            for ($counter = 0; $counter < $pageLength; $counter++) {
+            $ids = array();
+            $total = mysql_num_rows($idWithTheColorResSet);
+            while($r1 = mysql_fetch_array($idWithTheColorResSet)) {
+                array_push($ids, $r1['product_id']);
+            }
+            $_SESSION['$ids'] = $ids;
+            $_SESSION['total'] = $total;
+            $searchTime = $_SESSION['time'];
+            //
+            $idsToPrint = array();
+            if(intval($total)>$pageLength) {
+                for ($counter = 0; $counter < $pageLength; $counter++) {
+                    $idsToPrint[$counter] = $ids[$counter];
+                }
+            }else {
+                for ($counter = 0; $counter < $total; $counter++) {
+                    $idsToPrint[$counter] = $ids[$counter];
+                }
+            }
+            $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+        }else if($firstPageReq == "N") {
+            $ids = array();
+            if(isset($_SESSION['ids'])) {
+                $ids = $_SESSION['ids'];
+            }
+
+            if(isset($_SESSION['total'])) {
+                $total = $_SESSION['total'];
+            }
+
+            $idsToPrint = array();
+            for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
                 $idsToPrint[$counter] = $ids[$counter];
             }
-        }else {
-            for ($counter = 0; $counter < $total; $counter++) {
-                $idsToPrint[$counter] = $ids[$counter];
+            //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
+            //var_dump($idsToPrint);
+            $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
+        }
+    }else if($option == "refineSearchResult") {
+        $resultProcessor->createTextSearchXMLTitle();
+        if($firstPageReq=="Y") {
+            $ids = array();
+            if(isset($_SESSION['ids'])) {
+                $ids = $_SESSION['ids'];
             }
-        }
-        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
-    }else if($firstPageReq == "N") {
-        $ids = array();
-        if(isset($_SESSION['ids'])) {
-            $ids = $_SESSION['ids'];
-        }
-
-        if(isset($_SESSION['total'])) {
-            $total = $_SESSION['total'];
-        }
-
-        $idsToPrint = array();
-        for ($counter = $startIndex; $counter < $stopIndex; $counter++) {
-            $idsToPrint[$counter] = $ids[$counter];
-        }
-        //echo "-----------------------------------------------------------\n $startIndex $stopIndex";
-        //var_dump($idsToPrint);
-        $resultProcessor->process_result($idsToPrint,$total,0,$firstPageReq,$isLastPage);
-    }
-}else if($option == "refineSearchResult") {
-    $resultProcessor->createTextSearchXMLTitle();
-    if($firstPageReq=="Y") {
-        $ids = array();
-        if(isset($_SESSION['ids'])) {
-            $ids = $_SESSION['ids'];
-        }
-        $idStr = implode(",",$ids);
-        //if ($color == -97)
-        $cateQuery = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
-        $cateResSet = mysql_query($cateQuery);
-        $level_1_id = "";
-        while($r1 = mysql_fetch_array($cateResSet)) {
-            $level_1_id = $r1['level_1_id'];
-        }
-        //echo $level_1_id;
-        //echo $idStr;
-        $productQuery ="SELECT distinct p.product_id as pid from products as p, test_sub_categories c
+            $idStr = implode(",",$ids);
+            //if ($color == -97)
+            $cateQuery = "SELECT level_1_id FROM test_sub_categories WHERE category_id = '$category'";
+            $cateResSet = mysql_query($cateQuery);
+            $level_1_id = "";
+            while($r1 = mysql_fetch_array($cateResSet)) {
+                $level_1_id = $r1['level_1_id'];
+            }
+            //echo $level_1_id;
+            //echo $idStr;
+            $productQuery ="SELECT distinct p.product_id as pid from products as p, test_sub_categories c
 	where p.product_id IN (" .$idStr.") AND level_1_id = '".$level_1_id."'
         AND p.category_id=c.category_id  ORDER BY Field(product_id," .$idStr. ")";
 
-        $productResSet = mysql_query($productQuery);
+            $productResSet = mysql_query($productQuery);
 
-        $ids = array();
-        $total = mysql_num_rows($productResSet);
-        while($r1 = mysql_fetch_array($productResSet)) {
-            array_push($ids, $r1['pid']);
-        }
-        $_SESSION['$ids'] = $ids;
-        $_SESSION['total'] = $total;
-        $searchTime = $_SESSION['time'];
-        //
-        $idsToPrint = array();
-        if(intval($total)>$pageLength) {
-            for ($counter = 0; $counter < $pageLength; $counter++) {
-                $idsToPrint[$counter] = $ids[$counter];
+            $ids = array();
+            $total = mysql_num_rows($productResSet);
+            while($r1 = mysql_fetch_array($productResSet)) {
+                array_push($ids, $r1['pid']);
             }
-        }else {
-            for ($counter = 0; $counter < $total; $counter++) {
-                $idsToPrint[$counter] = $ids[$counter];
+            $_SESSION['$ids'] = $ids;
+            $_SESSION['total'] = $total;
+            $searchTime = $_SESSION['time'];
+            //
+            $idsToPrint = array();
+            if(intval($total)>$pageLength) {
+                for ($counter = 0; $counter < $pageLength; $counter++) {
+                    $idsToPrint[$counter] = $ids[$counter];
+                }
+            }else {
+                for ($counter = 0; $counter < $total; $counter++) {
+                    $idsToPrint[$counter] = $ids[$counter];
+                }
             }
+            $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
         }
-        $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
     }
-}
+
 
 ?>
