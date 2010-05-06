@@ -43,7 +43,7 @@ class CategoryMenuProcessor {
             }else if($r["id"] == "12"){ //HealthPersonalCare
                  $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (7988,7963,8414,9230) ORDER BY name";
             }else if($r["id"] == "22"){ //MusicalInstruments
-                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (6602,6636,6697,6373,6734,6771,6440,6941) ORDER BY name";
+                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (6602,6636,6697,6373,6734,6771,6440,6947) ORDER BY name";
             }else{
                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE amazon_id = ".$r["id"]." AND category_level = 1";
             }
