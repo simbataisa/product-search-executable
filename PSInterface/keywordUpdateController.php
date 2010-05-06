@@ -36,7 +36,7 @@ $total = "";
 if($option == "updateKeyword") {
     $sphinxSearchManger->setIndex("product");    
 //$res = $sphinxSearchManger->search("(@name $key_word) | (@description $key_word)");
-    $sphinxSearchManger->setResultRange(0,500,500);
+    $sphinxSearchManger->setResultRange(0,1000,1000);
 
     $res = $sphinxSearchManger->search("(@name $key_word)");
 //Getting total result first
