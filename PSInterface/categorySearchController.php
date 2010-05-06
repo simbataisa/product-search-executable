@@ -105,7 +105,7 @@ if($option == "byCategory") {
             $search_index = $r['search_index'];
         }
         //echo "\n search index : " . $search_index;
-        if(trim($search_index) == "Automotive") {
+        if(trim($search_index) == "dadadadaddada") {
             $res = $sphinxSearchManger->search("(@name $cateLabel)");
             //echo $cateLabel;
             $product_ids = array();
