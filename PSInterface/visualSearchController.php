@@ -117,8 +117,10 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
             $port = 9006;
             $sqlQuery = "SELECT index_id FROM map_watches WHERE product_id ='$product_id'";
         }else {
-            $port = $constants->image_server_port;
-            $sqlQuery = "SELECT index_id FROM map_categories WHERE product_id ='$product_id'";
+            //$port = $constants->image_server_port;
+            $port = 9001;
+            //$sqlQuery = "SELECT index_id FROM map_categories WHERE product_id ='$product_id'";
+            $sqlQuery = "SELECT index_id FROM map_apparel WHERE product_id ='$product_id'";
         }
 
         //Getting LSH index id
@@ -211,7 +213,11 @@ if($option == "vsDragDrop" || $option == "vsButtonClick" || $option == "vsRefine
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
         }else {
-            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_categories t, test_sub_categories c
+            /*$productQuery ="SELECT distinct p.product_id as pid from products as p,map_categories t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";*/
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_apparel t, test_sub_categories c
             where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
