@@ -116,19 +116,14 @@ if($option == "byCategory") {
             if(intval($total)>0) {
                 if (is_array($res["matches"]) ) {
                     $ids = array();
-
-
                     foreach($res["matches"] as $docinfo) {
                         array_push($ids, $docinfo['id']);
                     }
 
-                    //
                     $idStr = implode(",",$ids);
-
-                    
                     $productIdQuery = "SELECT product_id FROM products WHERE search_index = '$search_index'
                                 AND product_id IN (".$idStr.") ORDER BY Field(product_id," .$idStr. ")";
-                    //echo $productIdQuery;
+                    echo $productIdQuery;
                     $productResSet = mysql_query($productIdQuery);
                     $total = mysql_num_rows($productResSet);
                     $ids = array();
@@ -157,41 +152,11 @@ if($option == "byCategory") {
                         $total = 0;
                         $resultProcessor->processError($total);
                     }
-                    /*if ($res["matches"]!=null && is_array($res["matches"]) && count($res["matches"])>0) {
-                    foreach($res["matches"] as $docinfo) {
-                        array_push($product_ids, $docinfo['id']);
-                    }
-                    $_SESSION['product_ids'] = $product_ids;
-                    if(intval($total)>$pageLength) {
-                        for ($counter = 0; $counter < $pageLength; $counter++) {
-                            $idsToPrint[$counter] = $product_ids[$counter];
-                        }
-                    }else {
-                        for ($counter = 0; $counter < $total; $counter++) {
-                            $idsToPrint[$counter] = $product_ids[$counter];
-                        }
-                    }
                 }
-                $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);*/
-                }else {
-                    $resultProcessor->processError($total);
-                }
+                $resultProcessor->process_result($idsToPrint,$total,$searchTime,$firstPageReq,$isLastPage);
+            }else {
+                $resultProcessor->processError($total);
             }
-
-
-
-
-
-            //var_dump($res["matches"]);
-            //$productQuery = "SELECT product_id as pid FROM products WHERE category_id = $category";
-            //$productResSet = mysql_query($productQuery);
-            //$total = mysql_num_rows($productResSet);
-
-
-
-            //var_dump($product_ids);
-            /*while($r = mysql_fetch_array($productResSet)) {
-            array_push($product_ids,  $r['pid']);*/
         }else {
             $sphinxSearchManger->setFilter("category_id", array($category) );
             $res = $sphinxSearchManger->search("");
