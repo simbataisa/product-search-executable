@@ -85,7 +85,7 @@ $sphinxSearchManger->setIndex("product");
 if($option == "byCategory") {
     $resultProcessor->createTextSearchXMLTitle();
     $sphinxSearchManger->setResultRange(0,500,500);
-
+    echo "hello";
     if($firstPageReq=="Y") {
         //$sphinxSearchManger->setFilter("category_id", array($category) );
         $res = $sphinxSearchManger->search("(@name dress)");
