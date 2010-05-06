@@ -40,6 +40,8 @@ class CategoryMenuProcessor {
                  $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (5325,5303,2664,3010,3676,5939,2930,2853,2787) ORDER BY name";
             }else if($r["id"] == "4"){ //Beauty
                  $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (891,919,1025,872,884,973,1003) ORDER BY name";
+            }else if($r["id"] == "12"){ //HealthPersonalCare
+                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (7988,7963,8414,9230) ORDER BY name";
             }else{
                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE amazon_id = ".$r["id"]." AND category_level = 1";
             }
