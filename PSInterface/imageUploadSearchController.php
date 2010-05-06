@@ -91,17 +91,21 @@ if($option == "imageUploadSearch") {
         $host = $constants->image_server_host;
         if($search_index=="Apparel") {
             $port = 9001;
-        }else if($search_index=="Baby") {
-            $port = 9002;
         }else if($search_index=="Beauty") {
+            $port = 9002;
+        }else if($search_index=="HealthPersonalCare") {
             $port = 9003;
         }else if($search_index=="Jewelry") {
             $port = 9004;
-        }else if($search_index=="Watches") {
+        }else if($search_index=="MusicalInstruments") {
             $port = 9005;
+        }else if($search_index=="Watches") {
+            $port = 9006;
         }else {
-            $port = $constants->image_server_port;
+            $port = 9001;
+            //$port = $constants->image_server_port;
         }
+       
 
         // connect to server
         $result = socket_connect($socket, $host, $port);// or die("Could not connect to server\n");
@@ -163,17 +167,20 @@ if($option == "imageUploadSearch") {
         $cateLevel1Query = "";
         if($search_index=="Apparel") {
             $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
-        }else if($search_index=="Baby") {
-            $cateLevel1Query = "SELECT product_id FROM map_baby WHERE index_id IN (".$index_id_string.")";
         }else if($search_index=="Beauty") {
             $cateLevel1Query = "SELECT product_id FROM map_beauty WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="HealthPersonalCare") {
+            $cateLevel1Query = "SELECT product_id FROM map_healthpersonalcare WHERE index_id IN (".$index_id_string.")";
         }else if($search_index=="Jewelry") {
             $cateLevel1Query = "SELECT product_id FROM map_jewelry WHERE index_id IN (".$index_id_string.")";
+        }else if($search_index=="MusicalInstruments") {
+            $cateLevel1Query = "SELECT product_id FROM map_musicalinstruments WHERE index_id IN (".$index_id_string.")";
         }else if($search_index=="Watches") {
             $cateLevel1Query = "SELECT product_id FROM map_watches WHERE index_id IN (".$index_id_string.")
                                     ORDER BY Field(index_id," .$index_id_string. ")";
         }else {
-            $cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
+            //$cateLevel1Query = "SELECT product_id FROM itable WHERE index_id IN (".$index_id_string.")";
+            $cateLevel1Query = "SELECT product_id FROM map_apparel WHERE index_id IN (".$index_id_string.")";
         }
         //echo "\n";
         //var_dump($cateLevel1Query);
