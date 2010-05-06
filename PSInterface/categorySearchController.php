@@ -107,6 +107,7 @@ if($option == "byCategory") {
         echo "\n search index : " . $search_index;
         if($search_index == "Automotive") {
             $res = $sphinxSearchManger->search("(@name $cateLabel)");
+            echo $cateLabel;
             $product_ids = array();
             $idsToPrint = array();
             $total = $res['total'];
