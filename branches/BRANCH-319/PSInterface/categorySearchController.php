@@ -88,7 +88,7 @@ if($option == "byCategory") {
 
     if($firstPageReq=="Y") {
         //$sphinxSearchManger->setFilter("category_id", array($category) );
-        $res = $sphinxSearchManger->search("(@name $category)");
+        $res = $sphinxSearchManger->search("(@name dress)");
         $product_ids = array();
         $idsToPrint = array();
         $total = $res['total'];
