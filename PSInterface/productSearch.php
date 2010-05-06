@@ -84,7 +84,7 @@ $sphinxSearchManger->setIndex("product");
 if($option == "byKeyword") {
     $resultProcessor->createTextSearchXMLTitle();
     //$res = $sphinxSearchManger->search("(@name $key_word) | (@description $key_word)");
-    $sphinxSearchManger->setResultRange(0,500,500);
+    $sphinxSearchManger->setResultRange(0,1000,1000);
     if($firstPageReq=="Y") {
         $res = $sphinxSearchManger->search("(@name $key_word)");
         //Getting total result first
@@ -171,7 +171,7 @@ if($option == "byKeyword") {
     }
 
 }else if($option == "autoSuggestion") {
-    $sphinxSearchManger->setResultRange(intval($startIndex),intval($stopIndex),500);
+    $sphinxSearchManger->setResultRange(intval($startIndex),intval($stopIndex),1000);
     $res = $sphinxSearchManger->search("(@name $key_word)");
     //Getting total result first
     $resultProcessor->createAutoSuggestXMLTitle();
