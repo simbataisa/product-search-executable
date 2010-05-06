@@ -34,10 +34,10 @@ class CategoryMenuProcessor {
             $category = $this->_xmlWriter->addNode($this->_constants->xml_element_type_categories_category, null, $attr);
             $category = $this->_xmlWriter->appendChildToTypeNode($category);
             $level1Query = "";
-            if ($r["id"] == "35") { //Watches
+            if ($r["id"] == "35") { //Automotive
                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (2039,2041,2049) ORDER BY name";
-            }else if($r["id"] == "3"){ //Baby
-                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_level = 2 AND name LIKE '%".$r["search_index"]."%' GROUP BY name";
+            }else if($r["id"] == "2"){ //Baby
+                 $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE category_id IN (5325,5303,2664,3010,3676,5939,2930,2853,2787) ORDER BY name";
             }else{
                $level1Query = "SELECT category_id, name FROM test_sub_categories WHERE amazon_id = ".$r["id"]." AND category_level = 1";
             }
