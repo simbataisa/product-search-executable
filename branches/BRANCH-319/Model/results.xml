@@ -19,25 +19,7 @@
       <search_index>Apparel </search_index>
       <variantImage>variant_images/B002P73SBE_variant_large_1.jpg</variantImage>
       <primaryImage>primary_images/B002P73SBE_primary_large.jpg</primaryImage>
-    </item>
-    <item>
-      <product_id>242206</product_id>
-      <asin>B002EDRMTI</asin>
-      <name>Voom Dress by Joy Han - Puff Sleeve Soft Denim with Cumberbund in Grey and Red - Dresses for Women</name>
-      <minRetail>216</minRetail>
-      <maxRetail>216</maxRetail>
-      <minSale>-1</minSale>
-      <maxSale>-1</maxSale>
-      <description>Voom Dress by Joy Han - Shirley in Red</description>
-      <avg_rating>0</avg_rating>
-      <url>http://www.amazon.com/Voom-Dress-Joy-Han-Cumberbund/dp/B002EDRMTI%3FSubscriptionId%3DAKIAJAJIXZLPIMJTRM3Q%26tag%3Dws%26linkCode%3Dsp1%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002EDRMTI</url>
-      <num_views>0</num_views>
-      <category_id>75</category_id>
-      <merchant_id>1</merchant_id>
-      <search_index>Apparel </search_index>
-      <primaryImage>primary_images/B002EDRMTI_primary_large.jpg</primaryImage>
-      <variantImage>variant_images/B002EDRMTI_variant_large_1.jpg</variantImage>
-    </item>
+    </item>    
     <item>
       <product_id>256440</product_id>
       <asin>B001PLBTDA</asin>
