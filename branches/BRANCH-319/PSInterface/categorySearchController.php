@@ -124,7 +124,7 @@ if($option == "byCategory") {
                     $idStr = implode(",",$ids);
                     $productIdQuery = "SELECT product_id FROM products WHERE search_index = '$search_index'
                                 AND product_id IN (".$idStr.") ORDER BY Field(product_id," .$idStr. ")";
-                    echo $productIdQuery;
+                    //echo $productIdQuery;
                     $productResSet = mysql_query($productIdQuery);
                     $total = mysql_num_rows($productResSet);
                     $ids = array();
