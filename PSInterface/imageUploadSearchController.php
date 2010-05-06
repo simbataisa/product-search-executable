@@ -241,18 +241,23 @@ if($option == "imageUploadSearch") {
             where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
-        }else if($search_index=="Baby") {
-            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_baby t, test_sub_categories c
-            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
-            AND p.category_id=c.category_id AND
-            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
         }else if($search_index=="Beauty") {
             $productQuery ="SELECT distinct p.product_id as pid from products as p,map_beauty t, test_sub_categories c
             where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="HealthPersonalCare") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_healthpersonalcare t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
         }else if($search_index=="Jewelry") {
             $productQuery ="SELECT distinct p.product_id as pid from products as p,map_jewelry t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
+        }else if($search_index=="MusicalInstruments") {
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_musicalinstruments t, test_sub_categories c
             where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
@@ -262,7 +267,11 @@ if($option == "imageUploadSearch") {
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
         }else {
-            $productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
+            /*$productQuery ="SELECT distinct p.product_id as pid from products as p,itable t, test_sub_categories c
+            where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
+            AND p.category_id=c.category_id AND
+            p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";*/
+            $productQuery ="SELECT distinct p.product_id as pid from products as p,map_apparel t, test_sub_categories c
             where t.index_id IN (" .$index_id_string.") AND level_1_id = $level_1_id
             AND p.category_id=c.category_id AND
             p.product_id = t.product_id  ORDER BY Field(index_id," .$index_id_string. ")";
