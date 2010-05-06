@@ -98,13 +98,13 @@ if($option == "byCategory") {
         while($r = mysql_fetch_array($productResSet)) {
             $amazon_id = $r['amazon_id'];
         }
-        //echo "\n amazon id : " . $amazon_id;
+        echo "\n amazon id : " . $amazon_id;
         $productIdQuery = "Select search_index From amazon Where id = $amazon_id";
         $productResSet = mysql_query($productIdQuery);
         while($r = mysql_fetch_array($productResSet)) {
             $search_index = $r['search_index'];
         }
-
+        echo "\n search index : " . $search_index;
         if($search_index == "Automotive") {
             $res = $sphinxSearchManger->search("(@name $cateLabel)");
             $product_ids = array();
@@ -125,7 +125,7 @@ if($option == "byCategory") {
                     //
                     $idStr = implode(",",$ids);
 
-                    //echo "\n search index : " . $search_index;
+                    
                     $productIdQuery = "SELECT product_id FROM products WHERE search_index = '$search_index'
                                 AND product_id IN (".$idStr.") ORDER BY Field(product_id," .$idStr. ")";
                     //echo $productIdQuery;
