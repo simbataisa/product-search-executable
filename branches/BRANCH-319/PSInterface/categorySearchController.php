@@ -118,7 +118,7 @@ if($option == "byCategory") {
                     $amazon_id = $r['amazon_id'];
                 }
                 echo "\n amazon id : " . $amazon_id;
-                $productIdQuery = "Select search_index From amazon Where amazon_id = $amazon_id";
+                $productIdQuery = "Select search_index From amazon Where id = $amazon_id";
                 $productResSet = mysql_query($productIdQuery);
                 while($r = mysql_fetch_array($productResSet)) {
                     $search_index = $r['search_index'];
