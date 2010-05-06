@@ -87,7 +87,7 @@ if($option == "byCategory") {
     $sphinxSearchManger->setResultRange(0,500,500);
 
     if($firstPageReq=="Y") {
-        $sphinxSearchManger->setFilter("category_id", array($category) );
+        //$sphinxSearchManger->setFilter("category_id", array($category) );
         $res = $sphinxSearchManger->search($category);
         $product_ids = array();
         $idsToPrint = array();
