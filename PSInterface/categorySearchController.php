@@ -112,9 +112,9 @@ if($option == "byCategory") {
                 //
                 $idStr = implode(",",$ids);
                 $productIdQuery = "SELECT product_id FROM products WHERE search_index =
-                    (Select search_index From amazon Where amazon_id =
-                        (Select amazon_id From test_sub_categories Where category_id = " . $category . "))
+                    (Select search_index From amazon Where amazon_id = 2)
                     AND product_id IN (".$idStr.") ORDER BY Field(product_id," .$idStr. ")";
+                echo $productIdQuery;
                 $productResSet = mysql_query($productIdQuery);
                 $total = mysql_num_rows($productResSet);
                 $ids = array();
