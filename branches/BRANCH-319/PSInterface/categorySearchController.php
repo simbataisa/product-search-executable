@@ -174,8 +174,8 @@ if($option == "byCategory") {
 
             //var_dump($product_ids);
             /*while($r = mysql_fetch_array($productResSet)) {
-            array_push($product_ids,  $r['pid']);
-        }  */
+            array_push($product_ids,  $r['pid']);*/
+        }  
 
 
             //var_dump($idsToPrint);
