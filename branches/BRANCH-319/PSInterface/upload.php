@@ -51,7 +51,7 @@ if (count($files) > $MAXIMUM_FILE_COUNT) {
     }
 }
 
-echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+//echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 echo $message;
 
 

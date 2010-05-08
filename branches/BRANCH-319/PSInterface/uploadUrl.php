@@ -12,7 +12,7 @@ if(!preg_match('#^http://.*([^/]+\.('.ALLOWED_FILENAMES.'))$#',$_REQUEST['url'],
 }
 if(!$img=file_get_contents($_REQUEST['url']))
     $message = "Error: File cant get ";
-if(!$f=fopen(IMAGE_DIR.'/upload.jpg','w'))
+if(!$f=fopen(IMAGE_DIR.'upload.jpg','w'))
     $message = "Error: File open failed! ";
 chmod("./images/upload.jpg" ,0777);
 if(fwrite($f,$img)===FALSE)
